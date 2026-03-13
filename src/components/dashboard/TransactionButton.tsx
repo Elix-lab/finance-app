@@ -1,7 +1,9 @@
+// This is the modal that pop up when using the TransactionSummary buttons.
+// For the modal we are using ShadCN UI library.
+
 import { FaMinus, FaPlus } from "react-icons/fa6";
 import { Button } from "../ui/button";
 import { useState } from "react";
-
 import {
     Dialog,
     DialogContent,
@@ -20,6 +22,8 @@ type Props = {
 
 const TransactionButton = ({ type, onSubmit }: Props) => {
     const [value, setValue] = useState('')
+
+    // Conditional rendering data
     const config = {
         addIncome: {
             bgColorClass: 'bg-green-600',
@@ -34,13 +38,16 @@ const TransactionButton = ({ type, onSubmit }: Props) => {
             shadowColorClass: 'shadow-red-200'
         }
     }
+
+    // Destructuring the conditional data
     const { Icon, label, bgColorClass, shadowColorClass } = config[type];
 
+    // Submit event handler
     const handleSubmit = (e: React.SubmitEvent) => {
         e.preventDefault();
         const amount = Number(value);
         if (!amount || isNaN(amount)) return;
-        console.log('ENVIANDO AMOUNT', amount); // para verificar
+        // onSubmit that comes from the dashboard Page 
         onSubmit(amount);
         setValue('');
     }
@@ -81,7 +88,7 @@ const TransactionButton = ({ type, onSubmit }: Props) => {
                     </DialogFooter>
                 </form>
             </DialogContent>
-        </Dialog >
+        </Dialog>
     )
 }
 

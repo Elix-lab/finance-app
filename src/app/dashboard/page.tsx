@@ -5,12 +5,15 @@ import TransactionButton from "../../components/dashboard/TransactionButton";
 import CurrentBalance from "@/components/dashboard/CurrentBalance";
 
 const Page = () => {
+    // useStates
+    // Income state: had do localStorage this way because o posible "cascade rendering"
     const [income, setIncome] = useState(() => {
         if (typeof window === 'undefined') return 0;
         const saved = localStorage.getItem('income');
         return saved !== null ? Number(saved) : 0;
     });
 
+    // Expenses state: had do localStorage this way because o posible "cascade rendering"
     const [expenses, setExpenses] = useState(() => {
         if (typeof window === 'undefined') return 0;
         const saved = localStorage.getItem('expenses');
@@ -19,19 +22,7 @@ const Page = () => {
 
     const balance = income - expenses;
 
-    // useEffect(() => {
-    //     const savedIncome = localStorage.getItem('income');
-    //     const savedExpenses = localStorage.getItem('expenses');
-
-    //     if (savedIncome !== null) {
-    //         setIncome(Number(savedIncome))
-    //     }
-
-    //     if (savedExpenses !== null) {
-    //         setExpenses(Number(savedExpenses))
-    //     }
-    // }, [])
-
+    // Setting local storage
     useEffect(() => {
         localStorage.setItem('income', String(income))
     }, [income])
@@ -40,10 +31,12 @@ const Page = () => {
         localStorage.setItem('expenses', String(expenses))
     }, [expenses])
 
+    // Event handlers
+    // Handleing income changes
     const handleAddIncome = (amount: number) => {
         setIncome(prev => prev + amount)
     }
-
+    // Handleing expense changes
     const handleAddExpenses = (amount: number) => {
         setExpenses(prev => prev + amount)
     }
@@ -51,7 +44,9 @@ const Page = () => {
     return (
         <div className="flex justify-center p-10" >
             <div className="flex flex-col gap-8 w-3xl">
+                {/* Balance summary component*/}
                 <CurrentBalance balance={balance} income={income} expenses={expenses} />
+                {/* Buttons to manage income and expenses */}
                 <div className="grid grid-cols-2 gap-10">
                     <TransactionButton type={'addIncome'} onSubmit={handleAddIncome} />
                     <TransactionButton type={'addExpenses'} onSubmit={handleAddExpenses} />

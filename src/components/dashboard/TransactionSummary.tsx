@@ -9,6 +9,8 @@ type Props = {
 }
 
 const TransactionSummary = ({ type, amount }: Props) => {
+
+    // conditional rendering data
     const config = {
         income: {
             label: 'Total Income',
@@ -24,15 +26,19 @@ const TransactionSummary = ({ type, amount }: Props) => {
         }
     };
 
+    // destructuring conditional rendering data
     const { label, Icon, bgClass, textClass } = config[type];
 
     return (
         <div className="flex items-center gap-3">
+            {/* Icon */}
             <span className={clsx("inline-block p-3 rounded-2xl", bgClass)}>
                 <Icon className={clsx("text-2xl", textClass)} />
             </span>
             <div>
+                {/* Income/expenses label */}
                 <p className="text-xs">{label}</p>
+                {/* Amount */}
                 <span className={clsx("text-xl font-semibold", textClass)} >
                     ${amount}
                 </span>
