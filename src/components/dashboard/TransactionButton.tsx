@@ -18,7 +18,7 @@ type Props = {
     onSubmit: (amount: number) => void;
 }
 
-const IncExpButton = ({ type, onSubmit }: Props) => {
+const TransactionButton = ({ type, onSubmit }: Props) => {
     const [value, setValue] = useState('')
     const config = {
         addIncome: {
@@ -36,7 +36,7 @@ const IncExpButton = ({ type, onSubmit }: Props) => {
     }
     const { Icon, label, bgColorClass, shadowColorClass } = config[type];
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.SubmitEvent) => {
         e.preventDefault();
         const amount = Number(value);
         if (!amount || isNaN(amount)) return;
@@ -85,4 +85,4 @@ const IncExpButton = ({ type, onSubmit }: Props) => {
     )
 }
 
-export default IncExpButton;
+export default TransactionButton;

@@ -1,6 +1,4 @@
-'use client'
-
-import IncomeExpenses from "./IncomeExpenses";
+import TransactionSummary from "./TransactionSummary";
 
 type Props = {
     balance: number;
@@ -18,8 +16,8 @@ const CurrentBalance = ({ balance, income, expenses }: Props) => {
                 <p className="text-5xl font-extrabold">${balance}</p>
             </div>
             <div className="flex flex-wrap gap-5">
-                <IncomeExpenses type={'income'} amount={income} />
-                <IncomeExpenses type={'expenses'} amount={expenses} />
+                <TransactionSummary type={'income'} amount={income} />
+                <TransactionSummary type={'expenses'} amount={expenses} />
             </div>
         </div>
     )

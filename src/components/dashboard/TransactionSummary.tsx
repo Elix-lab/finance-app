@@ -8,7 +8,7 @@ type Props = {
     amount: number;
 }
 
-const IncomeExpenses = ({ type, amount }: Props) => {
+const TransactionSummary = ({ type, amount }: Props) => {
     const config = {
         income: {
             label: 'Total Income',
@@ -33,7 +33,7 @@ const IncomeExpenses = ({ type, amount }: Props) => {
             </span>
             <div>
                 <p className="text-xs">{label}</p>
-                <span className={clsx("text-xl font-semibold", textClass)}>
+                <span className={clsx("text-xl font-semibold", textClass)} >
                     ${amount}
                 </span>
             </div>
@@ -41,4 +41,4 @@ const IncomeExpenses = ({ type, amount }: Props) => {
     )
 }
 
-export default IncomeExpenses;
+export default TransactionSummary;
