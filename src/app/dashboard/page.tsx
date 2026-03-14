@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import TransactionButton from "../../components/dashboard/TransactionButton";
 import CurrentBalance from "@/components/dashboard/CurrentBalance";
+import TransactionTable from "@/components/dashboard/TransactionTable";
 
 const Page = () => {
     // useStates
@@ -51,6 +52,7 @@ const Page = () => {
                     <TransactionButton type={'addIncome'} onSubmit={handleAddIncome} />
                     <TransactionButton type={'addExpenses'} onSubmit={handleAddExpenses} />
                 </div>
+                <TransactionTable />
             </div>
         </div>
     )
