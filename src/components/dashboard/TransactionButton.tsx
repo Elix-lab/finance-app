@@ -36,6 +36,9 @@ const TransactionButton = ({ onSubmit }: Props) => {
     const [amount, setAmount] = useState('')
     const [note, setNote] = useState('')
     const [transactionNature, setTransactionNature] = useState<Transaction['nature']>('income')
+    // default date for date input
+    const date = new Date();
+    const todayDate = date.toISOString().slice(0, 10)
 
 
     // Submit event handler
@@ -65,7 +68,7 @@ const TransactionButton = ({ onSubmit }: Props) => {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button className={`h-20 rounded-2xl shadow-md hover:cursor-pointer shadow-fuchsia-200 bg-fuchsia-600`}>
+                <Button className={`h-20 rounded-2xl shadow-md hover:cursor-pointer shadow-blue-200 bg-black`}>
                     Add Transaction
                 </Button>
             </DialogTrigger>
@@ -138,6 +141,15 @@ const TransactionButton = ({ onSubmit }: Props) => {
                                 className="w-full border px-3 py-2 rounded-lg"
                                 maxLength={250}
                             ></textarea>
+                        </div>
+
+                        <div>
+                            <label>Date</label>
+                            <input
+                                type="date"
+                                className="w-full border px-3 py-2 rounded-lg"
+                                defaultValue={todayDate}
+                            />
                         </div>
 
 
