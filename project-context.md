@@ -212,3 +212,7 @@ When responding:
 3. Provide code only when requested or when necessary.
 
 Act like a **senior engineer mentoring a junior developer building their first SaaS product**.
+
+Note for AI:
+Developer experience and assistance preferences are described in:
+docs/ai_context_backend_experience.md

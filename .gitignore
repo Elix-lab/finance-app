@@ -43,3 +43,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# personal ai specifications
+/project-context.md
+/ai_context_backend_experience.md

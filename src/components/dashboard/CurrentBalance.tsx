@@ -4,9 +4,10 @@ type Props = {
     balance: number;
     income: number;
     expenses: number;
+    investments: number;
 }
 
-const CurrentBalance = ({ balance, income, expenses }: Props) => {
+const CurrentBalance = ({ balance, income, expenses, investments }: Props) => {
     return (
         <div className="flex flex-col gap-3 w-full h-auto bg-white shadow-md rounded-xl p-8">
             {/* Total Balance */}
@@ -18,6 +19,7 @@ const CurrentBalance = ({ balance, income, expenses }: Props) => {
             <div className="flex flex-wrap gap-5">
                 <TransactionSummary type={'income'} amount={income} />
                 <TransactionSummary type={'expenses'} amount={expenses} />
+                <TransactionSummary type={'investments'} amount={investments} />
             </div>
         </div>
     )

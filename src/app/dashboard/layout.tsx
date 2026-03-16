@@ -1,6 +1,15 @@
-const Layout = ({children}: {children: React.ReactNode}) => {
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/dashboard/AppSidebar";
+const Layout = ({ children }: { children: React.ReactNode }) => {
     return (
-        <div className="bg-[#fafafa] h-screen">{children}</div>
+        <SidebarProvider>
+            <AppSidebar />
+            <main className="w-full">
+                <div className="bg-[#fafafa] h-screen">{children}</div>
+                {/* {children} */}
+            </main>
+        </SidebarProvider>
+
     )
 }
 

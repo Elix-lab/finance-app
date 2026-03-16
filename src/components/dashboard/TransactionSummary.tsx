@@ -2,9 +2,10 @@
 
 import clsx from "clsx";
 import { IoIosTrendingUp, IoIosTrendingDown } from "react-icons/io";
+import { LuChartCandlestick } from "react-icons/lu";
 
 type Props = {
-    type: 'income' | 'expenses';
+    type: 'income' | 'expenses' | 'investments';
     amount: number;
 }
 
@@ -23,6 +24,12 @@ const TransactionSummary = ({ type, amount }: Props) => {
             Icon: IoIosTrendingDown,
             bgClass: 'bg-red-100',
             textClass: 'text-red-500',
+        },
+        investments: {
+            label: 'Total Investments',
+            Icon: LuChartCandlestick,
+            bgClass: 'bg-blue-100',
+            textClass: 'text-blue-500',
         }
     };
 
