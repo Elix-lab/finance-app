@@ -1,0 +1,3 @@
+- Crear un cambiador global de currency y currency format seguir los pasos del chat
+- Poner puntos cada 3 ceros para leer mejor los números
+- Inversion ajustarla para que no permita inverit mas de lo que se tiene entre la diferencia de ingreso y egreso

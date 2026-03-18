@@ -12,6 +12,10 @@ import {
     DialogFooter,
     DialogClose
 } from "@/components/ui/dialog"
+import { Calendar } from "../ui/calendar";
+import { Popover, PopoverTrigger, PopoverContent } from "../ui/popover";
+import { CalendarIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 // Types
 type Transaction = {
@@ -37,8 +41,10 @@ const TransactionButton = ({ onSubmit }: Props) => {
     const [note, setNote] = useState('')
     const [transactionNature, setTransactionNature] = useState<Transaction['nature']>('income')
     // default date for date input
-    const date = new Date();
-    const todayDate = date.toISOString().slice(0, 10)
+    // const date = new Date();
+    // const todayDate = date.toISOString().slice(0, 10)
+    const [dateValue, setDateValue] = useState<Date | undefined>(() => new Date())
+
 
 
     // Submit event handler
@@ -55,7 +61,7 @@ const TransactionButton = ({ onSubmit }: Props) => {
             category: category.trim(),
             amount: amountNum,
             note: note.trim(),
-            date: new Date().toISOString(),
+            date: (dateValue ?? new Date()).toDateString(),
         };
         onSubmit(newTransaction);
         setName('');
@@ -143,13 +149,24 @@ const TransactionButton = ({ onSubmit }: Props) => {
                             ></textarea>
                         </div>
 
-                        <div>
+                        <div className="flex flex-col gap-1">
                             <label>Date</label>
-                            <input
-                                type="date"
-                                className="w-full border px-3 py-2 rounded-lg"
-                                defaultValue={todayDate}
-                            />
+
+                            <Popover>
+                                <PopoverTrigger asChild>
+                                    <Button className="flex w-1/3" variant="outline">
+                                        {dateValue ? dateValue.toLocaleDateString() : 'Pick a date'}
+                                        <CalendarIcon className="ml-auto" />
+                                    </Button>
+                                </PopoverTrigger>
+                                <PopoverContent className="w-auto p-5">
+                                    <Calendar
+                                        mode="single"
+                                        selected={dateValue}
+                                        onSelect={setDateValue}
+                                    />
+                                </PopoverContent>
+                            </Popover>
                         </div>
 
 

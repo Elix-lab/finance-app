@@ -13,7 +13,7 @@ const CurrentBalance = ({ balance, income, expenses, investments }: Props) => {
             {/* Total Balance */}
             <div>
                 <p className="text-sm mb-1">Current Balance</p>
-                <p className="text-5xl font-extrabold">${balance}</p>
+                <p className="text-5xl font-extrabold">${(balance).toLocaleString()}</p>
             </div>
             {/* Income and Expenses Totals */}
             <div className="flex flex-wrap gap-5">
