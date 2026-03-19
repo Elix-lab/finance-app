@@ -1,4 +1,5 @@
 import TransactionSummary from "./TransactionSummary";
+import { formatCurrency } from "@/lib/currencyFormat";
 
 type Props = {
     balance: number;
@@ -13,7 +14,7 @@ const CurrentBalance = ({ balance, income, expenses, investments }: Props) => {
             {/* Total Balance */}
             <div>
                 <p className="text-sm mb-1">Current Balance</p>
-                <p className="text-5xl font-extrabold">${(balance).toLocaleString()}</p>
+                <p className="text-5xl font-extrabold">{formatCurrency(balance)}</p>
             </div>
             {/* Income and Expenses Totals */}
             <div className="flex flex-wrap gap-5">

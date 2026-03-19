@@ -3,6 +3,7 @@
 import clsx from "clsx";
 import { IoIosTrendingUp, IoIosTrendingDown } from "react-icons/io";
 import { LuChartCandlestick } from "react-icons/lu";
+import { formatCurrency } from "@/lib/currencyFormat";
 
 type Props = {
     type: 'income' | 'expenses' | 'investments';
@@ -47,7 +48,7 @@ const TransactionSummary = ({ type, amount }: Props) => {
                 <p className="text-xs">{label}</p>
                 {/* Amount */}
                 <span className={clsx("text-xl font-semibold", textClass)} >
-                    ${amount}
+                    {formatCurrency(amount)}
                 </span>
             </div>
         </div>
