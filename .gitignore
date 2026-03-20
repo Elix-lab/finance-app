@@ -45,7 +45,8 @@ yarn-error.log*
 next-env.d.ts
 
 # personal ai specifications
-/project-context.md
 /ai_context_backend_experience.md
+project-content.md
+
 
 toDo.md
