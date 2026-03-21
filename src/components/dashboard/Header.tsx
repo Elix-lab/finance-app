@@ -1,6 +1,6 @@
 
 
-import { SignOutButton } from "../ui/SignOutButton";
+import { SignOutButton } from "../auth/SignOutButton";
 const Header = () => {
     return (
         <div className="bg flex justify-end py-2 px-5">
