@@ -1,15 +1,12 @@
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/dashboard/AppSidebar";
+'use client'
+import Header from "@/components/dashboard/Header";
+
 const Layout = ({ children }: { children: React.ReactNode }) => {
     return (
-        <SidebarProvider>
-            <AppSidebar />
-            <main className="w-full">
-                <div className="bg-[#fafafa] h-screen">{children}</div>
-                {/* {children} */}
-            </main>
-        </SidebarProvider>
-
+        <div className="bg-[#f2f2f2] h-screen">
+            <Header />
+            {children}
+        </div>
     )
 }
 
