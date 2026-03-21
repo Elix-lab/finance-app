@@ -1,9 +1,11 @@
+'use client'
+
 import { Button } from "./button"
 
 export function SignOutButton() {
 
     const handleSignOut = async () => {
-        await fetch('@/api/signOut', { method: 'POST' });
+        await fetch('/api/signOut', { method: 'POST' });
         window.location.href = '/signIn'
     }
 
