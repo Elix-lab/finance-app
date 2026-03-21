@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from "react";
-import TransactionButton from "../../components/dashboard/TransactionButton";
+import TransactionButton from "../../../components/dashboard/TransactionButton";
 import CurrentBalance from "@/components/dashboard/CurrentBalance";
 import TransactionTable from "@/components/dashboard/TransactionTable";
 
