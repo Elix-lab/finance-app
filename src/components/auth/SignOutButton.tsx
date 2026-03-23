@@ -1,17 +1,16 @@
-'use client'
-
+import { signOut } from "../../../auth"
 import { Button } from "../ui/button"
 
 export function SignOutButton() {
 
-    const handleSignOut = async () => {
-        await fetch('/api/signOut', { method: 'POST' });
-        window.location.href = '/signIn'
-    }
-
     return (
-        <Button onClick={handleSignOut}>
-            Sign Out
-        </Button>
+        <form action={async () => {
+            'use server'
+            await signOut();
+        }}>
+            <Button type="submit">
+                Sign Out
+            </Button>
+        </form>
     )
 }
