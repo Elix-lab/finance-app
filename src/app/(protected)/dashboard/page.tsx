@@ -7,11 +7,10 @@ import TransactionTable from "@/components/dashboard/TransactionTable";
 
 type Transaction = {
     id: string;
-    nature: 'income' | 'expense' | 'investment';
+    nature: 'income' | 'expense';
     name: string;
     category: string;
     amount: number;
-    note: string;
     date: string;
 }
 
@@ -20,7 +19,6 @@ const Page = () => {
     const [transactions, setTransactions] = useState<Transaction[]>([]);
     const [totalIncome, setTotalIncome] = useState(0)
     const [totalExpenses, setTotalExpenses] = useState(0)
-    const [totalInvestments, setTotalInvestments] = useState(0)
     // Total balance
     const balance = totalIncome - totalExpenses;
 
@@ -41,8 +39,6 @@ const Page = () => {
             setTotalIncome(prev => prev + tx.amount)
         } else if (tx.nature === 'expense') {
             setTotalExpenses(prev => prev + tx.amount)
-        } else {
-            setTotalInvestments(prev => prev + tx.amount)
         }
     }
 
@@ -55,10 +51,12 @@ const Page = () => {
                     balance={balance}
                     income={totalIncome}
                     expenses={totalExpenses}
-                    investments={totalInvestments}
                 />
                 {/* Buttons to manage income and expenses */}
-                <TransactionButton onSubmit={handleAddTransaction} />
+                <div className="grid grid-cols-2 gap-1">
+                    <TransactionButton buttonNature='income' onSubmit={handleAddTransaction} />
+                    <TransactionButton buttonNature='expense' onSubmit={handleAddTransaction} />
+                </div>
                 <TransactionTable transactions={transactions} />
             </div>
         </div>

@@ -15,37 +15,32 @@ import {
 import { Calendar } from "../ui/calendar";
 import { Popover, PopoverTrigger, PopoverContent } from "../ui/popover";
 import { CalendarIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 // Types
 type Transaction = {
     id: string;
-    nature: 'income' | 'expense' | 'investment';
+    nature: 'income' | 'expense';
     name: string;
     category: string;
     amount: number;
-    note: string;
     date: string;
 }
 type Props = {
     onSubmit: (tx: Transaction) => void;
+    buttonNature: 'income' | 'expense';
 }
 
 
 // COMPONENT
-const TransactionButton = ({ onSubmit }: Props) => {
+const TransactionButton = ({ buttonNature, onSubmit }: Props) => {
     //Variables and States
     const [name, setName] = useState('')
     const [category, setCategory] = useState('')
     const [amount, setAmount] = useState('')
-    const [note, setNote] = useState('')
-    const [transactionNature, setTransactionNature] = useState<Transaction['nature']>('income')
+    // const [transactionNature, setTransactionNature] = useState<Transaction['nature']>('income')
+
     // default date for date input
-    // const date = new Date();
-    // const todayDate = date.toISOString().slice(0, 10)
     const [dateValue, setDateValue] = useState<Date | undefined>(() => new Date())
-
-
 
     // Submit event handler
     const handleSubmit = (e: React.SubmitEvent) => {
@@ -56,32 +51,44 @@ const TransactionButton = ({ onSubmit }: Props) => {
         // Creating the Transaction Object
         const newTransaction: Transaction = {
             id: crypto.randomUUID(),
-            nature: transactionNature, // this has to be changed with the select input value
+            nature: buttonNature,
             name: name.trim(),
             category: category.trim(),
             amount: amountNum,
-            note: note.trim(),
             date: (dateValue ?? new Date()).toDateString(),
         };
         onSubmit(newTransaction);
         setName('');
         setCategory('');
         setAmount('');
-        setNote('')
     }
 
+    const config = {
+        income: {
+            bgColor: 'bg-green-600',
+            shadow: 'shadow-green-300',
+            text: 'Add Income'
+        },
+        expense: {
+            bgColor: 'bg-red-600',
+            shadow: 'shadow-red-300',
+            text: 'Add Expense'
+        }
+    }
+
+    const { bgColor, shadow, text } = config[buttonNature];
 
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button className={`h-20 rounded-2xl shadow-md hover:cursor-pointer shadow-blue-200 bg-black`}>
-                    Add Transaction
+                <Button className={`h-20 rounded-2xl shadow-md hover:cursor-pointer ${shadow} ${bgColor}`}>
+                    {text}
                 </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-xl rounded-2xl">
                 <form onSubmit={handleSubmit}>
                     <DialogHeader>
-                        <DialogTitle>Add Transaction</DialogTitle>
+                        <DialogTitle>{text}</DialogTitle>
                         <DialogDescription>
                             Add transaction details and save.
                         </DialogDescription>
@@ -89,18 +96,6 @@ const TransactionButton = ({ onSubmit }: Props) => {
 
                     {/* inputs */}
                     <div className="flex flex-col gap-4 px-1.5 py-4">
-                        <div>
-                            <label className="block mb-1.5">Transaction Nature</label>
-                            <select
-                                value={transactionNature}
-                                onChange={(e) => setTransactionNature(e.target.value as Transaction['nature'])}
-                                className="w-full border px-3 py-2 rounded-lg"
-                            >
-                                <option value="income">Income</option>
-                                <option value="expense">Expense</option>
-                                <option value="investment">Investment</option>
-                            </select>
-                        </div>
 
                         <div>
                             <label className="block mb-1">Amount*</label>
@@ -138,7 +133,7 @@ const TransactionButton = ({ onSubmit }: Props) => {
                             />
                         </div>
 
-                        <div>
+                        {/* <div>
                             <label className="block mb-1">Note (Optional)</label>
                             <textarea
                                 value={note}
@@ -147,7 +142,7 @@ const TransactionButton = ({ onSubmit }: Props) => {
                                 className="w-full border px-3 py-2 rounded-lg"
                                 maxLength={250}
                             ></textarea>
-                        </div>
+                        </div> */}
 
                         <div className="flex flex-col gap-1">
                             <label>Date</label>

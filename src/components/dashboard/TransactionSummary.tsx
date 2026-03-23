@@ -6,7 +6,7 @@ import { LuChartCandlestick } from "react-icons/lu";
 import { formatCurrency } from "@/lib/currencyFormat";
 
 type Props = {
-    type: 'income' | 'expenses' | 'investments';
+    type: 'income' | 'expenses';
     amount: number;
 }
 
