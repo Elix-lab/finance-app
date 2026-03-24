@@ -1,5 +1,6 @@
 'use client'
 
+import { createTransaction } from "../actions/transactions/createTransaction";
 import { useState, useEffect } from "react";
 import TransactionButton from "../../../components/dashboard/TransactionButton";
 import CurrentBalance from "@/components/dashboard/CurrentBalance";
@@ -22,17 +23,9 @@ const Page = () => {
     // Total balance
     const balance = totalIncome - totalExpenses;
 
-    // Setting local storage
-    useEffect(() => {
-        localStorage.setItem('income', String(totalIncome))
-    }, [totalIncome])
-
-    useEffect(() => {
-        localStorage.setItem('expenses', String(totalExpenses))
-    }, [totalExpenses])
-
     // Event handlers
-    const handleAddTransaction = (tx: Transaction) => {
+    const handleAddTransaction = async (tx: Transaction) => {
+
         setTransactions(prev => [...prev, tx])
 
         if (tx.nature === 'income') {
@@ -40,6 +33,17 @@ const Page = () => {
         } else if (tx.nature === 'expense') {
             setTotalExpenses(prev => prev + tx.amount)
         }
+
+        // poner el user de auth provider
+        await createTransaction({
+            userId: 'test-user',
+            nature: tx.nature,
+            name: tx.name,
+            category: tx.category,
+            amount: tx.amount,
+            date: tx.date
+        })
+
     }
 
 

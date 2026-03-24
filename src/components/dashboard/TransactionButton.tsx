@@ -172,7 +172,9 @@ const TransactionButton = ({ buttonNature, onSubmit }: Props) => {
                             <Button variant="outline">Cancel</Button>
                         </DialogClose>
 
-                        <Button type="submit">Save</Button>
+                        <DialogClose asChild>
+                            <Button type="submit">Save</Button>
+                        </DialogClose>
 
                     </DialogFooter>
                 </form>

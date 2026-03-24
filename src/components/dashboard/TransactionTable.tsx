@@ -47,7 +47,8 @@ const TransactionTable = ({ transactions }: Props) => {
         <div className="flex flex-col gap-3 w-full h-auto bg-white shadow-md rounded-xl p-8">
             <span className="text-xl font-bold mb-5">Recent Transactions</span>
             <ul>
-                {transactions.map(tx => {
+                {/* in the future we have to do the toReversed() based on the date */}
+                {transactions.toReversed().map(tx => {
                     const { Icon, iconBgClass, iconSymbolColor, amountColorClass } = config[tx.nature];
 
                     return (
