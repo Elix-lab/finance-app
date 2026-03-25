@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { signIn } from "../../../../auth";
 import { GiMoneyStack } from "react-icons/gi";
 import { FcGoogle } from "react-icons/fc";
 
@@ -7,10 +6,6 @@ export default function SignIn() {
     return (
         <div className="flex min-h-screen items-center justify-center bg-[#f2f2f2] p-4">
             <form
-                action={async () => {
-                    "use server";
-                    await signIn("google", { redirectTo: "/dashboard" });
-                }}
                 className="flex w-full max-w-sm flex-col gap-6 rounded-xl border border-border/60 bg-white p-8 shadow-md"
             >
                 <div className="flex flex-col items-center gap-2 text-center">
