@@ -7,6 +7,7 @@ import {
   timestamp,
 } from "drizzle-orm/pg-core";
 
+// Transactions
 export const transactions = pgTable("transactions", {
   id: uuid("id").defaultRandom().primaryKey(),
 
