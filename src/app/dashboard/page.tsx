@@ -2,7 +2,7 @@
 
 import { createTransaction } from "../actions/transactions/createTransaction";
 import { useState } from "react";
-import TransactionButton from "../../../components/dashboard/TransactionButton";
+import TransactionButton from "../../components/dashboard/TransactionButton";
 import CurrentBalance from "@/components/dashboard/CurrentBalance";
 import TransactionTable from "@/components/dashboard/TransactionTable";
 
