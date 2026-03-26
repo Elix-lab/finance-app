@@ -1,11 +1,17 @@
 import { Button } from "@/components/ui/button";
 import { GiMoneyStack } from "react-icons/gi";
 import { FcGoogle } from "react-icons/fc";
+import { signInAction } from "@/app/actions/auth/actions";
+import { title } from "process";
+
+export const metadata = {
+    title: 'SignIn'
+}
 
 export default function SignIn() {
     return (
         <div className="flex min-h-screen items-center justify-center bg-[#f2f2f2] p-4">
-            <form
+            <form action={signInAction}
                 className="flex w-full max-w-sm flex-col gap-6 rounded-xl border border-border/60 bg-white p-8 shadow-md"
             >
                 <div className="flex flex-col items-center gap-2 text-center">
