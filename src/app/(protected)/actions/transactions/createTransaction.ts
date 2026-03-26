@@ -2,7 +2,6 @@
 
 import { db } from "@/db";
 import { transactions } from "@/db/schema";
-import { getCurrentUser } from "@/lib/auth";
 
 type CreateTransactionInput = {
   userId: string;
@@ -14,9 +13,8 @@ type CreateTransactionInput = {
 };
 
 export async function createTransaction(data: CreateTransactionInput) {
-  const user = await getCurrentUser();
   await db.insert(transactions).values({
-    userId: user.id,
+    userId: data.userId,
     nature: data.nature,
     name: data.name,
     category: data.category,
