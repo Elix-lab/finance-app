@@ -1,5 +1,4 @@
 import Header from "@/components/dashboard/Header";
-import { redirect } from 'next/navigation';
 
 const Layout = async ({ children }: { children: React.ReactNode }) => {
 
