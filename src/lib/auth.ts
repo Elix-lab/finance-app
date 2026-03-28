@@ -1,5 +1,7 @@
 import NextAuth from "next-auth";
+import { User } from "next-auth";
 import Google from "next-auth/providers/google";
+import { getUserByEmail } from "./data-service";
 
 const authConfig = {
   providers: [
@@ -9,13 +11,23 @@ const authConfig = {
     }),
   ],
   callbacks: {
-    authorized: async ({ auth }) => {
+    authorized: async ({ auth }: { auth: any }) => {
       return !!auth?.user;
     },
-    // signIn() {},
-  },
-  pages: {
-    signIn: "/signIn",
+    async signIn({ user }: { user: User }) {
+      try {
+        if (!user?.email) {
+          return false;
+        }
+        const existingUser = await getUserByEmail(user.email);
+        return true;
+      } catch {
+        return false;
+      }
+    },
+    pages: {
+      signIn: "/signIn",
+    },
   },
 };
 
