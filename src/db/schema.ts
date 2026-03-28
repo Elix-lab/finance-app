@@ -1,2 +1,2 @@
 export * from "./schema/transactions";
-export * from "./schema/user";
+export * from "./schema/users";
