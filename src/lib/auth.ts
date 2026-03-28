@@ -12,6 +12,7 @@ const authConfig = {
     authorized: async ({ auth }) => {
       return !!auth?.user;
     },
+    // signIn() {},
   },
   pages: {
     signIn: "/signIn",
