@@ -1,24 +1,15 @@
-import {
-  pgTable,
-  text,
-  numeric,
-  uuid,
-  date,
-  timestamp,
-} from "drizzle-orm/pg-core";
+import { pgTable, uuid, text, numeric, date, timestamp } from "drizzle-orm/pg-core"
+import { sql } from "drizzle-orm"
 
-// Transactions
+
+
 export const transactions = pgTable("transactions", {
-  id: uuid("id").defaultRandom().primaryKey(),
+  id: uuid().defaultRandom().primaryKey().notNull(),
   userId: text("user_id").notNull(),
-  nature: text("nature", {
-    enum: ["income", "expense"],
-  }).notNull(),
-  name: text("name").notNull(),
-  category: text("category").notNull(),
-  amount: numeric("amount").notNull(),
-  date: date("date").notNull(),
-  createdAt: timestamp("created_at", {
-    withTimezone: true,
-  }).defaultNow(),
+  nature: text().notNull(),
+  name: text().notNull(),
+  category: text().notNull(),
+  amount: numeric().notNull(),
+  date: date().notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).defaultNow(),
 });

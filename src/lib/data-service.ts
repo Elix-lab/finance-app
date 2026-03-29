@@ -8,5 +8,26 @@ export async function getUserByEmail(email: string) {
     .from(users)
     .where(eq(users.email, email))
     .limit(1);
-  return user ?? null;
+  return user[0] ?? null;
+console.log("RETURNING:", user);
+
 }
+
+export async function createUser(newUser: {
+  name?: string;
+  email: string;
+  image?: string;
+}) {
+  const user = await db
+    .insert(users)
+    .values({
+      name: newUser.name ?? undefined,
+      email: newUser.email,
+      image: newUser.image ?? undefined,
+    })
+    .onConflictDoNothing()
+    .returning();
+  return user[0] ?? null;
+  console.log("INSERTANDO:", newUser);
+}
+
