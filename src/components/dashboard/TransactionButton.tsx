@@ -15,11 +15,12 @@ import {
 import { Calendar } from "../ui/calendar";
 import { Popover, PopoverTrigger, PopoverContent } from "../ui/popover";
 import { CalendarIcon } from "lucide-react";
+import { insertTransactionAction } from "@/actions/transactions/transactions";
 
 // Types
 type Transaction = {
   nature: "income" | "expense";
-  name: string;
+  title: string;
   category: string;
   amount: number;
   date: string;
@@ -31,9 +32,9 @@ type Props = {
 // COMPONENT
 const TransactionButton = ({ buttonNature }: Props) => {
   //Variables and States
-  const [name, setName] = useState("");
+  const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
-  const [amount, setAmount] = useState("");
+  const [amount, setAmount] = useState('');
   // const [transactionNature, setTransactionNature] = useState<Transaction['nature']>('income')
 
   // default date for date input
@@ -41,25 +42,25 @@ const TransactionButton = ({ buttonNature }: Props) => {
     () => new Date(),
   );
 
-  // Submit event handler
-  const handleSubmit = (e: React.SubmitEvent) => {
-    e.preventDefault();
-    const amountNum = Number(amount);
-    if (!amountNum || isNaN(amountNum) || !name.trim() || !category.trim())
-      return;
+  // // Submit event handler
+  // const handleSubmit = (e: React.SubmitEvent) => {
+  //   e.preventDefault();
+  //   const amountNum = Number(amount);
+  //   if (!amountNum || isNaN(amountNum) || !title.trim() || !category.trim())
+  //     return;
 
-    // Creating the Transaction Object
-    const newTransaction: Transaction = {
-      nature: buttonNature,
-      name: name.trim(),
-      category: category.trim(),
-      amount: amountNum,
-      date: (dateValue ?? new Date()).toDateString(),
-    };
-    setName("");
-    setCategory("");
-    setAmount("");
-  };
+  //   // Creating the Transaction Object
+  //   const newTransaction: Transaction = {
+  //     nature: buttonNature,
+  //     title: title.trim(),
+  //     category: category.trim(),
+  //     amount: amountNum,
+  //     date: (dateValue ?? new Date()).toDateString(),
+  //   };
+  //   setTitle("");
+  //   setCategory("");
+  //   setAmount("");
+  // };
 
   const config = {
     income: {
@@ -86,7 +87,7 @@ const TransactionButton = ({ buttonNature }: Props) => {
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-xl rounded-2xl">
-        <form onSubmit={handleSubmit}>
+        <form action={insertTransactionAction}>
           <DialogHeader>
             <DialogTitle>{text}</DialogTitle>
             <DialogDescription>
@@ -99,6 +100,7 @@ const TransactionButton = ({ buttonNature }: Props) => {
             <div>
               <label className="block mb-1">Amount*</label>
               <input
+                name="amount"
                 type="number"
                 value={amount}
                 onChange={(e) => {
@@ -113,10 +115,11 @@ const TransactionButton = ({ buttonNature }: Props) => {
             <div>
               <label className="block mb-1">Title*</label>
               <input
+                name="title"
                 type="text"
-                value={name}
+                value={title}
                 onChange={(e) => {
-                  setName(e.target.value);
+                  setTitle(e.target.value);
                 }}
                 className="w-full border px-3 py-2 rounded-lg"
                 maxLength={50}
@@ -127,6 +130,7 @@ const TransactionButton = ({ buttonNature }: Props) => {
             <div>
               <label className="block mb-1">Category*</label>
               <input
+                name="category"
                 type="text"
                 value={category}
                 onChange={(e) => {
@@ -167,6 +171,18 @@ const TransactionButton = ({ buttonNature }: Props) => {
                   />
                 </PopoverContent>
               </Popover>
+
+              <input
+                type="hidden"
+                name="date"
+                value={
+                  dateValue
+                    ? dateValue.toISOString().slice(0, 10)
+                    : new Date().toISOString().slice(0, 10)
+                }
+              />
+
+              <input type="hidden" name="nature" value={buttonNature} />
             </div>
           </div>
 

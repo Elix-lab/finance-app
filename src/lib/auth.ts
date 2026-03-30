@@ -15,7 +15,7 @@ const authConfig = {
     authorized: async ({ auth }: { auth: any }) => {
       return !!auth?.user;
     },
-    async signIn({ user }: { user: User }) {
+    async signIn({ user }: { user: any }) {
       try {
         if (!user.email) {
           return false;
@@ -35,11 +35,14 @@ const authConfig = {
         return false;
       }
     },
-    async session({session} : {session : any}) {
-      const existingUser = await getUserByEmail(session.user.email)
+    async session({ session }: { session: any }) {
+      const existingUser = await getUserByEmail(session.user.email);
       session.user.existingId = existingUser.id;
       return session;
-    }
+
+      maxAge: 60; //20 minutes
+      updateAge: 60 * 5; //every 5 minutes
+    },
   },
   pages: {
     signIn: "/signIn",
