@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { GiMoneyStack } from "react-icons/gi";
 import { FcGoogle } from "react-icons/fc";
-import { signInAction } from "@/app/actions/auth/actions";
+import { signInAction } from "@/app/actions/auth";
 
 export const metadata = {
   title: "signIn",

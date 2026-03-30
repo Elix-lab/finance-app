@@ -1,6 +1,5 @@
 'use client'
 
-import { createTransaction } from "../actions/transactions/createTransaction";
 import { useState } from "react";
 import TransactionButton from "../../components/dashboard/TransactionButton";
 import CurrentBalance from "@/components/dashboard/CurrentBalance";
@@ -34,15 +33,6 @@ const Page = () => {
             setTotalExpenses(prev => prev + tx.amount)
         }
 
-        // poner el user de auth provider
-        await createTransaction({
-            userId: 'test-user',
-            nature: tx.nature,
-            name: tx.name,
-            category: tx.category,
-            amount: tx.amount,
-            date: tx.date
-        })
 
     }
 
@@ -58,8 +48,8 @@ const Page = () => {
                 />
                 {/* Buttons to manage income and expenses */}
                 <div className="grid grid-cols-2 gap-1">
-                    <TransactionButton buttonNature='income' onSubmit={handleAddTransaction} />
-                    <TransactionButton buttonNature='expense' onSubmit={handleAddTransaction} />
+                    <TransactionButton buttonNature='income' />
+                    <TransactionButton buttonNature='expense' />
                 </div>
                 <TransactionTable transactions={transactions} />
             </div>

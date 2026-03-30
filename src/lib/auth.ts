@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import { User } from "next-auth";
 import Google from "next-auth/providers/google";
-import { getUserByEmail, createUser } from "./data-service";
+import { getUserByEmail, createUser } from "./data/user";
 
 const authConfig = {
   providers: [
@@ -17,12 +17,10 @@ const authConfig = {
     },
     async signIn({ user }: { user: User }) {
       try {
-        console.log("SIGN IN USUARIO:", user);
         if (!user.email) {
           return false;
         }
         const existingUser = await getUserByEmail(user.email);
-        console.log("EXISTING USER:", existingUser);
 
         if (!existingUser) {
           await createUser({
@@ -30,15 +28,18 @@ const authConfig = {
             email: user.email,
             image: user.image ?? undefined,
           });
-          console.log("CREATED USER:", createUser);
         }
 
         return true;
       } catch (err) {
-        console.error("SIGNIN ERROR:", err);
         return false;
       }
     },
+    async session({session} : {session : any}) {
+      const existingUser = await getUserByEmail(session.user.email)
+      session.user.existingId = existingUser.id;
+      return session;
+    }
   },
   pages: {
     signIn: "/signIn",

@@ -9,8 +9,6 @@ export async function getUserByEmail(email: string) {
     .where(eq(users.email, email))
     .limit(1);
   return user[0] ?? null;
-console.log("RETURNING:", user);
-
 }
 
 export async function createUser(newUser: {
@@ -28,6 +26,4 @@ export async function createUser(newUser: {
     .onConflictDoNothing()
     .returning();
   return user[0] ?? null;
-  console.log("INSERTANDO:", newUser);
 }
-

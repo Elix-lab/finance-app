@@ -1,11 +1,15 @@
 import { pgTable, uuid, text, numeric, date, timestamp } from "drizzle-orm/pg-core"
+import {users} from '../schema'
 import { sql } from "drizzle-orm"
 
 
 
 export const transactions = pgTable("transactions", {
   id: uuid().defaultRandom().primaryKey().notNull(),
-  userId: text("user_id").notNull(),
+  userId: uuid("user_id").notNull().references(() => users.id, {
+    onDelete: 'cascade',
+    onUpdate: 'cascade',
+  }),
   nature: text().notNull(),
   name: text().notNull(),
   category: text().notNull(),
