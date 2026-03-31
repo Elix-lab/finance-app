@@ -28,7 +28,7 @@ export default function Page() {
           type="submit"
           variant="outline"
           size="lg"
-          className="w-full gap-2"
+          className="w-full gap-2 cursor-pointer"
         >
           <FcGoogle className="size-5 shrink-0" aria-hidden />
           Continue with Google

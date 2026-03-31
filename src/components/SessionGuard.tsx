@@ -9,7 +9,13 @@ export default function SessionGuard({
 }: {
   children: React.ReactNode;
 }) {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+  console.log("SessionGuard session:", session);
+  console.log("SessionGuard status:", status);
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
+
   if (!session) {
     return (
       <div>
@@ -18,7 +24,6 @@ export default function SessionGuard({
         <Link href="/signIn">Go to sign in</Link>
       </div>
     );
-
-    return <>{children}</>
   }
+  return <>{children}</>;
 }

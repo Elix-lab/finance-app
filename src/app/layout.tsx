@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { poppins } from "@/components/ui/fonts/fonts";
 import "./globals.css";
+import { SessionProvider } from "next-auth/react";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,10 +15,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${poppins.className} antialiased`}
-      >
-        {children}
+      <body className={`${poppins.className} antialiased`}>
+        <SessionProvider>{children}</SessionProvider>
       </body>
     </html>
   );

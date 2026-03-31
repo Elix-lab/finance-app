@@ -10,6 +10,11 @@ const authConfig = {
       clientSecret: process.env.AUTH_GOOGLE_SECRET,
     }),
   ],
+  session: {
+
+      maxAge: 60, //20 minutes
+      updateAge: 30, //every 5 minutes
+  },
 
   callbacks: {
     authorized: async ({ auth }: { auth: any }) => {
@@ -40,8 +45,6 @@ const authConfig = {
       session.user.existingId = existingUser.id;
       return session;
 
-      maxAge: 60; //20 minutes
-      updateAge: 60 * 5; //every 5 minutes
     },
   },
   pages: {
