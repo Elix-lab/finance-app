@@ -13,6 +13,9 @@ export async function insertTransaction ({data}: {data: {
   date: string;
 }})
 {
+
+  console.log("🔥 SERVER ACTION EJECUTADO");
+
     await db.insert(transactions).values({
     userId: data.userId,
     nature: data.nature,

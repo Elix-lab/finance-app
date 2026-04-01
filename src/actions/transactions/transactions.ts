@@ -4,6 +4,7 @@ import { db } from "@/db";
 import { transactions } from "@/db/schema";
 import { auth } from "@/lib/auth";
 import { insertTransaction } from "@/lib/data/transactions";
+import { revalidatePath } from "next/cache";
 
 // Server actions
 export async function insertTransactionAction(formData: FormData) {
@@ -15,7 +16,7 @@ export async function insertTransactionAction(formData: FormData) {
     throw new Error("You must be logged in to perform this action");
   }
 
-  const userId = session.user?.existingId;
+  const userId = session.user?.id;
   if (!userId) {
     throw new Error("User ID is required");
   }
@@ -37,4 +38,6 @@ export async function insertTransactionAction(formData: FormData) {
 
   const newTransactionData = { amount, title, category, date, userId, nature };
   await insertTransaction({ data: newTransactionData });
+
+  revalidatePath('/dashboard');
 }

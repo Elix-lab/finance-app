@@ -1,7 +1,9 @@
+"use client";
 // This is the modal that pop up when using the TransactionSummary buttons.
 // For the modal we are using ShadCN UI library.
 import { Button } from "../ui/button";
 import { useState } from "react";
+import { useFormStatus } from "react-dom";
 import {
   Dialog,
   DialogContent,
@@ -34,33 +36,15 @@ const TransactionButton = ({ buttonNature }: Props) => {
   //Variables and States
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
-  const [amount, setAmount] = useState('');
-  // const [transactionNature, setTransactionNature] = useState<Transaction['nature']>('income')
+  const [amount, setAmount] = useState("");
 
   // default date for date input
   const [dateValue, setDateValue] = useState<Date | undefined>(
     () => new Date(),
   );
 
-  // // Submit event handler
-  // const handleSubmit = (e: React.SubmitEvent) => {
-  //   e.preventDefault();
-  //   const amountNum = Number(amount);
-  //   if (!amountNum || isNaN(amountNum) || !title.trim() || !category.trim())
-  //     return;
-
-  //   // Creating the Transaction Object
-  //   const newTransaction: Transaction = {
-  //     nature: buttonNature,
-  //     title: title.trim(),
-  //     category: category.trim(),
-  //     amount: amountNum,
-  //     date: (dateValue ?? new Date()).toDateString(),
-  //   };
-  //   setTitle("");
-  //   setCategory("");
-  //   setAmount("");
-  // };
+  // Form status
+  const {pending} = useFormStatus();
 
   const config = {
     income: {
@@ -142,17 +126,6 @@ const TransactionButton = ({ buttonNature }: Props) => {
               />
             </div>
 
-            {/* <div>
-                            <label className="block mb-1">Note (Optional)</label>
-                            <textarea
-                                value={note}
-                                onChange={(e) => setNote(e.target.value)}
-                                placeholder="A quick note about the transaction..."
-                                className="w-full border px-3 py-2 rounded-lg"
-                                maxLength={250}
-                            ></textarea>
-                        </div> */}
-
             <div className="flex flex-col gap-1">
               <label>Date</label>
 
@@ -191,9 +164,7 @@ const TransactionButton = ({ buttonNature }: Props) => {
               <Button variant="outline">Cancel</Button>
             </DialogClose>
 
-            <DialogClose asChild>
-              <Button type="submit">Save</Button>
-            </DialogClose>
+            <SaveButton/>
           </DialogFooter>
         </form>
       </DialogContent>
@@ -201,4 +172,14 @@ const TransactionButton = ({ buttonNature }: Props) => {
   );
 };
 
+
+function SaveButton() {
+  const {pending} = useFormStatus();
+  return(
+    <Button type="submit" disabled={pending}>{pending ? 'Saving...' : 'Save'}</Button>
+  )
+}
+
 export default TransactionButton;
+
+
