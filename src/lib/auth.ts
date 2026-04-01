@@ -11,9 +11,8 @@ const authConfig = {
     }),
   ],
   session: {
-
-      maxAge: 60, //20 minutes
-      updateAge: 30, //every 5 minutes
+    maxAge: 60 * 20, //20 minutes
+    updateAge: 60 * 5, //every 5 minutes
   },
 
   callbacks: {
@@ -42,9 +41,8 @@ const authConfig = {
     },
     async session({ session }: { session: any }) {
       const existingUser = await getUserByEmail(session.user.email);
-      session.user.existingId = existingUser.id;
+      session.user.id = existingUser.id;
       return session;
-
     },
   },
   pages: {

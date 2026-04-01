@@ -1,58 +1,52 @@
-'use client'
-
 import clsx from "clsx";
 import { IoIosTrendingUp, IoIosTrendingDown } from "react-icons/io";
-import { LuChartCandlestick } from "react-icons/lu";
 import { formatCurrency } from "@/lib/currencyFormat";
+import { auth } from "@/lib/auth";
+import { getSumByNature } from "@/lib/data/transactions";
 
 type Props = {
-    type: 'income' | 'expenses';
-    amount: number;
-}
+  nature: "income" | "expenses";
+};
 
-const TransactionSummary = ({ type, amount }: Props) => {
+const TransactionSummary = async ({ nature }: Props) => {
+  const session = await auth();
+  const totals = await getSumByNature(session?.user?.id);
+  const amount = nature === "income" ? totals.income : totals.expenses;
 
-    // conditional rendering data
-    const config = {
-        income: {
-            label: 'Total Income',
-            Icon: IoIosTrendingUp,
-            bgClass: 'bg-green-100',
-            textClass: 'text-green-500',
-        },
-        expenses: {
-            label: 'Total Expenses',
-            Icon: IoIosTrendingDown,
-            bgClass: 'bg-red-100',
-            textClass: 'text-red-500',
-        },
-        investments: {
-            label: 'Total Investments',
-            Icon: LuChartCandlestick,
-            bgClass: 'bg-blue-100',
-            textClass: 'text-blue-500',
-        }
-    };
+  // Conditional rendering data
+  const config = {
+    income: {
+      label: "Total Income",
+      Icon: IoIosTrendingUp,
+      bgClass: "bg-green-100",
+      textClass: "text-green-500",
+    },
+    expenses: {
+      label: "Total Expenses",
+      Icon: IoIosTrendingDown,
+      bgClass: "bg-red-100",
+      textClass: "text-red-500",
+    },
+  };
 
-    // destructuring conditional rendering data
-    const { label, Icon, bgClass, textClass } = config[type];
+  const { label, Icon, bgClass, textClass } = config[nature];
 
-    return (
-        <div className="flex items-center gap-3">
-            {/* Icon */}
-            <span className={clsx("inline-block p-3 rounded-2xl", bgClass)}>
-                <Icon className={clsx("text-2xl", textClass)} />
-            </span>
-            <div>
-                {/* Income/expenses label */}
-                <p className="text-xs">{label}</p>
-                {/* Amount */}
-                <span className={clsx("text-xl font-semibold", textClass)} >
-                    {formatCurrency(amount)}
-                </span>
-            </div>
-        </div>
-    )
-}
+  return (
+    <div className="flex items-center gap-3">
+      {/* Icon */}
+      <span className={clsx("inline-block p-3 rounded-2xl", bgClass)}>
+        <Icon className={clsx("text-2xl", textClass)} />
+      </span>
+      <div>
+        {/* Income/expenses label */}
+        <p className="text-xs">{label}</p>
+        {/* Amount */}
+        <span className={clsx("text-xl font-semibold", textClass)}>
+          {formatCurrency(amount)}
+        </span>
+      </div>
+    </div>
+  );
+};
 
 export default TransactionSummary;
