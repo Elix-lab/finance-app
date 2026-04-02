@@ -13,9 +13,6 @@ export async function insertTransaction ({data}: {data: {
   date: string;
 }})
 {
-
-  console.log("🔥 SERVER ACTION EJECUTADO");
-
     await db.insert(transactions).values({
     userId: data.userId,
     nature: data.nature,
@@ -41,4 +38,19 @@ export async function  getSumByNature(userId: string) {
     income: result.find(r => r.nature === 'income')?.total ?? 0,
     expenses: result.find(r=> r.nature === 'expense')?.total ?? 0,
   }
+}
+
+// Get Aviable Balance (income - expenses)
+export async function getAviableBalance(userId: string) {
+  const [result] = await db.select({
+    balance:
+      sql<number>`
+      SUM(CASE WHEN ${transactions.nature} = 'income' THEN ${transactions.amount} ELSE 0 END) -
+      SUM(CASE WHEN ${transactions.nature} = 'expense' THEN ${transactions.amount} ELSE 0 END)
+      `
+  })
+  .from(transactions)
+  .where(eq(transactions.userId, userId));
+
+  return result.balance ?? 0;
 }
