@@ -1,6 +1,7 @@
 import TransactionSummary from "./TransactionSummary";
 import { formatCurrency } from "@/lib/currencyFormat";
-import { getSumByNature } from "@/lib/data/transactions";
+import {auth} from '@/lib/auth';
+import { getAviableBalance } from "@/lib/data/transactions";
 
 type Props = {
   balance: number;
@@ -9,13 +10,18 @@ type Props = {
 };
 
 // { balance, income, expenses }: Props
-const CurrentBalance = () => {
+const CurrentBalance = async () => {
+    // Check user session
+    const session = await auth();
+    // Getting Aviable Balance
+    const aviableBalance = await getAviableBalance(session!.user!.id!)
+
   return (
     <div className="flex flex-col gap-3 w-full h-auto bg-white shadow-md rounded-xl p-8">
       {/* Total Balance */}
       <div>
         <p className="text-sm mb-1">Available Balance</p>
-        <p className="text-5xl font-extrabold">Aqui va el Aviable Balance</p>
+        <p className="text-5xl font-extrabold">{aviableBalance}</p>
       </div>
       {/* Income and Expenses Totals */}
       <div className="flex flex-wrap gap-5">
