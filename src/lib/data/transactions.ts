@@ -1,6 +1,6 @@
 import { db } from "@/db";
 import { transactions } from "@/db/schema";
-import { sql, eq } from "drizzle-orm";
+import { sql, eq, desc, and, gte, lte } from "drizzle-orm";
 
 
 // Insert a new Transaction
@@ -22,6 +22,19 @@ export async function insertTransaction ({data}: {data: {
     date: data.date,
   });
 }
+
+
+// Get transactions by userId
+export async function getTransaction(filters: any[], transactionsLimit: number)
+{ 
+  return await db
+  .select()
+  .from(transactions)
+  .where(and(...filters))
+  .orderBy(desc(transactions.date))
+  .limit(transactionsLimit);
+}
+
 
 // Get Sum of transactions by nature
 export async function  getSumByNature(userId: string) {
