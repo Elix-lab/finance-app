@@ -12,13 +12,18 @@ export default function SessionGuard({
   const { data: session, status } = useSession();
   console.log("SessionGuard session:", session);
   console.log("SessionGuard status:", status);
+
   if (status === "loading") {
-    return <div>Loading...</div>;
+    return (
+      <div className="h-full">
+        <p>Loading...</p>
+      </div>
+    );
   }
 
   if (!session) {
     return (
-      <div>
+      <div className="h-full">
         <h2>Your session has expired</h2>
         <p>Please sign in again to continue.</p>
         <Link href="/signIn">Go to sign in</Link>

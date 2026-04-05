@@ -68,5 +68,5 @@ export async function getTransactionByUserIdAction(
     filters.push(eq(transactions.date, d));
   }
   
-  await getTransaction(filters, transactionsLimit)
+  return await getTransaction(filters, transactionsLimit)
 }
