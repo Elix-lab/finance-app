@@ -35,6 +35,18 @@ export async function getTransaction(filters: any[], transactionsLimit: number)
   .limit(transactionsLimit);
 }
 
+// Delete transaction
+export async function deleteTransaction(userId: string, transactionId: string) {
+  return await db
+  .delete(transactions)
+  .where(
+    and(
+      eq(transactions.id, transactionId),
+      eq(transactions.userId, userId)
+    )
+  );
+}
+
 
 // Get Sum of transactions by nature
 export async function  getSumByNature(userId: string) {
