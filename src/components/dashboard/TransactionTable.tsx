@@ -3,6 +3,7 @@ import { LuChartCandlestick } from "react-icons/lu";
 import { auth } from "@/lib/auth";
 import { getTransactionByUserIdAction } from "@/actions/transactions/transactions";
 import TransactionSummary from "./TransactionSummary";
+import DropDownMenuTransaction from "@/components/ui/DropDownMenuTransaction";
 
 const TransactionTable = async () => {
   // Check user session
@@ -48,7 +49,8 @@ const TransactionTable = async () => {
 
         <ul>
           {transactions.map((tx) => {
-            const { Icon, iconBgClass, iconSymbolColor, amountColorClass } = config[tx.nature];
+            const { Icon, iconBgClass, iconSymbolColor, amountColorClass } =
+              config[tx.nature];
 
             return (
               <li key={tx.id} className="grid grid-cols-2 border-b-2 py-5">
@@ -65,13 +67,16 @@ const TransactionTable = async () => {
                     <p className="text-xs">{tx.category}</p>
                   </div>
                 </div>
-                <div className="text-right">
-                  <span
-                    className={`${amountColorClass} text-base font-semibold`}
-                  >
-                    ${tx.amount}
-                  </span>
-                  <p className="text-xs">{formatDate(tx.date)}</p>
+                <div className="flex justify-end items-center gap-3">
+                  <div>
+                    <span
+                      className={`${amountColorClass} text-base font-semibold`}
+                    >
+                      ${tx.amount}
+                    </span>
+                    <p className="text-xs">{formatDate(tx.date)}</p>
+                  </div>
+                  <DropDownMenuTransaction />
                 </div>
               </li>
             );

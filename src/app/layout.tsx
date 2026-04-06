@@ -14,8 +14,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${poppins.className} antialiased h-screen`}>
+    <html lang="en" className="h-full">
+      <body
+        className={`${poppins.className} antialiased min-h-[100dvh] bg-[#f2f2f2]`}
+      >
         <SessionProvider>{children}</SessionProvider>
       </body>
     </html>
