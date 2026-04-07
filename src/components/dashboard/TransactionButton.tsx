@@ -43,9 +43,6 @@ const TransactionButton = ({ buttonNature }: Props) => {
     () => new Date(),
   );
 
-  // Form status
-  const {pending} = useFormStatus();
-
   const config = {
     income: {
       bgColor: "bg-green-600",
