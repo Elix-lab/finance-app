@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import {
   DropdownMenu,
@@ -15,26 +15,31 @@ import { Button } from "./button";
 import { deleteTransactionAction } from "@/actions/transactions/transactions";
 import { useTransition } from "react";
 
-const DropDownMenuTransaction = ({transactionId}: {transactionId: string}) => {
-
-  const [isPending, startTransition] = useTransition()
+const DropDownMenuTransaction = ({
+  transactionId,
+}: {
+  transactionId: string;
+}) => {
+  const [isPending, startTransition] = useTransition();
 
   const handleDelete = () => {
-    startTransition(() => deleteTransactionAction(transactionId))
-  }
+    if (confirm("Are you sure you want to DELETE this transaction?")) {
+      startTransition(() => deleteTransactionAction(transactionId));
+    }
+  };
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        { !isPending ?
-        <Button variant="ghost">
-          <BsThreeDotsVertical />
-        </Button>  
-        :
-        <Button variant="ghost">
-          <ImSpinner8 />
-        </Button>
-        }
+        {!isPending ? (
+          <Button variant="ghost">
+            <BsThreeDotsVertical />
+          </Button>
+        ) : (
+          <Button variant="ghost">
+            <ImSpinner8 />
+          </Button>
+        )}
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuGroup>
@@ -43,9 +48,7 @@ const DropDownMenuTransaction = ({transactionId}: {transactionId: string}) => {
             Edit
           </DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem
-            onClick={handleDelete}
-          >
+          <DropdownMenuItem onClick={handleDelete}>
             <MdOutlineDeleteForever />
             Delete
           </DropdownMenuItem>
