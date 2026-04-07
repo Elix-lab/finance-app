@@ -76,7 +76,7 @@ const TransactionTable = async () => {
                     </span>
                     <p className="text-xs">{formatDate(tx.date)}</p>
                   </div>
-                  <DropDownMenuTransaction />
+                  <DropDownMenuTransaction transactionId={tx.id}/>
                 </div>
               </li>
             );

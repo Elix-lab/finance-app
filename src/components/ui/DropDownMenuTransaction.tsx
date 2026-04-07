@@ -1,3 +1,5 @@
+'use client'
+
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -9,8 +11,9 @@ import {
 import { MdOutlineDeleteForever, MdOutlineEdit } from "react-icons/md";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { Button } from "./button";
+import { deleteTransactionAction } from "@/actions/transactions/transactions";
 
-const DropDownMenuTransaction = () => {
+const DropDownMenuTransaction = ({transactionId}: {transactionId: string}) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -25,7 +28,9 @@ const DropDownMenuTransaction = () => {
             Edit
           </DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => deleteTransactionAction(transactionId)}
+          >
             <MdOutlineDeleteForever />
             Delete
           </DropdownMenuItem>

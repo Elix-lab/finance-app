@@ -3,7 +3,7 @@
 import { db } from "@/db";
 import { transactions } from "@/db/schema";
 import { auth } from "@/lib/auth";
-import { getTransaction, insertTransaction, getAviableBalance } from "@/lib/data/transactions";
+import { getTransaction, insertTransaction, getAviableBalance, deleteTransaction } from "@/lib/data/transactions";
 import { revalidatePath } from "next/cache";
 import { eq, gte, lte } from "drizzle-orm";
 
@@ -37,8 +37,9 @@ export async function insertTransactionAction(formData: FormData) {
   await insertTransaction({ data: newTransactionData });
 
   revalidatePath("/dashboard");
-}
 
+  return {success: true}
+}
 
 // Get transactions by userId
 export async function getTransactionByUserIdAction(
@@ -77,9 +78,25 @@ export async function getTransactionByUserIdAction(
   return await getTransaction(filters, transactionsLimit);
 }
 
+//Delete transaction
+export async function deleteTransactionAction(transactionId: string) {
+  //Check session
+  const session = await auth();
+  if(!session) throw new Error('Unauthorized')
+
+  await deleteTransaction(session!.user!.id!, transactionId)
+
+  revalidatePath('/dashboard')
+
+  return {success: true}
+}
+
+// Get Aviable Balance
 export async function getAviableBalanceAction() {
   // Check user session
       const session = await auth();
+      if (!session) throw new Error("Unauthorized");
+
       // Getting Aviable Balance
       return await getAviableBalance(session!.user!.id!)
 }

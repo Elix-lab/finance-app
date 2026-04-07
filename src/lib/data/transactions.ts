@@ -23,7 +23,6 @@ export async function insertTransaction ({data}: {data: {
   });
 }
 
-
 // Get transactions by userId
 export async function getTransaction(filters: any[], transactionsLimit: number)
 { 
@@ -46,7 +45,6 @@ export async function deleteTransaction(userId: string, transactionId: string) {
     )
   );
 }
-
 
 // Get Sum of transactions by nature
 export async function  getSumByNature(userId: string) {
