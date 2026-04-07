@@ -3,7 +3,7 @@
 import { db } from "@/db";
 import { transactions } from "@/db/schema";
 import { auth } from "@/lib/auth";
-import { getTransaction, insertTransaction } from "@/lib/data/transactions";
+import { getTransaction, insertTransaction, getAviableBalance } from "@/lib/data/transactions";
 import { revalidatePath } from "next/cache";
 import { eq, gte, lte } from "drizzle-orm";
 
@@ -36,37 +36,50 @@ export async function insertTransactionAction(formData: FormData) {
 
   await insertTransaction({ data: newTransactionData });
 
-  revalidatePath('/dashboard');
+  revalidatePath("/dashboard");
 }
+
 
 // Get transactions by userId
 export async function getTransactionByUserIdAction(
-  userId: string, 
+  userId: string,
   transactionsLimit: number = 5,
   startDate?: string | Date,
   endDate?: string | Date,
-) 
-{
-  const filters = [eq(transactions.userId, userId)]
+) {
+  //Check user session
+  const session = await auth();
+  if (!session) throw new Error("Unauthorized");
+
+  const filters = [eq(transactions.userId, userId)];
 
   if (startDate && endDate) {
     let fromDate = new Date(startDate);
     let toDate = new Date(endDate);
 
     if (fromDate > toDate) {
-      [fromDate ,toDate] = [toDate, fromDate];
+      [fromDate, toDate] = [toDate, fromDate];
     }
 
-    filters.push(gte(transactions.date, fromDate.toISOString().slice(0,10)));
-    filters.push(lte(transactions.date, toDate.toISOString().slice(0,10)));
-  
+    filters.push(gte(transactions.date, fromDate.toISOString().slice(0, 10)));
+    filters.push(lte(transactions.date, toDate.toISOString().slice(0, 10)));
   }
 
   if (startDate && !endDate) {
-    const d = typeof startDate === 'string' ? startDate : startDate.toISOString().slice(0,10);
-   
+    const d =
+      typeof startDate === "string"
+        ? startDate
+        : startDate.toISOString().slice(0, 10);
+
     filters.push(eq(transactions.date, d));
   }
-  
-  return await getTransaction(filters, transactionsLimit)
+
+  return await getTransaction(filters, transactionsLimit);
+}
+
+export async function getAviableBalanceAction() {
+  // Check user session
+      const session = await auth();
+      // Getting Aviable Balance
+      return await getAviableBalance(session!.user!.id!)
 }
