@@ -87,8 +87,6 @@ export async function deleteTransactionAction(transactionId: string) {
   await deleteTransaction(session!.user!.id!, transactionId)
 
   revalidatePath('/dashboard')
-
-  return {success: true}
 }
 
 // Get Aviable Balance
