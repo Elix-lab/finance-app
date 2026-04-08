@@ -1,5 +1,5 @@
 import Header from "@/components/dashboard/Header";
-import SessionGuard from "@/components/SessionGuard";
+import SessionGuard from "@/components/auth/SessionGuard";
 
 const Layout = async ({ children }: { children: React.ReactNode }) => {
   return (

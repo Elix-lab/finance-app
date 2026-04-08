@@ -1,8 +1,8 @@
 // 'use client'
 // import { useState } from "react";
-import TransactionButton from "../../components/dashboard/TransactionButton";
+import TransactionButton from "../../components/transaction/TransactionButton";
 import CurrentBalance from "@/components/dashboard/CurrentBalance";
-import TransactionTable from "@/components/dashboard/TransactionTable";
+import TransactionTable from "@/components/transaction/TransactionTable";
 
 type Transaction = {
   id: string;

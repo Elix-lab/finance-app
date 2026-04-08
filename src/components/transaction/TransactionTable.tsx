@@ -3,7 +3,7 @@ import { LuChartCandlestick } from "react-icons/lu";
 import { auth } from "@/lib/auth";
 import { getTransactionByUserIdAction } from "@/actions/transactions/transactions";
 import TransactionSummary from "./TransactionSummary";
-import DropDownMenuTransaction from "@/components/ui/DropDownMenuTransaction";
+import TransactionRowActions from "./TransactionRowActions";
 
 const TransactionTable = async () => {
   // Check user session
@@ -76,7 +76,7 @@ const TransactionTable = async () => {
                     </span>
                     <p className="text-xs">{formatDate(tx.date)}</p>
                   </div>
-                  <DropDownMenuTransaction transactionId={tx.id}/>
+                  <TransactionRowActions transactionId={tx.id}/>
                 </div>
               </li>
             );

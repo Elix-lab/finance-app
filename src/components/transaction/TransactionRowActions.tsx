@@ -7,15 +7,15 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuSeparator,
-} from "./dropdown-menu";
+} from "../ui/dropdown-menu";
 import { MdOutlineDeleteForever, MdOutlineEdit } from "react-icons/md";
 import { ImSpinner8 } from "react-icons/im";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { Button } from "./button";
+import { Button } from "../ui/button";
 import { deleteTransactionAction } from "@/actions/transactions/transactions";
 import { useTransition } from "react";
 
-const DropDownMenuTransaction = ({
+const TransactionRowActions = ({
   transactionId,
 }: {
   transactionId: string;
@@ -58,4 +58,4 @@ const DropDownMenuTransaction = ({
   );
 };
 
-export default DropDownMenuTransaction;
+export default TransactionRowActions;

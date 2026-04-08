@@ -1,4 +1,4 @@
-import TransactionSummary from "./TransactionSummary";
+import TransactionSummary from "../transaction/TransactionSummary";
 import { formatCurrency } from "@/lib/currencyFormat";
 import { getAviableBalanceAction } from "@/actions/transactions/transactions";
 
