@@ -18,6 +18,7 @@ import { Calendar } from "../ui/calendar";
 import { Popover, PopoverTrigger, PopoverContent } from "../ui/popover";
 import { CalendarIcon } from "lucide-react";
 import { insertTransactionAction } from "@/actions/transactions/transactions";
+import TransactionFormFields from "./TransactionFormFields";
 
 // Types
 type Transaction = {
@@ -77,8 +78,8 @@ const TransactionButton = ({ buttonNature }: Props) => {
           </DialogHeader>
 
           {/* inputs */}
-          <div className="flex flex-col gap-4 px-1.5 py-4">
-            <div>
+          {/* <div className="flex flex-col gap-4 px-1.5 py-4"> */}
+            {/* <div>
               <label className="block mb-1">Amount*</label>
               <input
                 name="amount"
@@ -91,9 +92,9 @@ const TransactionButton = ({ buttonNature }: Props) => {
                 step="0.01"
                 required
               />
-            </div>
+            </div> */}
 
-            <div>
+            {/* <div>
               <label className="block mb-1">Title*</label>
               <input
                 name="title"
@@ -106,9 +107,9 @@ const TransactionButton = ({ buttonNature }: Props) => {
                 maxLength={50}
                 required
               />
-            </div>
+            </div> */}
 
-            <div>
+            {/* <div>
               <label className="block mb-1">Category*</label>
               <input
                 name="category"
@@ -121,9 +122,9 @@ const TransactionButton = ({ buttonNature }: Props) => {
                 maxLength={50}
                 required
               />
-            </div>
+            </div> */}
 
-            <div className="flex flex-col gap-1">
+            {/* <div className="flex flex-col gap-1">
               <label>Date</label>
 
               <Popover>
@@ -154,7 +155,9 @@ const TransactionButton = ({ buttonNature }: Props) => {
 
               <input type="hidden" name="nature" value={buttonNature} />
             </div>
-          </div>
+          </div> */}
+
+          <TransactionFormFields txNature={buttonNature}/>
 
           <DialogFooter>
             <DialogClose asChild>
