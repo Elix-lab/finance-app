@@ -37,8 +37,6 @@ export async function insertTransactionAction(formData: FormData) {
   await insertTransaction({ data: newTransactionData });
 
   revalidatePath("/dashboard");
-
-  return {success: true}
 }
 
 // Get transactions by userId
