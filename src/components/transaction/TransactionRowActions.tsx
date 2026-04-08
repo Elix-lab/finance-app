@@ -1,5 +1,5 @@
 "use client";
-
+import { Dialog, DialogTrigger, DialogContent } from "../ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -14,6 +14,9 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { Button } from "../ui/button";
 import { deleteTransactionAction } from "@/actions/transactions/transactions";
 import { useTransition } from "react";
+import TransactionFormHeader from "./TransactionFormHeader";
+import TransactionFormFields from "./TransactionFormFields";
+import TransactionFormFooter from "./TransactionFormFooter";
 
 const TransactionRowActions = ({
   transactionId,
@@ -29,32 +32,44 @@ const TransactionRowActions = ({
   };
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        {!isPending ? (
-          <Button variant="ghost">
-            <BsThreeDotsVertical />
-          </Button>
-        ) : (
-          <Button variant="ghost">
-            <ImSpinner8 />
-          </Button>
-        )}
-      </DropdownMenuTrigger>
-      <DropdownMenuContent>
-        <DropdownMenuGroup>
-          <DropdownMenuItem>
-            <MdOutlineEdit />
-            Edit
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={handleDelete}>
-            <MdOutlineDeleteForever />
-            Delete
-          </DropdownMenuItem>
-        </DropdownMenuGroup>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <Dialog>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          {!isPending ? (
+            <Button variant="ghost">
+              <BsThreeDotsVertical />
+            </Button>
+          ) : (
+            <Button variant="ghost">
+              <ImSpinner8 />
+            </Button>
+          )}
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuGroup>
+            <DialogTrigger className="w-full">
+              <DropdownMenuItem>
+                <MdOutlineEdit />
+                Edit
+              </DropdownMenuItem>
+            </DialogTrigger>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={handleDelete}>
+              <MdOutlineDeleteForever />
+              Delete
+            </DropdownMenuItem>
+          </DropdownMenuGroup>
+        </DropdownMenuContent>
+      </DropdownMenu>
+
+      <DialogContent>
+        <form action="">
+          <TransactionFormHeader txNature="income" />
+          <TransactionFormFields txNature="income" />
+          <TransactionFormFooter />
+        </form>
+      </DialogContent>
+    </Dialog>
   );
 };
 

@@ -3,7 +3,7 @@
 import { db } from "@/db";
 import { transactions } from "@/db/schema";
 import { auth } from "@/lib/auth";
-import { getTransaction, insertTransaction, getAviableBalance, deleteTransaction } from "@/lib/data/transactions";
+import { getTransaction, insertTransaction, getAviableBalance, deleteTransaction, updateTransaction } from "@/lib/data/transactions";
 import { revalidatePath } from "next/cache";
 import { eq, gte, lte } from "drizzle-orm";
 
@@ -80,9 +80,20 @@ export async function getTransactionByUserIdAction(
 export async function deleteTransactionAction(transactionId: string) {
   //Check session
   const session = await auth();
-  if(!session) throw new Error('Unauthorized')
+  if(!session) throw new Error("You must be logged in to perform this action")
 
   await deleteTransaction(session!.user!.id!, transactionId)
+
+  revalidatePath('/dashboard')
+}
+
+// Update transaction
+export async function updateTransactionAction(transactionId: string) {
+  // Check session
+  const session = await auth();
+  if(!session) {throw new Error ("You must be logged in to perform this action")}
+
+  updateTransaction(session!.user!.id!,transactionId)
 
   revalidatePath('/dashboard')
 }

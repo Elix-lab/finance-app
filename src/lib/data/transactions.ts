@@ -46,6 +46,24 @@ export async function deleteTransaction(userId: string, transactionId: string) {
   );
 }
 
+// Update transaction
+export async function updateTransaction(userId: string, transactionId: string) {
+  return await db
+  .update(transactions)
+  .set({
+    amount: transactions.amount,
+    title: transactions.title,
+    category: transactions.category,
+    date: transactions.date
+  })
+  .where(
+    and(
+      eq(transactions.userId, userId),
+      eq(transactions.id, transactionId),
+    )
+  )
+}
+
 // Get Sum of transactions by nature
 export async function  getSumByNature(userId: string) {
   const result = await db
