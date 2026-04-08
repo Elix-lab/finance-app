@@ -1,3 +1,4 @@
+// The buttons work with shadCN Dialog
 import { Button } from "../ui/button";
 import {
   Dialog,
@@ -33,6 +34,7 @@ const TransactionButton = ({ buttonNature }: Props) => {
 
   return (
     <Dialog>
+      {/* Button */}
       <DialogTrigger asChild>
         <Button
           className={`h-20 rounded-2xl shadow-md hover:cursor-pointer ${shadow} ${bgColor}`}
@@ -40,7 +42,7 @@ const TransactionButton = ({ buttonNature }: Props) => {
           {text}
         </Button>
       </DialogTrigger>
-
+      {/* Modal */}
       <DialogContent className="sm:max-w-xl rounded-2xl">
         <form action={insertTransactionAction}>
           <TransactionFormHeader txNature={buttonNature} />
