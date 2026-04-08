@@ -1,3 +1,5 @@
+'use client'
+
 import { Popover, PopoverTrigger, PopoverContent } from "../ui/popover";
 import { CalendarIcon } from "lucide-react";
 import { Calendar } from "../ui/calendar";
