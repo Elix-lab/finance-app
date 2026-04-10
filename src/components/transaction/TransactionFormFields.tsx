@@ -7,15 +7,19 @@ import { Button } from "../ui/button";
 import { useState } from "react";
 
 
-const TransactionFormFields = ({txNature}: {txNature: 'income' | 'expense'}) => {
+const TransactionFormFields = ({txNature}: {txNature: 'income' | 'expense'}, existingTx?:any) => {
     //Variables and States
-      const [title, setTitle] = useState("");
-      const [category, setCategory] = useState("");
-      const [amount, setAmount] = useState("");
+      const [title, setTitle] = useState(existingTx?.title ?? "");
+      const [category, setCategory] = useState(existingTx?.category ?? "");
+      const [amount, setAmount] = useState(existingTx?.amount ?? "");
     
       // default date for date input
       const [dateValue, setDateValue] = useState<Date | undefined>(
-        () => new Date(),
+        () => {
+          if(existingTx?.date) return new Date(existingTx.date);
+          
+          return new Date();
+        },
       );
 
     return (

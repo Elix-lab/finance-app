@@ -12,8 +12,8 @@ import { MdOutlineDeleteForever, MdOutlineEdit } from "react-icons/md";
 import { ImSpinner8 } from "react-icons/im";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { Button } from "../ui/button";
-import { deleteTransactionAction } from "@/actions/transactions/transactions";
-import { useTransition } from "react";
+import { deleteTransactionAction, getSingleTransactionAction, getTransactionByUserIdAction } from "@/actions/transactions/transactions";
+import { useState, useTransition } from "react";
 import TransactionFormHeader from "./TransactionFormHeader";
 import TransactionFormFields from "./TransactionFormFields";
 import TransactionFormFooter from "./TransactionFormFooter";
@@ -24,12 +24,18 @@ const TransactionRowActions = ({
   transactionId: string;
 }) => {
   const [isPending, startTransition] = useTransition();
+  const [tx, setTx] = useState(null);
 
   const handleDelete = () => {
     if (confirm("Are you sure you want to DELETE this transaction?")) {
       startTransition(() => deleteTransactionAction(transactionId));
     }
   };
+
+  const handleEdit = async () => {
+    const data = getSingleTransactionAction(transactionId)
+    setTx(data)
+  }
 
   return (
     <Dialog>
@@ -47,7 +53,7 @@ const TransactionRowActions = ({
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuGroup>
-            <DialogTrigger className="w-full">
+            <DialogTrigger className="w-full" onClick={handleEdit}>
               <DropdownMenuItem>
                 <MdOutlineEdit />
                 Edit
@@ -64,7 +70,7 @@ const TransactionRowActions = ({
 
       <DialogContent>
         <form action="">
-          <TransactionFormHeader txNature="income" />
+          <TransactionFormHeader txNature='income' />
           <TransactionFormFields txNature="income" />
           <TransactionFormFooter />
         </form>

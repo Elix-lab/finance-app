@@ -3,7 +3,14 @@
 import { db } from "@/db";
 import { transactions } from "@/db/schema";
 import { auth } from "@/lib/auth";
-import { getTransaction, insertTransaction, getAviableBalance, deleteTransaction, updateTransaction } from "@/lib/data/transactions";
+import { 
+  getTransactions, 
+  insertTransaction, 
+  getAviableBalance, 
+  deleteTransaction, 
+  updateTransaction,
+  getSingleTransaction 
+} from "@/lib/data/transactions";
 import { revalidatePath } from "next/cache";
 import { eq, gte, lte } from "drizzle-orm";
 
@@ -39,7 +46,7 @@ export async function insertTransactionAction(formData: FormData) {
   revalidatePath("/dashboard");
 }
 
-// Get transactions by userId
+// Get MULTIPLE transactions
 export async function getTransactionByUserIdAction(
   userId: string,
   transactionsLimit: number = 5,
@@ -73,7 +80,16 @@ export async function getTransactionByUserIdAction(
     filters.push(eq(transactions.date, d));
   }
 
-  return await getTransaction(filters, transactionsLimit);
+  return await getTransactions(filters, transactionsLimit);
+}
+
+// Get SINGLE transaction
+export async function getSingleTransactionAction (transactionId: string) {
+  // Check session
+  const session = await auth()
+  if(!session) {throw new Error ('Unautorized')}
+
+  return await getSingleTransaction(session!.user!.id!,transactionId)
 }
 
 //Delete transaction

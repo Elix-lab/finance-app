@@ -23,8 +23,8 @@ export async function insertTransaction ({data}: {data: {
   });
 }
 
-// Get transactions by userId
-export async function getTransaction(filters: any[], transactionsLimit: number)
+// Get MULTIPLE transactions
+export async function getTransactions(filters: any[], transactionsLimit: number)
 { 
   return await db
   .select()
@@ -32,6 +32,19 @@ export async function getTransaction(filters: any[], transactionsLimit: number)
   .where(and(...filters))
   .orderBy(desc(transactions.date))
   .limit(transactionsLimit);
+}
+
+// Get a SINGLE transaction
+export async function getSingleTransaction(userId: string, transactionId: string) {
+  return await db.
+  select()
+  .from(transactions)
+  .where(
+    and(
+      eq(transactions.id, transactionId),
+      eq(transactions.userId, userId)
+    )
+  )
 }
 
 // Delete transaction
