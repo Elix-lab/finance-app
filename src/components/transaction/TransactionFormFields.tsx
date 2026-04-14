@@ -5,7 +5,6 @@ import { CalendarIcon } from "lucide-react";
 import { Calendar } from "../ui/calendar";
 import { Button } from "../ui/button";
 import { useEffect, useState } from "react";
-import { setDate } from "date-fns";
 
 const TransactionFormFields = ({
   txNature,
@@ -26,7 +25,11 @@ const TransactionFormFields = ({
     setTitle(existingTx?.title ?? "");
     setCategory(existingTx?.category ?? "");
     setAmount(existingTx?.amount ?? "");
-    setDateValue(new Date(existingTx?.date) ?? new Date());
+    setDateValue(
+      existingTx?.date
+      ? new Date(existingTx.date)
+      : new Date()
+    )
   }, [existingTx]);
 
   return (
