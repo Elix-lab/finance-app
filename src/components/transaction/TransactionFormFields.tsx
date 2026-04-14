@@ -10,7 +10,7 @@ const TransactionFormFields = ({
   txNature,
   existingTx,
 }: {
-  txNature: "income" | "expense";
+  txNature?: "income" | "expense";
   existingTx?: any;
 }) => {
   //Variables and States

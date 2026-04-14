@@ -1,5 +1,5 @@
 "use client";
-import { Dialog, DialogTrigger, DialogContent, DialogTitle } from "../ui/dialog";
+import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogDescription } from "../ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -12,7 +12,7 @@ import { MdOutlineDeleteForever, MdOutlineEdit } from "react-icons/md";
 import { ImSpinner8 } from "react-icons/im";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { Button } from "../ui/button";
-import { deleteTransactionAction, getSingleTransactionAction, getTransactionByUserIdAction } from "@/actions/transactions/transactions";
+import { deleteTransactionAction } from "@/actions/transactions/transactions";
 import { useState, useTransition } from "react";
 import TransactionFormHeader from "./TransactionFormHeader";
 import TransactionFormFields from "./TransactionFormFields";
@@ -77,11 +77,12 @@ transactionId,
         <DialogTitle>
           Edit Transaction
         </DialogTitle>
+        <DialogDescription>Change the desired fields and save</DialogDescription>
         {!tx ? 
         'Loading' :
         <form action="">
           {/* <TransactionFormHeader txNature='income' /> */}
-          <TransactionFormFields txNature="income" existingTx={tx}/>
+          <TransactionFormFields existingTx={tx}/>
           <TransactionFormFooter />
         </form>
         }
