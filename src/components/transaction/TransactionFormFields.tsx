@@ -14,6 +14,7 @@ const TransactionFormFields = ({
   existingTx?: any;
 }) => {
   //Variables and States
+  const [id, setId] = useState("");
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [amount, setAmount] = useState("");
@@ -22,14 +23,11 @@ const TransactionFormFields = ({
 
   //useEffect in case existingTx exist
   useEffect(() => {
+    setId(existingTx?.id ?? "");
     setTitle(existingTx?.title ?? "");
     setCategory(existingTx?.category ?? "");
     setAmount(existingTx?.amount ?? "");
-    setDateValue(
-      existingTx?.date
-      ? new Date(existingTx.date)
-      : new Date()
-    )
+    setDateValue(existingTx?.date ? new Date(existingTx?.date) : new Date());
   }, [existingTx]);
 
   return (
@@ -114,6 +112,7 @@ const TransactionFormFields = ({
         />
 
         <input type="hidden" name="nature" value={txNature} />
+        <input type="hidden" name="id" value={id} />
       </div>
     </div>
   );

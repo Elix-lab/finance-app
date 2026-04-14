@@ -12,9 +12,8 @@ import { MdOutlineDeleteForever, MdOutlineEdit } from "react-icons/md";
 import { ImSpinner8 } from "react-icons/im";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { Button } from "../ui/button";
-import { deleteTransactionAction } from "@/actions/transactions/transactions";
+import { deleteTransactionAction, updateTransactionAction } from "@/actions/transactions/transactions";
 import { useState, useTransition } from "react";
-import TransactionFormHeader from "./TransactionFormHeader";
 import TransactionFormFields from "./TransactionFormFields";
 import TransactionFormFooter from "./TransactionFormFooter";
 
@@ -38,7 +37,6 @@ transactionId,
   const handleEdit = async () => {
     const res = await fetch(`/api/transactions/${transactionId}`)
     const txData = await res.json()
-    console.log(txData)
     setTx(txData)
   }
 
@@ -80,7 +78,7 @@ transactionId,
         <DialogDescription>Change the desired fields and save</DialogDescription>
         {!tx ? 
         'Loading' :
-        <form action="">
+        <form action={updateTransactionAction}>
           {/* <TransactionFormHeader txNature='income' /> */}
           <TransactionFormFields existingTx={tx}/>
           <TransactionFormFooter />

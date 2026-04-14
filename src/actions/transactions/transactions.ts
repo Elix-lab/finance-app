@@ -3,13 +3,13 @@
 import { db } from "@/db";
 import { transactions } from "@/db/schema";
 import { auth } from "@/lib/auth";
-import { 
-  getTransactions, 
-  insertTransaction, 
-  getAviableBalance, 
-  deleteTransaction, 
+import {
+  getTransactions,
+  insertTransaction,
+  getAviableBalance,
+  deleteTransaction,
   updateTransaction,
-  getSingleTransaction 
+  getSingleTransaction,
 } from "@/lib/data/transactions";
 import { revalidatePath } from "next/cache";
 import { eq, gte, lte } from "drizzle-orm";
@@ -27,9 +27,7 @@ export async function insertTransactionAction(formData: FormData) {
     throw new Error("User ID is required");
   }
   const amountValue = formData.get("amount");
-  if (typeof amountValue !== "string") {
-    throw new Error("Invalid amount value");
-  }
+
   const amount = Number(amountValue);
   if (isNaN(amount)) {
     throw new Error("Invalid amount format");
@@ -84,42 +82,59 @@ export async function getTransactionByUserIdAction(
 }
 
 // Get SINGLE transaction
-export async function getSingleTransactionAction (transactionId: string) {
+export async function getSingleTransactionAction(transactionId: string) {
   // Check session
-  const session = await auth()
-  if(!session) {throw new Error ('Unautorized')}
+  const session = await auth();
+  if (!session) {
+    throw new Error("Unautorized");
+  }
 
-  return await getSingleTransaction(session!.user!.id!,transactionId)
+  return await getSingleTransaction(session!.user!.id!, transactionId);
 }
 
 //Delete transaction
 export async function deleteTransactionAction(transactionId: string) {
   //Check session
   const session = await auth();
-  if(!session) throw new Error("You must be logged in to perform this action")
+  if (!session) throw new Error("You must be logged in to perform this action");
 
-  await deleteTransaction(session!.user!.id!, transactionId)
+  await deleteTransaction(session!.user!.id!, transactionId);
 
-  revalidatePath('/dashboard')
+  revalidatePath("/dashboard");
 }
 
 // Update transaction
-export async function updateTransactionAction(transactionId: string) {
+export async function updateTransactionAction(formData: FormData) {
   // Check session
   const session = await auth();
-  if(!session) {throw new Error ("You must be logged in to perform this action")}
+  if (!session) {
+    throw new Error("You must be logged in to perform this action");
+  }
+  const userId = session.user?.id
 
-  updateTransaction(session!.user!.id!,transactionId)
+  const id = String(formData.get("id")) ?? "";
+  const title = String(formData.get("title")) ?? "";
+  const category = String(formData.get("category")) ?? "";
+  const date = String(formData.get("date")) ?? "";
+  const amountValue = formData.get("amount");
+  const amount = Number(amountValue);
+  if (isNaN(amount)) {
+    throw new Error("Invalid amount value");
+  }
 
-  revalidatePath('/dashboard')
+  const updatedTransaction = { id, userId , title, category, date, amount };
+
+  await updateTransaction({data: updatedTransaction})
+
+  revalidatePath("/dashboard");
 }
 
 // Get Aviable Balance
 export async function getAviableBalanceAction() {
   // Check user session
-      const session = await auth();
-      if (!session) throw new Error("Unauthorized");
+  const session = await auth();
+  if (!session) throw new Error("Unauthorized");
 
-      // Getting Aviable Balance
-      return await getAviableBalance(session!.user!.id!)
+  // Getting Aviable Balance
+  return await getAviableBalance(session!.user!.id!);
 }
