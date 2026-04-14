@@ -1,112 +1,119 @@
-'use client'
+"use client";
 
 import { Popover, PopoverTrigger, PopoverContent } from "../ui/popover";
 import { CalendarIcon } from "lucide-react";
 import { Calendar } from "../ui/calendar";
 import { Button } from "../ui/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { setDate } from "date-fns";
 
+const TransactionFormFields = ({
+  txNature,
+  existingTx,
+}: {
+  txNature: "income" | "expense";
+  existingTx?: any;
+}) => {
+  //Variables and States
+  const [title, setTitle] = useState("");
+  const [category, setCategory] = useState("");
+  const [amount, setAmount] = useState("");
+  // default date for date input
+  const [dateValue, setDateValue] = useState<Date | undefined>(new Date());
 
-const TransactionFormFields = ({txNature}: {txNature: 'income' | 'expense'}, existingTx?:any) => {
-    //Variables and States
-      const [title, setTitle] = useState(existingTx?.title ?? "");
-      const [category, setCategory] = useState(existingTx?.category ?? "");
-      const [amount, setAmount] = useState(existingTx?.amount ?? "");
-    
-      // default date for date input
-      const [dateValue, setDateValue] = useState<Date | undefined>(
-        () => {
-          if(existingTx?.date) return new Date(existingTx.date);
-          
-          return new Date();
-        },
-      );
+  //useEffect in case existingTx exist
+  useEffect(() => {
+    setTitle(existingTx?.title ?? "");
+    setCategory(existingTx?.category ?? "");
+    setAmount(existingTx?.amount ?? "");
+    setDateValue(new Date(existingTx?.date) ?? new Date());
+  }, [existingTx]);
 
-    return (
-        // Inputs
-        <div className="flex flex-col gap-4 px-1.5 py-4">
-            {/* Amount */}
-            <div>
-              <label className="block mb-1">Amount*</label>
-              <input
-                name="amount"
-                type="number"
-                value={amount}
-                onChange={(e) => {
-                  setAmount(e.target.value);
-                }}
-                className="w-full border px-3 py-2 rounded-lg"
-                step="0.01"
-                required
-              />
-            </div>
+  return (
+    // Inputs
+    <div className="flex flex-col gap-4 px-1.5 py-4">
+      {/* Amount */}
+      <div>
+        <label className="block mb-1">Amount*</label>
+        <input
+          name="amount"
+          type="number"
+          value={amount}
+          onChange={(e) => {
+            setAmount(e.target.value);
+          }}
+          className="w-full border px-3 py-2 rounded-lg"
+          step="0.01"
+          required
+        />
+      </div>
 
-            {/* Title */}
-            <div>
-              <label className="block mb-1">Title*</label>
-              <input
-                name="title"
-                type="text"
-                value={title}
-                onChange={(e) => {
-                  setTitle(e.target.value);
-                }}
-                className="w-full border px-3 py-2 rounded-lg"
-                maxLength={50}
-                required
-              />
-            </div>
+      {/* Title */}
+      <div>
+        <label className="block mb-1">Title*</label>
+        <input
+          name="title"
+          type="text"
+          value={title}
+          onChange={(e) => {
+            setTitle(e.target.value);
+          }}
+          className="w-full border px-3 py-2 rounded-lg"
+          maxLength={50}
+          required
+        />
+      </div>
 
-            {/* Category */}
-            <div>
-              <label className="block mb-1">Category*</label>
-              <input
-                name="category"
-                type="text"
-                value={category}
-                onChange={(e) => {
-                  setCategory(e.target.value);
-                }}
-                className="w-full border px-3 py-2 rounded-lg"
-                maxLength={50}
-                required
-              />
-            </div>
+      {/* Category */}
+      <div>
+        <label className="block mb-1">Category*</label>
+        <input
+          name="category"
+          type="text"
+          value={category}
+          onChange={(e) => {
+            setCategory(e.target.value);
+          }}
+          className="w-full border px-3 py-2 rounded-lg"
+          maxLength={50}
+          required
+        />
+      </div>
 
-            {/* Date */}
-            <div className="flex flex-col gap-1">
-              <label>Date</label>
+      {/* Date */}
+      <div className="flex flex-col gap-1">
+        <label>Date</label>
 
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button className="flex w-1/3" variant="outline">
-                    {dateValue ? dateValue.toLocaleDateString() : "Pick a date"}
-                    <CalendarIcon className="ml-auto" />
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-5">
-                  <Calendar
-                    mode="single"
-                    selected={dateValue}
-                    onSelect={setDateValue}
-                  />
-                </PopoverContent>
-              </Popover>
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button className="flex w-1/3" variant="outline">
+              {dateValue ? dateValue.toLocaleDateString() : "Pick a date"}
+              <CalendarIcon className="ml-auto" />
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto p-5">
+            <Calendar
+              mode="single"
+              selected={dateValue}
+              onSelect={setDateValue}
+            />
+          </PopoverContent>
+        </Popover>
 
-              <input
-                type="hidden"
-                name="date"
-                value={
-                  dateValue
-                  ? dateValue.toISOString().slice(0, 10)
-                  : new Date().toISOString().slice(0, 10)
-                }
-              />
+        <input
+          type="hidden"
+          name="date"
+          value={
+            dateValue
+              ? dateValue.toISOString().slice(0, 10)
+              : new Date().toISOString().slice(0, 10)
+          }
+        />
 
-              <input type="hidden" name="nature" value={txNature} />
-            </div>
-        </div>
-    )
-}
+        <input type="hidden" name="nature" value={txNature} />
+      </div>
+    </div>
+  );
+};
 
 export default TransactionFormFields;

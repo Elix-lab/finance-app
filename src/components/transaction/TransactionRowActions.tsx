@@ -1,5 +1,5 @@
 "use client";
-import { Dialog, DialogTrigger, DialogContent } from "../ui/dialog";
+import { Dialog, DialogTrigger, DialogContent, DialogTitle } from "../ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -19,13 +19,16 @@ import TransactionFormFields from "./TransactionFormFields";
 import TransactionFormFooter from "./TransactionFormFooter";
 
 const TransactionRowActions = ({
-  transactionId,
+transactionId,
 }: {
   transactionId: string;
 }) => {
+  
+  // States
   const [isPending, startTransition] = useTransition();
   const [tx, setTx] = useState(null);
 
+  //Event Handlers
   const handleDelete = () => {
     if (confirm("Are you sure you want to DELETE this transaction?")) {
       startTransition(() => deleteTransactionAction(transactionId));
@@ -33,8 +36,10 @@ const TransactionRowActions = ({
   };
 
   const handleEdit = async () => {
-    const data = getSingleTransactionAction(transactionId)
-    setTx(data)
+    const res = await fetch(`/api/transactions/${transactionId}`)
+    const txData = await res.json()
+    console.log(txData)
+    setTx(txData)
   }
 
   return (
@@ -69,11 +74,17 @@ const TransactionRowActions = ({
       </DropdownMenu>
 
       <DialogContent>
+        <DialogTitle>
+          Edit Transaction
+        </DialogTitle>
+        {!tx ? 
+        'Loading' :
         <form action="">
-          <TransactionFormHeader txNature='income' />
-          <TransactionFormFields txNature="income" />
+          {/* <TransactionFormHeader txNature='income' /> */}
+          <TransactionFormFields txNature="income" existingTx={tx}/>
           <TransactionFormFooter />
         </form>
+        }
       </DialogContent>
     </Dialog>
   );

@@ -10,8 +10,6 @@ export default function SessionGuard({
   children: React.ReactNode;
 }) {
   const { data: session, status } = useSession();
-  console.log("SessionGuard session:", session);
-  console.log("SessionGuard status:", status);
 
   if (status === "loading") {
     return (

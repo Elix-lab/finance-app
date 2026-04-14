@@ -4,26 +4,21 @@ import { db } from "@/db";
 import { transactions } from "@/db/schema";
 import { and, eq } from "drizzle-orm";
 
-type Params = {
-    params: {
-        id: string;
-    }
-}
 
-export async function GET(req: Request, {params}: Params) {
+export async function GET(req: Request, {params}) {
     try {
-        // Checking session
+    // Obtaining params(Promise) values
+    const p = await params;
+    // Checking session
     const session = await auth()
-
     if(!session) {
         return NextResponse.json(
             {error: 'Unauthorized'},
             {status: 401}
         );
     }
-
-    // Checkgin params
-    if(!params || !params.id) {
+    // Checkgin p
+    if(!p || !p.id) {
         return NextResponse.json(
             {error: 'Missing ID'},
             {status: 400}
@@ -37,7 +32,7 @@ export async function GET(req: Request, {params}: Params) {
     .where(
         and(
             eq(transactions.userId ,session!.user!.id!),
-            eq(transactions.id, params.id)
+            eq(transactions.id, p.id)
         )
     )
 
