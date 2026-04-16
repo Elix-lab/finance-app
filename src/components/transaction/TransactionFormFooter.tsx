@@ -2,6 +2,7 @@
 
 import { DialogFooter, DialogClose } from "../ui/dialog"
 import { useFormStatus } from "react-dom"
+import { Spinner } from "../ui/spinner"
 import { Button } from "../ui/button"
 
 const TransactionFormFooter = () => {
@@ -20,7 +21,7 @@ function SaveButton() {
   const { pending } = useFormStatus();
   return (
     <Button type="submit" disabled={pending}>
-      {pending ? "Saving..." : "Save"}
+      {pending ? <Spinner/> : "Save"}
     </Button>
   );
 }

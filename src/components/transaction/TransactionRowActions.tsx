@@ -23,6 +23,7 @@ import {
   updateTransactionAction,
 } from "@/actions/transactions/transactions";
 import { useState, useTransition } from "react";
+import { Spinner } from "../ui/spinner";
 import TransactionFormFields from "./TransactionFormFields";
 import TransactionFormFooter from "./TransactionFormFooter";
 
@@ -32,27 +33,27 @@ const TransactionRowActions = ({
   transactionId: string;
 }) => {
   // States
-  const [isPending, startTransition] = useTransition();
+  const [isDeleting, startDeleteTransition] = useTransition();
   const [tx, setTx] = useState(null);
 
   //Event Handlers
   const handleDelete = () => {
     if (confirm("Are you sure you want to DELETE this transaction?")) {
-      startTransition(() => deleteTransactionAction(transactionId));
+      startDeleteTransition(() => deleteTransactionAction(transactionId));
     }
   };
 
   const handleEdit = async () => {
-    const res = await fetch(`/api/transactions/${transactionId}`);
-    const txData = await res.json();
-    setTx(txData);
+      const res = await fetch(`/api/transactions/${transactionId}`);
+      const txData = await res.json();
+      setTx(txData);
   };
 
   return (
     <Dialog>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          {!isPending ? (
+          {!isDeleting ? (
             <Button variant="ghost">
               <BsThreeDotsVertical />
             </Button>
@@ -79,23 +80,29 @@ const TransactionRowActions = ({
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <DialogContent>
-        {!tx ? (
-          <p>Preparing for editing</p>
-        ) : (
-          <>
-            <DialogTitle>Edit Transaction</DialogTitle>
-            <DialogDescription>
-              Change the desired fields and save
-            </DialogDescription>
-            <form action={updateTransactionAction}>
-              {/* <TransactionFormHeader txNature='income' /> */}
-              <TransactionFormFields existingTx={tx} />
-              <TransactionFormFooter />
-            </form>
-          </>
-        )}
-      </DialogContent>
+      {!tx ? (
+        <DialogContent className="flex gap-3 items-center">
+          <DialogTitle>
+            <span>
+              <Spinner />
+            </span>
+          </DialogTitle>
+          <DialogDescription>
+            Preparing for edition
+          </DialogDescription>
+        </DialogContent>
+      ) : (
+        <DialogContent>
+          <DialogTitle>Edit Transaction</DialogTitle>
+          <DialogDescription>
+            Change the desired fields and save
+          </DialogDescription>
+          <form action={updateTransactionAction}>
+            <TransactionFormFields existingTx={tx} />
+            <TransactionFormFooter />
+          </form>
+        </DialogContent>
+      )}
     </Dialog>
   );
 };
