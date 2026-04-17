@@ -1,6 +1,7 @@
 import { db } from "@/db";
 import { transactions } from "@/db/schema";
 import { sql, eq, desc, and, gte, lte } from "drizzle-orm";
+import Decimal from 'decimal.js'
 
 // Insert a new Transaction
 export async function insertTransaction({
@@ -30,12 +31,14 @@ export async function getTransactions(
   filters: any[],
   transactionsLimit: number,
 ) {
-  return await db
+  const txs = await db
     .select()
     .from(transactions)
     .where(and(...filters))
     .orderBy(desc(transactions.date))
     .limit(transactionsLimit);
+
+  return txs.map((t) => ({...t, amount: new Decimal(t.amount)}))
 }
 
 // Get a SINGLE transaction
@@ -43,12 +46,14 @@ export async function getSingleTransaction(
   userId: string,
   transactionId: string,
 ) {
-  return await db
+  const tx = await db
     .select()
     .from(transactions)
     .where(
       and(eq(transactions.id, transactionId), eq(transactions.userId, userId)),
     );
+
+  return tx.map(t => ({...t, amount: new Decimal(t.amount)}))
 }
 
 // Delete transaction
@@ -69,14 +74,14 @@ export async function updateTransaction({
     userId: string;
     title: string;
     category: string;
-    amount: number;
+    amount: string;
     date: string;
   };
 }) {
   return await db
     .update(transactions)
     .set({
-      amount: data.amount.toString(),
+      amount: data.amount,
       title: data.title,
       category: data.category,
       date: data.date,

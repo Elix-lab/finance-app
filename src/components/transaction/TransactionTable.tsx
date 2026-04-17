@@ -48,6 +48,7 @@ const TransactionTable = async () => {
           {transactions.map((tx) => {
             const { Icon, iconBgClass, iconSymbolColor, amountColorClass } =
               config[tx.nature];
+              console.log(typeof tx.amount)
 
             return (
               <li key={tx.id} className="grid grid-cols-2 border-b-2 py-5">
@@ -69,7 +70,7 @@ const TransactionTable = async () => {
                     <span
                       className={`${amountColorClass} text-base font-semibold`}
                     >
-                      {formatCurrency(Number(tx.amount))}
+                      {formatCurrency(tx.amount.toNumber())}
                     </span>
                     <p className="text-xs">{formatDate(parseISOtoDate(tx.date))}</p>
                   </div>

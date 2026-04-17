@@ -1,8 +1,8 @@
 "use server";
 
-import { db } from "@/db";
 import { transactions } from "@/db/schema";
 import { auth } from "@/lib/auth";
+import Decimal from 'decimal.js'
 import {
   getTransactions,
   insertTransaction,
@@ -116,10 +116,14 @@ export async function updateTransactionAction(formData: FormData) {
   const title = String(formData.get("title")) ?? "";
   const category = String(formData.get("category")) ?? "";
   const date = String(formData.get("date")) ?? "";
-  const amountValue = formData.get("amount");
-  const amount = Number(amountValue);
-  if (isNaN(amount)) {
-    throw new Error("Invalid amount value");
+  const amount = String(formData.get("amount"));
+  if(!amount || amount.trim() === '') {
+    throw new Error ('Amount required');
+  }
+  try {
+    new Decimal(amount)
+  } catch {
+    throw new Error('Invalid amount')
   }
 
   const updatedTransaction = { id, userId , title, category, date, amount };
