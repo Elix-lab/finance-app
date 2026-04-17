@@ -112,7 +112,7 @@ export async function getAviableBalance(userId: string) {
       balance: sql<number>`
       SUM(CASE WHEN ${transactions.nature} = 'income' THEN ${transactions.amount} ELSE 0 END) -
       SUM(CASE WHEN ${transactions.nature} = 'expense' THEN ${transactions.amount} ELSE 0 END)
-      `,
+      `.mapWith(Number),
     })
     .from(transactions)
     .where(eq(transactions.userId, userId));

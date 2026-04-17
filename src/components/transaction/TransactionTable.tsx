@@ -13,6 +13,7 @@ const TransactionTable = async () => {
 
   // Get transactions
   const transactions = await getTransactionByUserIdAction(session!.user!.id!);
+  console.log(transactions)
 
   // Conditional styling configuration
   const config = {
@@ -29,13 +30,6 @@ const TransactionTable = async () => {
       amountColorClass: "text-red-500",
     },
   };
-
-  // Date formating
-  // const formatDate = (dateString: string) => {
-  //   const [year, month, day] = dateString.split('-').map(i => Number(i));
-  //   const date = new Date(year, month -1, day);
-  //   return date.toLocaleDateString("en-US", { day: "numeric", month: "short" });
-  // };
 
   if (!transactions || TransactionSummary.length === 0) {
     return (
