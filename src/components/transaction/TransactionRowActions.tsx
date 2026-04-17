@@ -1,4 +1,11 @@
 "use client";
+
+import { MdOutlineDeleteForever, MdOutlineEdit } from "react-icons/md";
+import TransactionFormFields from "./TransactionFormFields";
+import TransactionFormFooter from "./TransactionFormFooter";
+import { BsThreeDotsVertical } from "react-icons/bs";
+import { useState, useTransition } from "react";
+import { Spinner } from "../ui/spinner";
 import {
   Dialog,
   DialogTrigger,
@@ -14,18 +21,11 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
 } from "../ui/dropdown-menu";
-import { MdOutlineDeleteForever, MdOutlineEdit } from "react-icons/md";
-import { ImSpinner8 } from "react-icons/im";
-import { BsThreeDotsVertical } from "react-icons/bs";
 import { Button } from "../ui/button";
 import {
   deleteTransactionAction,
   updateTransactionAction,
 } from "@/actions/transactions/transactions";
-import { useState, useTransition } from "react";
-import { Spinner } from "../ui/spinner";
-import TransactionFormFields from "./TransactionFormFields";
-import TransactionFormFooter from "./TransactionFormFooter";
 
 const TransactionRowActions = ({
   transactionId,
@@ -59,7 +59,7 @@ const TransactionRowActions = ({
             </Button>
           ) : (
             <Button variant="ghost">
-              <ImSpinner8 />
+              <Spinner/>
             </Button>
           )}
         </DropdownMenuTrigger>

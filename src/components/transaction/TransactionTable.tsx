@@ -4,6 +4,7 @@ import { auth } from "@/lib/auth";
 import { getTransactionByUserIdAction } from "@/actions/transactions/transactions";
 import TransactionSummary from "./TransactionSummary";
 import TransactionRowActions from "./TransactionRowActions";
+import { formatDate, parseISOtoDate } from "@/lib/date";
 
 const TransactionTable = async () => {
   // Check user session
@@ -29,10 +30,11 @@ const TransactionTable = async () => {
   };
 
   // Date formating
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString("en-US", { day: "numeric", month: "short" });
-  };
+  // const formatDate = (dateString: string) => {
+  //   const [year, month, day] = dateString.split('-').map(i => Number(i));
+  //   const date = new Date(year, month -1, day);
+  //   return date.toLocaleDateString("en-US", { day: "numeric", month: "short" });
+  // };
 
   if (!transactions || TransactionSummary.length === 0) {
     return (
@@ -74,7 +76,7 @@ const TransactionTable = async () => {
                     >
                       ${tx.amount}
                     </span>
-                    <p className="text-xs">{formatDate(tx.date)}</p>
+                    <p className="text-xs">{formatDate(parseISOtoDate(tx.date))}</p>
                   </div>
                   <TransactionRowActions transactionId={tx.id}/>
                 </div>

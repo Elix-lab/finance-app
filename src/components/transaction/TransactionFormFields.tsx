@@ -5,6 +5,7 @@ import { CalendarIcon } from "lucide-react";
 import { Calendar } from "../ui/calendar";
 import { Button } from "../ui/button";
 import { useEffect, useState } from "react";
+import { parseISOtoDate } from "@/lib/date";
 
 const TransactionFormFields = ({
   txNature,
@@ -23,11 +24,12 @@ const TransactionFormFields = ({
 
   //useEffect in case existingTx exist
   useEffect(() => {
+    console.log(existingTx.date)
     setId(existingTx?.id ?? "");
     setTitle(existingTx?.title ?? "");
     setCategory(existingTx?.category ?? "");
     setAmount(existingTx?.amount ?? "");
-    setDateValue(existingTx?.date ? new Date(existingTx?.date) : new Date());
+    setDateValue(existingTx?.date ? parseISOtoDate(existingTx?.date) : new Date());
   }, [existingTx]);
 
   return (
