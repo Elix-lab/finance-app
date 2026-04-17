@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import { IoIosTrendingUp, IoIosTrendingDown } from "react-icons/io";
 import { formatCurrency } from "@/lib/currencyFormat";
 import { auth } from "@/lib/auth";
@@ -34,14 +33,14 @@ const TransactionSummary = async ({ nature }: Props) => {
   return (
     <div className="flex items-center gap-3">
       {/* Icon */}
-      <span className={clsx("inline-block p-3 rounded-2xl", bgClass)}>
-        <Icon className={clsx("text-2xl", textClass)} />
+      <span className={`inline-block p-3 rounded-2xl ${bgClass}`}>
+        <Icon className={`text-2xl ${textClass}`} />
       </span>
       <div>
         {/* Income/expenses label */}
         <p className="text-xs">{label}</p>
         {/* Amount */}
-        <span className={clsx("text-xl font-semibold", textClass)}>
+        <span className={`text-xl font-semibold ${textClass}`}>
           {formatCurrency(amount)}
         </span>
       </div>

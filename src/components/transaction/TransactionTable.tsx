@@ -5,6 +5,7 @@ import { getTransactionByUserIdAction } from "@/actions/transactions/transaction
 import TransactionSummary from "./TransactionSummary";
 import TransactionRowActions from "./TransactionRowActions";
 import { formatDate, parseISOtoDate } from "@/lib/date";
+import { formatCurrency } from "@/lib/currencyFormat";
 
 const TransactionTable = async () => {
   // Check user session
@@ -74,7 +75,7 @@ const TransactionTable = async () => {
                     <span
                       className={`${amountColorClass} text-base font-semibold`}
                     >
-                      ${tx.amount}
+                      {formatCurrency(Number(tx.amount))}
                     </span>
                     <p className="text-xs">{formatDate(parseISOtoDate(tx.date))}</p>
                   </div>

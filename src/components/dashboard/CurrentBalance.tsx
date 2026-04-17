@@ -17,7 +17,7 @@ const CurrentBalance = async () => {
       {/* Total Balance */}
       <div>
         <p className="text-sm mb-1">Available Balance</p>
-        <p className="text-5xl font-extrabold">{aviableBalance}</p>
+        <p className="text-5xl font-extrabold">${aviableBalance}</p>
       </div>
       {/* Income and Expenses Totals */}
       <div className="flex flex-wrap gap-5">

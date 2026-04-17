@@ -24,7 +24,6 @@ const TransactionFormFields = ({
 
   //useEffect in case existingTx exist
   useEffect(() => {
-    console.log(existingTx.date)
     setId(existingTx?.id ?? "");
     setTitle(existingTx?.title ?? "");
     setCategory(existingTx?.category ?? "");

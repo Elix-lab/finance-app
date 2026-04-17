@@ -91,11 +91,13 @@ export async function getSumByNature(userId: string) {
   const result = await db
     .select({
       nature: transactions.nature,
-      total: sql<number>`SUM(${transactions.amount})`,
+      total: sql<number>`SUM(${transactions.amount})`.mapWith(Number),
     })
     .from(transactions)
     .where(eq(transactions.userId, userId))
     .groupBy(transactions.nature);
+
+    
 
   return {
     income: result.find((r) => r.nature === "income")?.total ?? 0,
