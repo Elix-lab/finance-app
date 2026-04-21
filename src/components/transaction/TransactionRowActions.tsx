@@ -47,7 +47,6 @@ const TransactionRowActions = ({
       const res = await fetch(`/api/transactions/${transactionId}`);
       const txData = await res.json();
       setTx(txData);
-      console.log(txData)
   };
 
   return (
