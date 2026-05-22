@@ -1,4 +1,4 @@
-import { signOutAction } from "@/actions/auth/actions"
+import { signOutAction } from "@/_actions/auth/actions"
 import { Button } from "../ui/button"
 
 export function SignOutButton() {

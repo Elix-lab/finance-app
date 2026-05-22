@@ -1,6 +1,6 @@
 import TransactionSummary from "../transaction/TransactionSummary";
 import { formatCurrency } from "@/lib/currencyFormat";
-import { getAviableBalanceAction } from "@/actions/transactions";
+import { getAviableBalanceAction } from "@/_actions/transactions/get";
 
 type Props = {
   balance: number;

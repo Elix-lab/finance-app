@@ -1,7 +1,7 @@
 import { IoIosTrendingUp, IoIosTrendingDown } from "react-icons/io";
 import { LuChartCandlestick } from "react-icons/lu";
 import { auth } from "@/lib/auth";
-import { getTransactionByUserIdAction } from "@/actions/transactions";
+import { getTransactionByUserIdAction } from "@/_actions/transactions/get";
 import TransactionSummary from "./TransactionSummary";
 import TransactionRowActions from "./TransactionRowActions";
 import { formatDate, parseISOtoDate } from "@/lib/date";

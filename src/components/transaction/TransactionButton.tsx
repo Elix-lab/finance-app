@@ -5,8 +5,7 @@ import {
   DialogContent,
   DialogTrigger,
 } from "@/components/ui/dialog";
-
-import { insertTransactionAction } from "@/actions/transactions";
+import { insertTransactionAction } from "@/_actions/transactions/insert";
 import TransactionFormFields from "./TransactionFormFields";
 import TransactionFormHeader from "./TransactionFormHeader";
 import TransactionFormFooter from "./TransactionFormFooter";

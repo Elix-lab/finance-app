@@ -22,11 +22,8 @@ import {
   DropdownMenuSeparator,
 } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
-import {
-  deleteTransactionAction,
-  updateTransactionAction,
-} from "@/actions/transactions";
-
+import { deleteTransactionAction } from "@/_actions/transactions/delete";
+import { updateTransactionAction } from "@/_actions/transactions/update";
 const TransactionRowActions = ({
   transactionId,
 }: {
