@@ -33,27 +33,6 @@ export async function getTransactionByUserIdAction(
   //Managing filters for selecting the data
   const filters = [eq(transactions.userId, userId)];
 
-  if (startDate && endDate) {
-    let fromDate = new Date(startDate);
-    let toDate = new Date(endDate);
-
-    if (fromDate > toDate) {
-      [fromDate, toDate] = [toDate, fromDate];
-    }
-
-    filters.push(gte(transactions.date, fromDate.toISOString().slice(0, 10)));
-    filters.push(lte(transactions.date, toDate.toISOString().slice(0, 10)));
-  }
-
-  if (startDate && !endDate) {
-    const d =
-      typeof startDate === "string"
-        ? startDate
-        : startDate.toISOString().slice(0, 10);
-
-    filters.push(eq(transactions.date, d));
-  }
-
   //Getting transactions
   return await getTransactions(filters, transactionsLimit);
 }
