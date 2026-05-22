@@ -25,7 +25,7 @@ import { Button } from "../ui/button";
 import {
   deleteTransactionAction,
   updateTransactionAction,
-} from "@/actions/transactions/transactions";
+} from "@/actions/transactions";
 
 const TransactionRowActions = ({
   transactionId,

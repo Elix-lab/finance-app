@@ -1,3 +1,5 @@
+/** Here are all the server actions that work with Transactions */
+
 "use server";
 
 import { transactions } from "@/db/schema";
@@ -22,6 +24,7 @@ export async function insertTransactionAction(formData: FormData) {
   if (!session) {
     throw new Error("You must be logged in to perform this action");
   }
+  // Creating new transaction object
   const userId = session.user?.id;
   if (!userId) {
     throw new Error("User ID is required");
@@ -39,9 +42,9 @@ export async function insertTransactionAction(formData: FormData) {
 
   const newTransactionData = { amount, title, category, date, userId, nature };
 
-  await insertTransaction({ data: newTransactionData });
+  const inserted = await insertTransaction({ data: newTransactionData });
 
-  revalidatePath("/dashboard");
+  return inserted;
 }
 
 // Get MULTIPLE transactions
