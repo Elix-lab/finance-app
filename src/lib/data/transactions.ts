@@ -4,7 +4,7 @@ import { sql, eq, desc, and} from "drizzle-orm";
 import Decimal from 'decimal.js'
 
 // Insert a new Transaction
-export async function insertTransaction({
+export async function createTx({
   data,
 }: {
   data: {
@@ -27,7 +27,7 @@ export async function insertTransaction({
 }
 
 // Get MULTIPLE transactions
-export async function getTransactions(
+export async function getLatestTx(
   filters: any[],
   transactionsLimit: number,
 ) {
@@ -42,7 +42,7 @@ export async function getTransactions(
 }
 
 // Get a SINGLE transaction
-export async function getSingleTransaction(
+export async function getSingleTx(
   userId: string,
   transactionId: string,
 ) {
@@ -57,7 +57,7 @@ export async function getSingleTransaction(
 }
 
 // Delete transaction
-export async function deleteTransaction(userId: string, transactionId: string) {
+export async function deleteTx(userId: string, transactionId: string) {
   return await db
     .delete(transactions)
     .where(
@@ -66,7 +66,7 @@ export async function deleteTransaction(userId: string, transactionId: string) {
 }
 
 // Update transaction
-export async function updateTransaction({
+export async function updateTx({
   data,
 }: {
   data: {
@@ -111,7 +111,7 @@ export async function getSumByNature(userId: string) {
 }
 
 // Get Aviable Balance (income - expenses)
-export async function getAviableBalance(userId: string) {
+export async function getAvailableBalance(userId: string) {
   const [result] = await db
     .select({
       balance: sql<number>`

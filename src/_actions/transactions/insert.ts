@@ -3,10 +3,10 @@
 "use server";
 
 import { auth } from "@/lib/auth";
-import { insertTransaction } from "@/lib/data/transactions";
+import { createTx } from "@/lib/data/transactions";
 
-// Insert a new Transaction
-export async function insertTransactionAction(formData: FormData) {
+// Create/insert a new Transaction
+export async function createTxAction(formData: FormData) {
   // Check session
   const session = await auth();
   if (!session) {
@@ -31,6 +31,6 @@ export async function insertTransactionAction(formData: FormData) {
   const newTransactionData = { amount, title, category, date, userId, nature };
 
   //Inserting transaction
-  const inserted = await insertTransaction({ data: newTransactionData });
+  const inserted = await createTx({ data: newTransactionData });
   return inserted;
 }

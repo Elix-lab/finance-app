@@ -4,11 +4,11 @@
 
 import { auth } from "@/lib/auth";
 import Decimal from "decimal.js";
-import { updateTransaction } from "@/lib/data/transactions";
+import { updateTx } from "@/lib/data/transactions";
 import { revalidatePath } from "next/cache";
 
 // Update transaction
-export async function updateTransactionAction(formData: FormData) {
+export async function updateTxAction(formData: FormData) {
   // Check session
   const session = await auth();
   if (!session) {
@@ -33,6 +33,6 @@ export async function updateTransactionAction(formData: FormData) {
   const updatedTransaction = { id, userId, title, category, date, amount };
 
   // Updating transaction
-  await updateTransaction({ data: updatedTransaction });
+  await updateTx({ data: updatedTransaction });
   revalidatePath("/dashboard");
 }

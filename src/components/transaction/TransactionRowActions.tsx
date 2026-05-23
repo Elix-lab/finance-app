@@ -22,8 +22,8 @@ import {
   DropdownMenuSeparator,
 } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
-import { deleteTransactionAction } from "@/_actions/transactions/delete";
-import { updateTransactionAction } from "@/_actions/transactions/update";
+import { deleteTxAction } from "@/_actions/transactions/delete";
+import { updateTxAction } from "@/_actions/transactions/update";
 const TransactionRowActions = ({
   transactionId,
 }: {
@@ -36,7 +36,7 @@ const TransactionRowActions = ({
   //Event Handlers
   const handleDelete = () => {
     if (confirm("Are you sure you want to DELETE this transaction?")) {
-      startDeleteTransition(() => deleteTransactionAction(transactionId));
+      startDeleteTransition(() => deleteTxAction(transactionId));
     }
   };
 
@@ -94,7 +94,7 @@ const TransactionRowActions = ({
           <DialogDescription>
             Change the desired fields and save
           </DialogDescription>
-          <form action={updateTransactionAction}>
+          <form action={updateTxAction}>
             <TransactionFormFields existingTx={tx} />
             <TransactionFormFooter />
           </form>

@@ -1,6 +1,6 @@
 import TransactionSummary from "../transaction/TransactionSummary";
 import { formatCurrency } from "@/lib/currencyFormat";
-import { getAviableBalanceAction } from "@/_actions/transactions/get";
+import { getAvailableBalanceAction } from "@/_actions/transactions/get";
 
 type Props = {
   balance: number;
@@ -10,7 +10,7 @@ type Props = {
 
 // { balance, income, expenses }: Props
 const CurrentBalance = async () => {
-  const aviableBalance = await getAviableBalanceAction();
+  const aviableBalance = await getAvailableBalanceAction();
 
   return (
     <div className="flex flex-col gap-3 w-full h-auto bg-white shadow-md rounded-xl p-8">

@@ -5,7 +5,7 @@ import {
   DialogContent,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { insertTransactionAction } from "@/_actions/transactions/insert";
+import { createTxAction } from "@/_actions/transactions/insert";
 import TransactionFormFields from "./TransactionFormFields";
 import TransactionFormHeader from "./TransactionFormHeader";
 import TransactionFormFooter from "./TransactionFormFooter";
@@ -43,7 +43,7 @@ const TransactionButton = ({ buttonNature }: Props) => {
       </DialogTrigger>
       {/* Modal */}
       <DialogContent className="sm:max-w-xl rounded-2xl">
-        <form action={insertTransactionAction}>
+        <form action={createTxAction}>
           <TransactionFormHeader txNature={buttonNature} />
           <TransactionFormFields txNature={buttonNature} />
           <TransactionFormFooter />
