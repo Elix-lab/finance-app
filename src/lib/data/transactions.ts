@@ -16,7 +16,7 @@ export async function createTx({
     date: string;
   };
 }) {
-  await db.insert(transactions).values({
+  return await db.insert(transactions).values({
     userId: data.userId,
     nature: data.nature,
     title: data.title,

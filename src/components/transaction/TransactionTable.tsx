@@ -11,7 +11,7 @@ const TransactionTable = async () => {
   const session = await auth();
 
   // Get transactions
-  const transactions = await getLatestTxAction(session!.user!.id!);
+  const transactions = await getLatestTxAction();
 
   // Conditional styling configuration
   const config = {
@@ -29,7 +29,7 @@ const TransactionTable = async () => {
     },
   };
 
-  if (!transactions || TransactionSummary.length === 0) {
+  if (!transactions || transactions.length === 0) {
     return (
       <div className="flex flex-col gap-3 w-full h-auto bg-white shadow-md rounded-xl p-8">
         <span className="text-xl font-bold mb-5">

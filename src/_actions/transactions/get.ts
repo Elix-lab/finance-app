@@ -7,21 +7,9 @@ import { eq } from "drizzle-orm";
 import { transactions } from "@/db/schema";
 import { getLatestTx, getSingleTx, getAvailableBalance } from "@/lib/data/transactions";
 
-// Get SINGLE transaction
-export async function getSingleTxAction(transactionId: string) {
-  // Check session
-  const session = await auth();
-  if (!session) {
-    throw new Error("Unautorized");
-  }
-  // Getting transaction
-  return await getSingleTx(session!.user!.id!, transactionId);
-}
-
 // Get MULTIPLE transactions.
 // It has more steps than needed because of thinking about using this query in the transactions page; where the user can see the hisrotic of transactions
 export async function getLatestTxAction(
-  userId: string,
   transactionsLimit: number = 5,
 ) {
   //Check session
@@ -29,7 +17,7 @@ export async function getLatestTxAction(
   if (!session) throw new Error("Unauthorized");
 
   //Managing filters for selecting the data
-  const filters = [eq(transactions.userId, userId)];
+  const filters = [eq(transactions.userId, session.user?.id!)];
 
   //Getting transactions
   return await getLatestTx(filters, transactionsLimit);
