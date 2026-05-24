@@ -7,9 +7,6 @@ import { formatDate, parseISOtoDate } from "@/lib/date";
 import { formatCurrency } from "@/lib/currencyFormat";
 
 const TransactionTable = async () => {
-  // Check user session
-  const session = await auth();
-
   // Get transactions
   const transactions = await getLatestTxAction();
 
