@@ -1,15 +1,12 @@
 import { IoIosTrendingUp, IoIosTrendingDown } from "react-icons/io";
 import { formatCurrency } from "@/lib/currencyFormat";
-import { auth } from "@/lib/auth";
-import { getSumByNature } from "@/lib/data/transactions";
-
+import { getSumByNatureAction } from "@/_actions/transactions/get";
 type Props = {
   nature: "income" | "expenses";
 };
 
 const TransactionSummary = async ({ nature }: Props) => {
-  const session = await auth();
-  const totals = await getSumByNature(session?.user?.id);
+  const totals = await getSumByNatureAction();
   const amount = nature === "income" ? totals.income : totals.expenses;
 
   // Conditional rendering data

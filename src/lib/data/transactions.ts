@@ -1,7 +1,6 @@
 import { db } from "@/db";
 import { transactions } from "@/db/schema";
 import { sql, eq, desc, and } from "drizzle-orm";
-import Decimal from "decimal.js";
 
 // Insert a new Transaction
 export async function createTx({
