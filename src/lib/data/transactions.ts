@@ -1,7 +1,7 @@
 import { db } from "@/db";
 import { transactions } from "@/db/schema";
-import { sql, eq, desc, and} from "drizzle-orm";
-import Decimal from 'decimal.js'
+import { sql, eq, desc, and } from "drizzle-orm";
+import Decimal from "decimal.js";
 
 // Insert a new Transaction
 export async function createTx({
@@ -27,33 +27,27 @@ export async function createTx({
 }
 
 // Get MULTIPLE transactions
-export async function getLatestTx(
-  filters: any[],
-  transactionsLimit: number,
-) {
-  const txs = await db
+export async function getLatestTxs(filters: any[], transactionsLimit: number) {
+  const LatestTxs = await db
     .select()
     .from(transactions)
     .where(and(...filters))
     .orderBy(desc(transactions.date))
     .limit(transactionsLimit);
 
-  return txs.map((t) => ({...t, amount: new Decimal(t.amount)}))
+  return LatestTxs;
 }
 
 // Get a SINGLE transaction
-export async function getSingleTx(
-  userId: string,
-  transactionId: string,
-) {
-  const tx = await db
+export async function getSingleTx(userId: string, transactionId: string) {
+  const SingleTx = await db
     .select()
     .from(transactions)
     .where(
       and(eq(transactions.id, transactionId), eq(transactions.userId, userId)),
     );
 
-  return tx.map(t => ({...t, amount: new Decimal(t.amount)}))
+  return SingleTx;
 }
 
 // Delete transaction
@@ -101,8 +95,6 @@ export async function getSumByNature(userId: string) {
     .from(transactions)
     .where(eq(transactions.userId, userId))
     .groupBy(transactions.nature);
-
-    
 
   return {
     income: result.find((r) => r.nature === "income")?.total ?? 0,

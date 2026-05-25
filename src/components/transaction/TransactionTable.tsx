@@ -1,3 +1,5 @@
+'use client'
+
 import { IoIosTrendingUp, IoIosTrendingDown } from "react-icons/io";
 import { auth } from "@/lib/auth";
 import { getLatestTxAction } from "@/_actions/transactions/get";
@@ -5,10 +7,11 @@ import TransactionSummary from "./TransactionSummary";
 import TransactionRowActions from "./TransactionRowActions";
 import { formatDate, parseISOtoDate } from "@/lib/date";
 import { formatCurrency } from "@/lib/currencyFormat";
+import { useLatestTransactionQuery } from "@/_queries/transactions/useLatestTransactionsQuery";
 
-const TransactionTable = async () => {
+const TransactionTable = () => {
   // Get transactions
-  const transactions = await getLatestTxAction();
+  const {data: transactions} = useLatestTransactionQuery();
 
   // Conditional styling configuration
   const config = {
@@ -64,7 +67,7 @@ const TransactionTable = async () => {
                     <span
                       className={`${amountColorClass} text-base font-semibold`}
                     >
-                      {formatCurrency(tx.amount.toNumber())}
+                      {formatCurrency(Number(tx.amount))}
                     </span>
                     <p className="text-xs">{formatDate(parseISOtoDate(tx.date))}</p>
                   </div>
