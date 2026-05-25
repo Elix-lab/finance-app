@@ -1,4 +1,3 @@
-'use client'
 // The buttons work with shadCN Dialog
 import { Button } from "../ui/button";
 import {
@@ -34,12 +33,6 @@ const TransactionButton = ({ buttonNature }: Props) => {
 
   const { bgColor, shadow, text } = config[buttonNature];
 
-  const {mutate, isSuccess, isPending, isError} = useCreateTransactionMutation()
-
-  function handleSubmitForm (formData: FormData) {
-    mutate(formData)
-  }
-
   return (
     <Dialog>
       {/* Button */}
@@ -52,11 +45,7 @@ const TransactionButton = ({ buttonNature }: Props) => {
       </DialogTrigger>
       {/* Modal */}
       <DialogContent className="sm:max-w-xl rounded-2xl">
-        <TransactionForm formOnSubmit={handleSubmitForm}>
-          <TransactionFormHeader txNature={buttonNature} />
-          <TransactionFormFields txNature={buttonNature} />
-          <TransactionFormFooter />
-        </TransactionForm>
+        <TransactionForm mutationHook={useCreateTransactionMutation} txNature={buttonNature}/>
       </DialogContent>
     </Dialog>
   );
