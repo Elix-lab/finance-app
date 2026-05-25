@@ -1,8 +1,6 @@
 'use client'
 
 import { DialogFooter, DialogClose } from "../ui/dialog"
-import { useFormStatus } from "react-dom"
-import { Spinner } from "../ui/spinner"
 import { Button } from "../ui/button"
 
 const TransactionFormFooter = () => {
@@ -12,18 +10,12 @@ const TransactionFormFooter = () => {
               <Button variant="outline">Cancel</Button>
             </DialogClose>
 
-            <SaveButton />
+            <DialogClose asChild>
+              <Button type="submit">Save</Button>
+            </DialogClose>
           </DialogFooter>
     )
 }
 
-function SaveButton() {
-  const { pending } = useFormStatus();
-  return (
-    <Button type="submit" disabled={pending}>
-      {pending ? <Spinner/> : "Save"}
-    </Button>
-  );
-}
 
 export default TransactionFormFooter;

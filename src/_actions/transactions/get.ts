@@ -40,5 +40,5 @@ export async function getSumByNatureAction() {
   if (!session) throw new Error('Unauthorized')
   
   // Getting sum by nature
-  return getSumByNature(session.user?.id)
+  return getSumByNature(session.user?.id!)
 }

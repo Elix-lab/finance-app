@@ -5,9 +5,9 @@ import { getLatestTxAction } from "@/_actions/transactions/get";
 
 export function useLatestTransactionQuery(limit: number = 5) {
   return useQuery({
-    queryKey: ["transactions", 'latest', limit],
+    queryKey: ["transactions", 'latest'],
     queryFn: async () => {
-      const data = await getLatestTxAction();
+      const data = await getLatestTxAction(limit);
       return data;
     },
   });
