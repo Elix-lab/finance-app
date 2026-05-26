@@ -1,6 +1,7 @@
 import { poppins } from "@/components/ui/fonts/fonts";
 import type { Metadata } from "next";
 import Providers from "./Providers";
+import { Toaster } from "sonner";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -18,7 +19,10 @@ export default function RootLayout({
       <body
         className={`${poppins.className} antialiased min-h-[100dvh] bg-[#f2f2f2]`}
       >
-        <Providers>{children}</Providers>
+        <Providers>
+          {children}
+          <Toaster />
+        </Providers>
       </body>
     </html>
   );

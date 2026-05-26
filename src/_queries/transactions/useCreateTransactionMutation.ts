@@ -7,6 +7,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { date } from "drizzle-orm/mysql-core";
+import { toast } from "sonner";
 
 export function useCreateTransactionMutation() {
   const queryClient = useQueryClient();
@@ -44,12 +45,17 @@ export function useCreateTransactionMutation() {
     },
 
     onError: (err, payload, context) => {
+      toast.error('Error creating the Transaction', {position:'top-center'})
       if (context?.previousData) {
-        return queryClient.setQueryData(
+        queryClient.setQueryData(
           ["transactions", "latest"],
           context.previousData,
         );
       }
+    },
+
+    onSuccess() {
+      toast.success('Transaction created successfully', {position:'top-center'})
     },
 
     onSettled() {
