@@ -2,11 +2,9 @@
 
 import { createTxAction } from "@/_actions/transactions/insert";
 import {
-  QueryClientProvider,
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query";
-import { date } from "drizzle-orm/mysql-core";
 import { toast } from "sonner";
 
 export function useCreateTransactionMutation() {
@@ -16,9 +14,11 @@ export function useCreateTransactionMutation() {
 
     onMutate: async (payload) => {
       // Cancel queries in case there is a refetching in progress
-      await queryClient.cancelQueries({
-        queryKey: ["transactions", "latest"],
-      });
+      await Promise.all([
+        queryClient.cancelQueries({queryKey:['transactions', 'latest']}),
+        queryClient.cancelQueries({queryKey: ['summary', 'availableBalance']})
+      ])
+      
       // Get the current data
       const previousData = await queryClient.getQueryData([
         "transactions",
@@ -59,9 +59,10 @@ export function useCreateTransactionMutation() {
     },
 
     onSettled() {
-      return queryClient.invalidateQueries({
-        queryKey:['transactions', 'latest']
-      })
+      return Promise.all([
+        queryClient.invalidateQueries({queryKey:['transactions', 'latest']}),
+        queryClient.invalidateQueries({queryKey:['summary', 'availableBalance']})
+      ])
     },
   });
 }

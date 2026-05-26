@@ -7,7 +7,7 @@ import TransactionSummary from "./TransactionSummary";
 import TransactionRowActions from "./TransactionRowActions";
 import { formatDate, parseISOtoDate } from "@/lib/date";
 import { formatCurrency } from "@/lib/currencyFormat";
-import { useLatestTransactionQuery } from "@/_queries/transactions/useLatestTransactionsQuery";
+import { useLatestTransactionQuery } from "@/hooks/queries/transactions/useLatestTransactionsQuery";
 
 const TransactionTable = () => {
   // Get transactions

@@ -10,7 +10,7 @@ import TransactionFormFields from "./TransactionFormFields";
 import TransactionFormHeader from "./TransactionFormHeader";
 import TransactionFormFooter from "./TransactionFormFooter";
 import TransactionForm from "./TransactionForm";
-import { useCreateTransactionMutation } from "@/_queries/transactions/useCreateTransactionMutation";
+import { useCreateTransactionMutation } from "@/hooks/mutations/transactions/useCreateTransactionMutation";
 
 type Props = {
   buttonNature: "income" | "expense";
