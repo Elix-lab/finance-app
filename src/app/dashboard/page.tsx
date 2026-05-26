@@ -1,7 +1,7 @@
 // 'use client'
 // import { useState } from "react";
 import TransactionButton from "../../components/transaction/TransactionButton";
-import CurrentBalance from "@/components/dashboard/CurrentBalance";
+import Balance from "@/components/dashboard/Balance";
 import TransactionTable from "@/components/transaction/TransactionTable";
 
 type Transaction = {
@@ -18,7 +18,7 @@ const Page = () => {
     <div className="flex justify-center p-10">
       <div className="flex flex-col gap-6 w-3xl">
         {/* Balance summary component*/}
-        <CurrentBalance />
+        <Balance />
         {/* Buttons to manage income and expenses */}
         <div className="grid grid-cols-2 gap-1">
           <TransactionButton buttonNature="income" />

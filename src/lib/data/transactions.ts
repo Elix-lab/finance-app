@@ -115,3 +115,21 @@ export async function getAvailableBalance(userId: string) {
 
   return result.balance ?? 0;
 }
+
+// Get Aviable Balance and Totals of income and expenses
+export async function getFinanceSummary (userId: string) {
+  const [result] = await db.
+  select({
+    income: sql<number>`SUM(CASE WHEN ${transactions.nature}) = 'income' THEN ${transactions.amount} ELSE 0 END)`.mapWith(Number),
+    expenses: sql<number>`SUM(CASE WHEN ${transactions.nature} = 'expense' THEN ${transactions.amount} ELSE 0 END)`.mapWith(Number),
+    availableBalance: sql<number>`SUM(CASE WHEN ${transactions.nature} = 'income' THEN ${transactions.amount} ELSE -${transactions.amount} END)`.mapWith(Number)
+  })
+  .from(transactions)
+  .where(eq(transactions.userId, userId))
+
+  return {
+    income: result.income ?? 0,
+    expenses: result.expenses ?? 0,
+    availableBalance: result.availableBalance ?? 0,
+  }
+}

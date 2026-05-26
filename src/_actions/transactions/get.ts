@@ -5,7 +5,7 @@
 import { auth } from "@/lib/auth";
 import { eq } from "drizzle-orm";
 import { transactions } from "@/db/schema";
-import { getLatestTxs, getAvailableBalance, getSumByNature } from "@/lib/data/transactions";
+import { getLatestTxs, getAvailableBalance, getSumByNature, getFinanceSummary } from "@/lib/data/transactions";
 
 // Get MULTIPLE transactions.
 // It has more steps than needed because of thinking about using this query in the transactions page; where the user can see the hisrotic of transactions
@@ -41,4 +41,16 @@ export async function getSumByNatureAction() {
   
   // Getting sum by nature
   return getSumByNature(session.user?.id!)
+}
+
+// Get Aviable Balance and Totals of income and expenses
+export async function getFinanceSummaryAction() {
+  // Check session
+  const session = await auth();
+  if(!session) {
+    throw new Error('Unauthorized')
+  }
+
+  const data = await getFinanceSummary(session.user?.id!)
+  return data;
 }

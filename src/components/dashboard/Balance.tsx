@@ -1,6 +1,7 @@
 import TransactionSummary from "../transaction/TransactionSummary";
 import { formatCurrency } from "@/lib/currencyFormat";
 import { getAvailableBalanceAction } from "@/_actions/transactions/get";
+import AvailableBalance from "./AvailableBalance";
 
 type Props = {
   balance: number;
@@ -9,16 +10,13 @@ type Props = {
 };
 
 // { balance, income, expenses }: Props
-const CurrentBalance = async () => {
+const Balance = async () => {
   const aviableBalance = await getAvailableBalanceAction();
 
   return (
     <div className="flex flex-col gap-3 w-full h-auto bg-white shadow-md rounded-xl p-8">
       {/* Total Balance */}
-      <div>
-        <p className="text-sm mb-1">Available Balance</p>
-        <p className="text-5xl font-extrabold">{formatCurrency(aviableBalance)}</p>
-      </div>
+      <AvailableBalance/>
       {/* Income and Expenses Totals */}
       <div className="flex flex-wrap gap-5">
         <TransactionSummary nature={"income"} />
@@ -28,4 +26,4 @@ const CurrentBalance = async () => {
   );
 };
 
-export default CurrentBalance;
+export default Balance;
