@@ -33,6 +33,9 @@ const TransactionRowActions = ({
   // States
   const [isDeleting, startDeleteTransition] = useTransition();
   const [tx, setTx] = useState(null);
+  
+  const isOptimistic = transactionId.startsWith('optimistic-')
+  const showSpinner = isOptimistic || isDeleting
 
   //Event Handlers
   const handleDelete = () => {
@@ -51,13 +54,13 @@ const TransactionRowActions = ({
     <Dialog>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          {!isDeleting ? (
-            <Button variant="ghost">
-              <BsThreeDotsVertical />
+          {showSpinner ? (
+            <Button variant="ghost" disabled={true}>
+              <Spinner/>
             </Button>
           ) : (
             <Button variant="ghost">
-              <Spinner/>
+              <BsThreeDotsVertical />
             </Button>
           )}
         </DropdownMenuTrigger>
