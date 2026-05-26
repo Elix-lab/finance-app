@@ -16,7 +16,6 @@ export function useCreateTransactionMutation() {
       // Cancel queries in case there is a refetching in progress
       await Promise.all([
         queryClient.cancelQueries({queryKey:['transactions', 'latest']}),
-        queryClient.cancelQueries({queryKey: ['summary', 'availableBalance']})
       ])
       
       // Get the current data
@@ -61,7 +60,6 @@ export function useCreateTransactionMutation() {
     onSettled() {
       return Promise.all([
         queryClient.invalidateQueries({queryKey:['transactions', 'latest']}),
-        queryClient.invalidateQueries({queryKey:['summary', 'availableBalance']})
       ])
     },
   });

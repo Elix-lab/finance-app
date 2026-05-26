@@ -1,13 +1,17 @@
+'use client'
+
 import { IoIosTrendingUp, IoIosTrendingDown } from "react-icons/io";
 import { formatCurrency } from "@/lib/currencyFormat";
 import { getSumByNatureAction } from "@/_actions/transactions/get";
+import { useFinanceSummaryQuery } from "@/hooks/queries/transactions/useFinanceSummaryQuery";
+
 type Props = {
   nature: "income" | "expenses";
 };
 
-const TransactionSummary = async ({ nature }: Props) => {
-  const totals = await getSumByNatureAction();
-  const amount = nature === "income" ? totals.income : totals.expenses;
+const TransactionSummary = ({ nature }: Props) => {
+  const {data} = useFinanceSummaryQuery();
+  const amount = nature === "income" ? data?.income : data?.expenses;
 
   // Conditional rendering data
   const config = {
@@ -38,7 +42,7 @@ const TransactionSummary = async ({ nature }: Props) => {
         <p className="text-xs">{label}</p>
         {/* Amount */}
         <span className={`text-xl font-semibold ${textClass}`}>
-          {formatCurrency(amount)}
+          {formatCurrency(amount ?? 0)}
         </span>
       </div>
     </div>

@@ -120,7 +120,7 @@ export async function getAvailableBalance(userId: string) {
 export async function getFinanceSummary (userId: string) {
   const [result] = await db.
   select({
-    income: sql<number>`SUM(CASE WHEN ${transactions.nature}) = 'income' THEN ${transactions.amount} ELSE 0 END)`.mapWith(Number),
+    income: sql<number>`SUM(CASE WHEN ${transactions.nature} = 'income' THEN ${transactions.amount} ELSE 0 END)`.mapWith(Number),
     expenses: sql<number>`SUM(CASE WHEN ${transactions.nature} = 'expense' THEN ${transactions.amount} ELSE 0 END)`.mapWith(Number),
     availableBalance: sql<number>`SUM(CASE WHEN ${transactions.nature} = 'income' THEN ${transactions.amount} ELSE -${transactions.amount} END)`.mapWith(Number)
   })
