@@ -16,6 +16,7 @@ export function useCreateTransactionMutation() {
       // Cancel queries in case there is a refetching in progress
       await Promise.all([
         queryClient.cancelQueries({queryKey:['transactions', 'latest']}),
+        queryClient.cancelQueries({queryKey: ['finance-summary']}),
       ])
       
       // Get the current data
@@ -32,7 +33,18 @@ export function useCreateTransactionMutation() {
         amount: Number(payload.get("amount")),
         date: new Date().toISOString(),
       };
+
       // Update cache with optimisticTx
+      // For Balance component
+      queryClient.setQueryData(['finance-summary'], (old:any) => {
+        const income = optimisticTx.nature === 'income' ? old.income + optimisticTx.amount : old.income + 0
+        const expenses = optimisticTx.nature === 'expense' ? old.expenses + optimisticTx.amount : old.expenses + 0
+        const availableBalance = old.availableBalance + (optimisticTx.nature === 'income' ? optimisticTx.amount : -optimisticTx.amount)
+
+        return{income,expenses,availableBalance}
+      })
+      
+      // For TransactionTable component
       queryClient.setQueryData(["transactions", "latest"], (old: any) => {
         if (!old) {
           return [optimisticTx];
@@ -60,6 +72,7 @@ export function useCreateTransactionMutation() {
     onSettled() {
       return Promise.all([
         queryClient.invalidateQueries({queryKey:['transactions', 'latest']}),
+        queryClient.invalidateQueries({queryKey: ['finance-summary']}),
       ])
     },
   });
