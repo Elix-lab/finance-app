@@ -1,6 +1,6 @@
-import { getFinanceSummaryAction } from "@/_actions/transactions/get";
+import { getFinanceSummaryAction, getLatestTxAction } from "@/_actions/transactions/get";
 import TransactionButton from "../../components/transaction/TransactionButton";
-import TransactionTable from "@/components/transaction/TransactionTable";
+import TransactionTable from "@/components/transaction/TransactionTableTxs";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { getQueryClient } from "@/lib/getQueryClient";
 import Balance from "@/components/dashboard/Balance";
@@ -17,10 +17,10 @@ type Transaction = {
 const Page = async () => {
   const queryClient = getQueryClient();
 
-  await queryClient.prefetchQuery({
-    queryKey: ["finance-summary"],
-    queryFn: getFinanceSummaryAction,
-  });
+  await Promise.all([
+    queryClient.prefetchQuery({queryKey: ["finance-summary"],queryFn: () => getFinanceSummaryAction(),}),
+    queryClient.prefetchQuery({queryKey: ["transactions", 'latest'], queryFn: () => getLatestTxAction(),}),
+  ])
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

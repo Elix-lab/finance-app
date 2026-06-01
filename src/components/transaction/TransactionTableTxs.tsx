@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { IoIosTrendingUp, IoIosTrendingDown } from "react-icons/io";
 import TransactionRowActions from "./TransactionRowActions";
@@ -6,9 +6,9 @@ import { formatDate, parseISOtoDate } from "@/lib/date";
 import { formatCurrency } from "@/lib/currencyFormat";
 import { useLatestTransactionQuery } from "@/hooks/queries/transactions/useLatestTransactionsQuery";
 
-const TransactionTableTxs = ({initialData}) => {
+const TransactionTable = () => {
   // Get transactions
-  const {data: transactions} = useLatestTransactionQuery({initialData: initialData});
+  const { data: transactions } = useLatestTransactionQuery();
 
   // Conditional styling configuration
   const config = {
@@ -66,9 +66,11 @@ const TransactionTableTxs = ({initialData}) => {
                     >
                       {formatCurrency(Number(tx.amount))}
                     </span>
-                    <p className="text-xs">{formatDate(parseISOtoDate(tx.date))}</p>
+                    <p className="text-xs">
+                      {formatDate(parseISOtoDate(tx.date))}
+                    </p>
                   </div>
-                  <TransactionRowActions transactionId={tx.id}/>
+                  <TransactionRowActions transactionId={tx.id} />
                 </div>
               </li>
             );
@@ -79,4 +81,4 @@ const TransactionTableTxs = ({initialData}) => {
   }
 };
 
-export default TransactionTableTxs;
+export default TransactionTable;
