@@ -10,6 +10,7 @@ export function useLatestTransactionQuery({limit = 5, initialData}:{limit?: numb
       const data = await getLatestTxAction(limit);
       return data;
     },
-    initialData: initialData,
+    placeholderData: initialData,
+    staleTime: 0,
   });
 }

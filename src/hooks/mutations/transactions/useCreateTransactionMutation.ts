@@ -65,11 +65,11 @@ export function useCreateTransactionMutation() {
       }
     },
 
-    onSuccess() {
+    onSuccess: () => {
       toast.success('Transaction created successfully', {position:'top-center'})
     },
 
-    onSettled() {
+    onSettled: () => {
       return Promise.all([
         queryClient.invalidateQueries({queryKey:['transactions', 'latest']}),
         queryClient.invalidateQueries({queryKey: ['finance-summary']}),

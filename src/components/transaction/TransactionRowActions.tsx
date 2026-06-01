@@ -24,6 +24,7 @@ import {
 import { Button } from "../ui/button";
 import { deleteTxAction } from "@/_actions/transactions/delete";
 import { updateTxAction } from "@/_actions/transactions/update";
+import { useDeleteTransactionMutation } from "@/hooks/mutations/transactions/useDeleteTransactionMutation";
 
 const TransactionRowActions = ({
   transactionId,
@@ -31,23 +32,23 @@ const TransactionRowActions = ({
   transactionId: string;
 }) => {
   // States
-  const [isDeleting, startDeleteTransition] = useTransition();
   const [tx, setTx] = useState(null);
-  
-  const isOptimistic = transactionId.startsWith('optimistic-')
-  const showSpinner = isOptimistic || isDeleting
+  const useDeleteTxMutation = useDeleteTransactionMutation()
+  const isDeleting = useDeleteTxMutation.isPending
+  const isOptimistic = transactionId.startsWith("optimistic-");
+  const showSpinner = isOptimistic || isDeleting;
 
   //Event Handlers
   const handleDelete = () => {
     if (confirm("Are you sure you want to DELETE this transaction?")) {
-      startDeleteTransition(() => deleteTxAction(transactionId));
+      useDeleteTxMutation.mutate(transactionId);
     }
   };
 
   const handleEdit = async () => {
-      const res = await fetch(`/api/transactions/${transactionId}`);
-      const txData = await res.json();
-      setTx(txData);
+    const res = await fetch(`/api/transactions/${transactionId}`);
+    const txData = await res.json();
+    setTx(txData);
   };
 
   return (
@@ -56,7 +57,7 @@ const TransactionRowActions = ({
         <DropdownMenuTrigger asChild>
           {showSpinner ? (
             <Button variant="ghost" disabled={true}>
-              <Spinner/>
+              <Spinner />
             </Button>
           ) : (
             <Button variant="ghost">
@@ -88,9 +89,7 @@ const TransactionRowActions = ({
               <Spinner />
             </span>
           </DialogTitle>
-          <DialogDescription>
-            Preparing for edition
-          </DialogDescription>
+          <DialogDescription>Preparing for edition</DialogDescription>
         </DialogContent>
       ) : (
         <DialogContent>
