@@ -3,8 +3,8 @@
 import { formatCurrency } from "@/lib/currencyFormat";
 import { useFinanceSummaryQuery } from "@/hooks/queries/transactions/useFinanceSummaryQuery";
 
-function AvailableBalance({initialData}) {
-    const {data} = useFinanceSummaryQuery(initialData);
+function AvailableBalance() {
+    const {data} = useFinanceSummaryQuery();
   return (
     <>
       <p className="text-sm mb-1">Available Balance</p>

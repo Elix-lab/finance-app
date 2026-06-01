@@ -2,7 +2,6 @@
 
 import { IoIosTrendingUp, IoIosTrendingDown } from "react-icons/io";
 import { formatCurrency } from "@/lib/currencyFormat";
-import { getSumByNatureAction } from "@/_actions/transactions/get";
 import { useFinanceSummaryQuery } from "@/hooks/queries/transactions/useFinanceSummaryQuery";
 
 type Props = {

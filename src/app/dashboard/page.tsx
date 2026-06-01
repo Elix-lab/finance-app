@@ -1,6 +1,9 @@
+import { getFinanceSummaryAction } from "@/_actions/transactions/get";
 import TransactionButton from "../../components/transaction/TransactionButton";
-import Balance from "@/components/dashboard/Balance";
 import TransactionTable from "@/components/transaction/TransactionTable";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import { getQueryClient } from "@/lib/getQueryClient";
+import Balance from "@/components/dashboard/Balance";
 
 type Transaction = {
   id: string;
@@ -11,21 +14,29 @@ type Transaction = {
   date: string;
 };
 
-const Page = () => {
+const Page = async () => {
+  const queryClient = getQueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: ["finance-summary"],
+    queryFn: getFinanceSummaryAction,
+  });
 
   return (
-    <div className="flex justify-center p-10">
-      <div className="flex flex-col gap-6 w-3xl">
-        {/* Balance summary component*/}
-        <Balance />
-        {/* Buttons to manage income and expenses */}
-        <div className="grid grid-cols-2 gap-1">
-          <TransactionButton buttonNature="income" />
-          <TransactionButton buttonNature="expense" />
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <div className="flex justify-center p-10">
+        <div className="flex flex-col gap-6 w-3xl">
+          {/* Balance summary component*/}
+          <Balance />
+          {/* Buttons to manage income and expenses */}
+          <div className="grid grid-cols-2 gap-1">
+            <TransactionButton buttonNature="income" />
+            <TransactionButton buttonNature="expense" />
+          </div>
+          <TransactionTable />
         </div>
-        <TransactionTable />
       </div>
-    </div>
+    </HydrationBoundary>
   );
 };
 
