@@ -1,6 +1,6 @@
 import { getFinanceSummaryAction, getLatestTxAction } from "@/_actions/transactions/get";
 import TransactionButton from "../../components/transaction/TransactionButton";
-import TransactionTable from "@/components/transaction/TransactionTableTxs";
+import TransactionTable from "@/components/transaction/TransactionTable";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { getQueryClient } from "@/lib/getQueryClient";
 import Balance from "@/components/dashboard/Balance";

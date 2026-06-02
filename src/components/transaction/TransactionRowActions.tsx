@@ -22,31 +22,28 @@ import {
   DropdownMenuSeparator,
 } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
-import { deleteTxAction } from "@/_actions/transactions/delete";
 import { updateTxAction } from "@/_actions/transactions/update";
 import { useDeleteTransactionMutation } from "@/hooks/mutations/transactions/useDeleteTransactionMutation";
 
 const TransactionRowActions = ({
-  transactionId,
-}: {
-  transactionId: string;
+  transaction
 }) => {
   // States
   const [tx, setTx] = useState(null);
   const useDeleteTxMutation = useDeleteTransactionMutation()
   const isDeleting = useDeleteTxMutation.isPending
-  const isOptimistic = transactionId.startsWith("optimistic-");
+  const isOptimistic = transaction.id.startsWith("optimistic-");
   const showSpinner = isOptimistic || isDeleting;
 
   //Event Handlers
   const handleDelete = () => {
     if (confirm("Are you sure you want to DELETE this transaction?")) {
-      useDeleteTxMutation.mutate(transactionId);
+      useDeleteTxMutation.mutate(transaction.id);
     }
   };
 
   const handleEdit = async () => {
-    const res = await fetch(`/api/transactions/${transactionId}`);
+    const res = await fetch(`/api/transactions/${transaction.id}`);
     const txData = await res.json();
     setTx(txData);
   };

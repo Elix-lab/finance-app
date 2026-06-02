@@ -70,7 +70,7 @@ const TransactionTable = () => {
                       {formatDate(parseISOtoDate(tx.date))}
                     </p>
                   </div>
-                  <TransactionRowActions transactionId={tx.id} />
+                  <TransactionRowActions transaction={tx} />
                 </div>
               </li>
             );
