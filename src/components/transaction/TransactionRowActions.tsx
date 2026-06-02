@@ -42,10 +42,8 @@ const TransactionRowActions = ({
     }
   };
 
-  const handleEdit = async () => {
-    const res = await fetch(`/api/transactions/${transaction.id}`);
-    const txData = await res.json();
-    setTx(txData);
+  const handleEdit =  () => {
+    setTx(transaction);
   };
 
   return (
