@@ -24,6 +24,9 @@ import {
 import { Button } from "../ui/button";
 import { updateTxAction } from "@/_actions/transactions/update";
 import { useDeleteTransactionMutation } from "@/hooks/mutations/transactions/useDeleteTransactionMutation";
+import TransactionForm from "./TransactionForm";
+import { useEditTransactionMutation } from "@/hooks/mutations/transactions/useEditTransactionMutation";
+import { Edit } from "lucide-react";
 
 const TransactionRowActions = ({
   transaction
@@ -87,15 +90,8 @@ const TransactionRowActions = ({
           <DialogDescription>Preparing for edition</DialogDescription>
         </DialogContent>
       ) : (
-        <DialogContent>
-          <DialogTitle>Edit Transaction</DialogTitle>
-          <DialogDescription>
-            Change the desired fields and save
-          </DialogDescription>
-          <form action={updateTxAction}>
-            <TransactionFormFields existingTx={tx} />
-            <TransactionFormFooter />
-          </form>
+        <DialogContent className="sm:max-w-xl rounded-2xl">
+          <TransactionForm mutationHook={useEditTransactionMutation} txNature={transaction.nature} mode={'edit'} transaction={transaction}/>
         </DialogContent>
       )}
     </Dialog>

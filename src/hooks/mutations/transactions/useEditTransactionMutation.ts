@@ -6,7 +6,7 @@ import { updateTxAction } from "@/_actions/transactions/update";
 export function useEditTransactionMutation() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (formData) => await updateTxAction(formData),
+    mutationFn: async (payload: FormData) => await updateTxAction(payload),
     onSettled: async () => {
       return Promise.all([
         queryClient.invalidateQueries({ queryKey: ["transactions", "latest"] }),

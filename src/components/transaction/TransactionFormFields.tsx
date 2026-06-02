@@ -15,21 +15,23 @@ const TransactionFormFields = ({
   existingTx?: any;
 }) => {
   //Variables and States
-  const [id, setId] = useState("");
-  const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("");
-  const [amount, setAmount] = useState("");
+  const [id, setId] = useState(existingTx ?? "");
+  const [title, setTitle] = useState(existingTx?.title ?? "");
+  const [category, setCategory] = useState(existingTx?.category ?? "");
+  const [amount, setAmount] = useState(existingTx?.amount ?? "");
   // default date for date input
-  const [dateValue, setDateValue] = useState<Date | undefined>(new Date());
+  const [dateValue, setDateValue] = useState<Date | undefined>(existingTx?.date ? parseISOtoDate(existingTx?.date) : new Date(),);
 
-  //useEffect in case existingTx exist
-  useEffect(() => {
-    setId(existingTx?.id ?? "");
-    setTitle(existingTx?.title ?? "");
-    setCategory(existingTx?.category ?? "");
-    setAmount(existingTx?.amount ?? "");
-    setDateValue(existingTx?.date ? parseISOtoDate(existingTx?.date) : new Date());
-  }, [existingTx]);
+  // //useEffect in case existingTx exist
+  // useEffect(() => {
+  //   setId(existingTx?.id ?? "");
+  //   setTitle(existingTx?.title ?? "");
+  //   setCategory(existingTx?.category ?? "");
+  //   setAmount(existingTx?.amount ?? "");
+  //   setDateValue(
+  //     existingTx?.date ? parseISOtoDate(existingTx?.date) : new Date(),
+  //   );
+  // }, [existingTx]);
 
   return (
     // Inputs

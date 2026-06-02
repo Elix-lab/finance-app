@@ -1,6 +1,5 @@
 "use client";
 
-import { ReactNode } from "react";
 import TransactionFormHeader from "./TransactionFormHeader";
 import TransactionFormFooter from "./TransactionFormFooter";
 import TransactionFormFields from "./TransactionFormFields";
@@ -13,9 +12,16 @@ type FormProps = {
     isSuccess: boolean;
   };
   txNature: "income" | "expense";
+  mode: "create" | "edit";
+  transaction?: any;
 };
 
-export default function TransactionForm({ mutationHook, txNature }: FormProps) {
+export default function TransactionForm({
+  mutationHook,
+  txNature,
+  mode,
+  transaction,
+}: FormProps) {
   const { mutate } = mutationHook();
 
   function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
@@ -26,9 +32,9 @@ export default function TransactionForm({ mutationHook, txNature }: FormProps) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <TransactionFormHeader txNature={txNature} />
-      <TransactionFormFields txNature={txNature} />
-      <TransactionFormFooter />
+      <TransactionFormHeader txNature={txNature} mode={mode} />
+      <TransactionFormFields txNature={txNature} existingTx={transaction} />
+      <TransactionFormFooter mode={mode} />
     </form>
   );
 }

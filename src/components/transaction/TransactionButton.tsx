@@ -45,7 +45,7 @@ const TransactionButton = ({ buttonNature }: Props) => {
       </DialogTrigger>
       {/* Modal */}
       <DialogContent className="sm:max-w-xl rounded-2xl">
-        <TransactionForm mutationHook={useCreateTransactionMutation} txNature={buttonNature}/>
+        <TransactionForm mutationHook={useCreateTransactionMutation} txNature={buttonNature} mode={'create'}/>
       </DialogContent>
     </Dialog>
   );
