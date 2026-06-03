@@ -1,10 +1,7 @@
 "use client";
 
 import { createTxAction } from "@/_actions/transactions/insert";
-import {
-  useMutation,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 export function useCreateTransactionMutation() {
@@ -15,10 +12,10 @@ export function useCreateTransactionMutation() {
     onMutate: async (payload) => {
       // Cancel queries in case there is a refetching in progress
       await Promise.all([
-        queryClient.cancelQueries({queryKey:['transactions', 'latest']}),
-        queryClient.cancelQueries({queryKey: ['finance-summary']}),
-      ])
-      
+        queryClient.cancelQueries({ queryKey: ["transactions", "latest"] }),
+        queryClient.cancelQueries({ queryKey: ["finance-summary"] }),
+      ]);
+
       // Get the current data
       const previousData = await queryClient.getQueryData([
         "transactions",
@@ -36,14 +33,24 @@ export function useCreateTransactionMutation() {
 
       // Update cache with optimisticTx
       // For Balance component
-      queryClient.setQueryData(['finance-summary'], (old:any) => {
-        const income = optimisticTx.nature === 'income' ? old.income + optimisticTx.amount : old.income + 0
-        const expenses = optimisticTx.nature === 'expense' ? old.expenses + optimisticTx.amount : old.expenses + 0
-        const availableBalance = old.availableBalance + (optimisticTx.nature === 'income' ? optimisticTx.amount : -optimisticTx.amount)
+      queryClient.setQueryData(["finance-summary"], (old: any) => {
+        const income =
+          optimisticTx.nature === "income"
+            ? old.income + optimisticTx.amount
+            : old.income + 0;
+        const expenses =
+          optimisticTx.nature === "expense"
+            ? old.expenses + optimisticTx.amount
+            : old.expenses + 0;
+        const availableBalance =
+          old.availableBalance +
+          (optimisticTx.nature === "income"
+            ? optimisticTx.amount
+            : -optimisticTx.amount);
 
-        return{income,expenses,availableBalance}
-      })
-      
+        return { income, expenses, availableBalance };
+      });
+
       // For TransactionTable component
       queryClient.setQueryData(["transactions", "latest"], (old: any) => {
         if (!old) {
@@ -56,7 +63,7 @@ export function useCreateTransactionMutation() {
     },
 
     onError: (err, payload, context) => {
-      toast.error('Error creating the Transaction', {position:'top-center'})
+      toast.error("Error creating the Transaction", { position: "top-center" });
       if (context?.previousData) {
         queryClient.setQueryData(
           ["transactions", "latest"],
@@ -66,14 +73,16 @@ export function useCreateTransactionMutation() {
     },
 
     onSuccess: () => {
-      toast.success('Transaction created successfully', {position:'top-center'})
+      toast.success("Transaction created successfully", {
+        position: "top-center",
+      });
     },
 
     onSettled: () => {
       return Promise.all([
-        queryClient.invalidateQueries({queryKey:['transactions', 'latest']}),
-        queryClient.invalidateQueries({queryKey: ['finance-summary']}),
-      ])
+        queryClient.invalidateQueries({ queryKey: ["transactions", "latest"] }),
+        queryClient.invalidateQueries({ queryKey: ["finance-summary"] }),
+      ]);
     },
   });
 }
