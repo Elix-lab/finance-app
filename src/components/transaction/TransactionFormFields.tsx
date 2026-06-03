@@ -15,7 +15,7 @@ const TransactionFormFields = ({
   existingTx?: any;
 }) => {
   //Variables and States
-  const [id, setId] = useState(existingTx ?? "");
+  const [id, setId] = useState(existingTx?.id ?? "");
   const [title, setTitle] = useState(existingTx?.title ?? "");
   const [category, setCategory] = useState(existingTx?.category ?? "");
   const [amount, setAmount] = useState(existingTx?.amount ?? "");
