@@ -27,6 +27,7 @@ import { useDeleteTransactionMutation } from "@/hooks/mutations/transactions/use
 import TransactionForm from "./TransactionForm";
 import { useEditTransactionMutation } from "@/hooks/mutations/transactions/useEditTransactionMutation";
 import { Edit } from "lucide-react";
+import { useMutationState } from "@tanstack/react-query";
 
 const TransactionRowActions = ({
   transaction
@@ -36,7 +37,20 @@ const TransactionRowActions = ({
   const useDeleteTxMutation = useDeleteTransactionMutation()
   const isDeleting = useDeleteTxMutation.isPending
   const isOptimistic = transaction.id.startsWith("optimistic-");
-  const showSpinner = isOptimistic || isDeleting;
+  
+  const mutationStates = useMutationState({
+    filters: {mutationKey:['edit-transaction']},
+    select: (useEditTransactionMutation) => ({
+      id: (useEditTransactionMutation.state.variables as FormData)?.get('id'),
+      status: useEditTransactionMutation.state.status,
+    })
+  })
+  console.log(mutationStates)
+
+  const isEditing = mutationStates.some((t) => (t.status === 'pending' && t.id === transaction.id))
+
+  const showSpinner = isOptimistic || isDeleting || isEditing;
+
 
   //Event Handlers
   const handleDelete = () => {

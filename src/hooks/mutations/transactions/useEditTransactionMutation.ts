@@ -7,6 +7,7 @@ import { toast } from "sonner";
 export function useEditTransactionMutation() {
   const queryClient = useQueryClient();
   return useMutation({
+    mutationKey: ['edit-transaction'],
     mutationFn: async (payload: FormData) => await updateTxAction(payload),
     onError: () => {
       toast.error("Error editing the Transaction", { position: "top-center" });
