@@ -31,16 +31,16 @@ const TransactionSummary = ({ nature }: Props) => {
   const { label, Icon, bgClass, textClass } = config[nature];
 
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-2">
       {/* Icon */}
-      <span className={`inline-block p-3 rounded-2xl ${bgClass}`}>
-        <Icon className={`text-2xl ${textClass}`} />
+      <span className={`inline-block p-2 rounded-md ${bgClass}`}>
+        <Icon className={`text-lg ${textClass}`} />
       </span>
       <div>
         {/* Income/expenses label */}
         <p className="text-xs">{label}</p>
         {/* Amount */}
-        <span className={`text-xl font-semibold ${textClass}`}>
+        <span className={`text-md font-semibold ${textClass}`}>
           {formatCurrency(amount ?? 0)}
         </span>
       </div>

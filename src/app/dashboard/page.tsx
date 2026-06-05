@@ -24,12 +24,12 @@ const Page = async () => {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <div className="flex justify-center p-10">
-        <div className="flex flex-col gap-6 w-3xl">
+      <div className="flex justify-center p-4">
+        <div className="flex flex-col gap-4 w-full">
           {/* Balance summary component*/}
           <Balance />
           {/* Buttons to manage income and expenses */}
-          <div className="grid grid-cols-2 gap-1">
+          <div className="flex flex-col gap-0.5">
             <TransactionButton buttonNature="income" />
             <TransactionButton buttonNature="expense" />
           </div>

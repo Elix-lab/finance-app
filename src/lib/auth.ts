@@ -26,6 +26,7 @@ const authConfig = {
         }
         const existingUser = await getUserByEmail(user.email);
 
+
         if (!existingUser) {
           await createUser({
             name: user.name ?? undefined,
@@ -40,6 +41,7 @@ const authConfig = {
       }
     },
     async session({ session }: { session: any }) {
+      console.log("SESSION CALLBACK");
       const existingUser = await getUserByEmail(session.user.email);
       session.user.id = existingUser.id;
       return session;
