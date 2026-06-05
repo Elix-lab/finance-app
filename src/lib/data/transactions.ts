@@ -31,7 +31,7 @@ export async function getLatestTxs(filters: any[], transactionsLimit: number) {
     .select()
     .from(transactions)
     .where(and(...filters))
-    .orderBy(desc(transactions.date))
+    .orderBy(desc(transactions.date), desc(transactions.createdAt))
     .limit(transactionsLimit);
 
   return LatestTxs;
