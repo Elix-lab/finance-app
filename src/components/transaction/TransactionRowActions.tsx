@@ -1,10 +1,8 @@
 "use client";
 
 import { MdOutlineDeleteForever, MdOutlineEdit } from "react-icons/md";
-import TransactionFormFields from "./TransactionFormFields";
-import TransactionFormFooter from "./TransactionFormFooter";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { useState, useTransition } from "react";
+import { useState } from "react";
 import { Spinner } from "../ui/spinner";
 import {
   Dialog,
@@ -22,36 +20,24 @@ import {
   DropdownMenuSeparator,
 } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
-import { updateTxAction } from "@/_actions/transactions/update";
 import { useDeleteTransactionMutation } from "@/hooks/mutations/transactions/useDeleteTransactionMutation";
 import TransactionForm from "./TransactionForm";
 import { useEditTransactionMutation } from "@/hooks/mutations/transactions/useEditTransactionMutation";
-import { Edit } from "lucide-react";
-import { useMutationState } from "@tanstack/react-query";
+import { useEditTxMutationState } from "@/hooks/mutation_states/transactions/useEditTxMutationState";
 
-const TransactionRowActions = ({
-  transaction
-}) => {
+const TransactionRowActions = ({ transaction }) => {
   // States
   const [tx, setTx] = useState(null);
-  const useDeleteTxMutation = useDeleteTransactionMutation()
-  const isDeleting = useDeleteTxMutation.isPending
+  const useDeleteTxMutation = useDeleteTransactionMutation();
+  const isDeleting = useDeleteTxMutation.isPending;
   const isOptimistic = transaction.id.startsWith("optimistic-");
-  
-  const mutationStates = useMutationState({
-    filters: {mutationKey:['edit-transaction']},
-    select: (useEditTransactionMutation) => ({
-      id: (useEditTransactionMutation.state.variables as FormData)?.get('id'),
-      status: useEditTransactionMutation.state.status,
-    })
-  })
-  console.log(mutationStates)
-
-  const isEditing = mutationStates.some((t) => (t.status === 'pending' && t.id === transaction.id))
-
+  // Checking is there is a transaction in Pending status
+  const transactionState = useEditTxMutationState();
+  const isEditing = transactionState.some(
+    (t) => t.status === "pending" && t.id === transaction.id,
+  );
+  // Conditions to show spinner
   const showSpinner = isOptimistic || isDeleting || isEditing;
-
-
   //Event Handlers
   const handleDelete = () => {
     if (confirm("Are you sure you want to DELETE this transaction?")) {
@@ -59,7 +45,7 @@ const TransactionRowActions = ({
     }
   };
 
-  const handleEdit =  () => {
+  const handleEdit = () => {
     setTx(transaction);
   };
 
@@ -105,7 +91,12 @@ const TransactionRowActions = ({
         </DialogContent>
       ) : (
         <DialogContent className="sm:max-w-xl rounded-2xl">
-          <TransactionForm mutationHook={useEditTransactionMutation} txNature={transaction.nature} mode={'edit'} transaction={transaction}/>
+          <TransactionForm
+            mutationHook={useEditTransactionMutation}
+            txNature={transaction.nature}
+            mode={"edit"}
+            transaction={transaction}
+          />
         </DialogContent>
       )}
     </Dialog>
