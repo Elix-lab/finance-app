@@ -16,11 +16,11 @@ type Props = {
 const TransactionButton = ({ buttonNature }: Props) => {
   const config = {
     income: {
-      bgColor: "bg-button-income",
+      bgColor: "bg-income",
       text: "Add Income",
     },
     expense: {
-      bgColor: "bg-button-expenses",
+      bgColor: "bg-expenses",
       text: "Add Expense",
     },
   };
@@ -31,7 +31,7 @@ const TransactionButton = ({ buttonNature }: Props) => {
     <Dialog>
       {/* Button */}
       <DialogTrigger asChild>
-        <Button className={`h-20 rounded-2xl hover:cursor-pointer ${bgColor}`}>
+        <Button className={`h-16 rounded-lg hover:cursor-pointer ${bgColor}`}>
           {text}
         </Button>
       </DialogTrigger>

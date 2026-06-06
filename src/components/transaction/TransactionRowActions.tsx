@@ -58,8 +58,8 @@ const TransactionRowActions = ({ transaction }) => {
               <Spinner />
             </Button>
           ) : (
-            <Button variant="ghost">
-              <BsThreeDotsVertical />
+            <Button variant='ghost' className="p-2 rounded-md">
+              <BsThreeDotsVertical className="size-3.5 p-0"/>
             </Button>
           )}
         </DropdownMenuTrigger>

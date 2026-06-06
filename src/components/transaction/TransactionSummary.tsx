@@ -18,13 +18,13 @@ const TransactionSummary = ({ nature }: Props) => {
       label: "Total Income",
       Icon: IoIosTrendingUp,
       bgClass: "bg-green-100",
-      textClass: "text-green-500",
+      textClass: "text-income",
     },
     expenses: {
       label: "Total Expenses",
       Icon: IoIosTrendingDown,
       bgClass: "bg-red-100",
-      textClass: "text-red-500",
+      textClass: "text-expenses",
     },
   };
 
@@ -33,14 +33,14 @@ const TransactionSummary = ({ nature }: Props) => {
   return (
     <div className="flex items-center gap-2">
       {/* Icon */}
-      <span className={`inline-block p-2 rounded-md ${bgClass}`}>
+      <span className={`flex justify-center items-center p-2 rounded-md ${bgClass}`}>
         <Icon className={`text-lg ${textClass}`} />
       </span>
       <div>
         {/* Income/expenses label */}
         <p className="text-xs">{label}</p>
         {/* Amount */}
-        <span className={`text-md font-semibold ${textClass}`}>
+        <span className={`text-md font-medium ${textClass}`}>
           {formatCurrency(amount ?? 0)}
         </span>
       </div>
