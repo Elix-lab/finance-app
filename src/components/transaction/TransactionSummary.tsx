@@ -34,13 +34,13 @@ const TransactionSummary = ({ nature }: Props) => {
     <div className="flex items-center gap-2">
       {/* Icon */}
       <span className={`flex justify-center items-center p-2 rounded-md ${bgClass}`}>
-        <Icon className={`text-lg ${textClass}`} />
+        <Icon className={`text-lg ${textClass} sm:text-xl`} />
       </span>
       <div>
         {/* Income/expenses label */}
-        <p className="text-xs">{label}</p>
+        <p className="text-xs sm:text-sm">{label}</p>
         {/* Amount */}
-        <span className={`text-md font-medium ${textClass}`}>
+        <span className={`text-base font-medium ${textClass} sm:text-lg`}>
           {formatCurrency(amount ?? 0)}
         </span>
       </div>

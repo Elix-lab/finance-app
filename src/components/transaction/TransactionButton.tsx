@@ -7,6 +7,7 @@ import TransactionFormHeader from "./TransactionFormHeader";
 import TransactionFormFooter from "./TransactionFormFooter";
 import TransactionForm from "./TransactionForm";
 import { useCreateTransactionMutation } from "@/hooks/mutations/transactions/useCreateTransactionMutation";
+import clsx from "clsx";
 
 type Props = {
   buttonNature: "income" | "expense";
@@ -31,12 +32,19 @@ const TransactionButton = ({ buttonNature }: Props) => {
     <Dialog>
       {/* Button */}
       <DialogTrigger asChild>
-        <Button className={`h-16 rounded-lg hover:cursor-pointer ${bgColor}`}>
+        <Button
+          className={`h-16 rounded-lg hover:cursor-pointer ${bgColor} sm:text-lg h-20`}
+        >
           {text}
         </Button>
       </DialogTrigger>
       {/* Modal */}
-      <DialogContent className="sm:max-w-xl rounded-2xl">
+      <DialogContent
+        className={clsx("rounded-lg border sm:max-w-xl", {
+          "border-income": buttonNature === "income",
+          "border-expenses": buttonNature === "expense",
+        })}
+      >
         <TransactionForm
           mutationHook={useCreateTransactionMutation}
           txNature={buttonNature}

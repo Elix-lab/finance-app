@@ -27,7 +27,7 @@ const TransactionFormHeader = ({
 
   return (
     <DialogHeader>
-      <DialogTitle>{config[txNature].text}</DialogTitle>
+      <DialogTitle >{config[txNature].text}</DialogTitle>
       <DialogDescription>Add transaction details and save.</DialogDescription>
     </DialogHeader>
   );

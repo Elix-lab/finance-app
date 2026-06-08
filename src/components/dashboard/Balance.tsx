@@ -3,9 +3,8 @@ import AvailableBalance from "./AvailableBalance";
 
 // { balance, income, expenses }: Props
 const Balance = async () => {
-  
   return (
-    <div className="flex flex-col gap-1 w-full h-auto bg-card shadow-md rounded-card p-6">
+    <div className="flex flex-col gap-1 w-full h-auto bg-card shadow-sm shadow-gray-300 rounded-card p-6">
       {/* Total Balance */}
       <AvailableBalance />
       {/* Income and Expenses Totals */}

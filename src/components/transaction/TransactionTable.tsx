@@ -28,17 +28,18 @@ const TransactionTable = () => {
 
   if (!transactions || transactions.length === 0) {
     return (
-      <div className="flex flex-col gap-1 w-full h-auto bg-card shadow-md rounded-card p-8">
-        <span className="text-xl font-bold mb-5">
-          Enter a transaction to see it here
+      // <div className="flex flex-col gap-1 w-full h-auto bg-card shadow-md rounded-card p-6">
+      <div className="flex justify-center">
+        <span className="text-xs font-light text-zinc-700 sm:text-sm">
+          Add a new transaction
         </span>
       </div>
     );
   }
-  
+
   return (
-    <div className="flex flex-col gap-1 w-full h-auto bg-card shadow-md rounded-card p-6">
-      <span className="text-md font-medium">Last transactions</span>
+    <div className="flex flex-col gap-1 w-full h-auto bg-card shadow-sm shadow-gray-300 rounded-card p-6">
+      <span className="text-base font-medium sm:text-lg">Last transactions</span>
 
       <ul>
         {transactions.map((tx) => {
@@ -51,13 +52,13 @@ const TransactionTable = () => {
               <div className="flex items-center gap-2">
                 {/* icon */}
                 <span
-                  className={`flex justify-center items-center p-2  ${iconBgClass} rounded-md`}
+                  className={`flex justify-center items-center p-2 ${iconBgClass} rounded-md`}
                 >
-                  <Icon className={`text-lg ${iconSymbolColor}`} />
+                  <Icon className={`text-lg ${iconSymbolColor} sm:text-xl`} />
                 </span>
                 {/* title */}
                 <div className="min-w-0">
-                  <span className="text-sm font-medium truncate block">
+                  <span className="text-sm font-medium truncate block sm:text-base">
                     {tx.title}
                   </span>
                   {/* cathegory */}
@@ -68,9 +69,7 @@ const TransactionTable = () => {
               <div className="flex justify-end items-center gap-2">
                 <div className="text-right">
                   {/* amount */}
-                  <span
-                    className={`${amountColorClass} text-md font-medium`}
-                  >
+                  <span className={`${amountColorClass} text-base font-medium sm:text-lg`}>
                     {formatCurrency(Number(tx.amount))}
                   </span>
                   {/* date */}

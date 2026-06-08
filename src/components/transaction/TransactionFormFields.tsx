@@ -35,7 +35,7 @@ const TransactionFormFields = ({
 
   return (
     // Inputs
-    <div className="flex flex-col gap-4 px-1.5 py-4">
+    <div className="flex flex-col gap-4 py-4">
       {/* Amount */}
       <div>
         <label className="block mb-1">Amount*</label>
@@ -90,7 +90,7 @@ const TransactionFormFields = ({
 
         <Popover>
           <PopoverTrigger asChild>
-            <Button className="flex w-1/3" variant="outline">
+            <Button className="flex w-1/2" variant="outline">
               {dateValue ? dateValue.toLocaleDateString() : "Pick a date"}
               <CalendarIcon className="ml-auto" />
             </Button>
