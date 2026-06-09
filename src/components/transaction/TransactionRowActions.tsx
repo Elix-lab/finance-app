@@ -90,7 +90,8 @@ const TransactionRowActions = ({ transaction }) => {
           <DialogDescription>Preparing for edition</DialogDescription>
         </DialogContent>
       ) : (
-        <DialogContent className="sm:max-w-xl rounded-2xl">
+        // className="rounded-lg border border-amber-300 sm:max-w-xl"
+        <DialogContent className="rounded-lg border border-amber-300 sm:max-w-xl">
           <TransactionForm
             mutationHook={useEditTransactionMutation}
             txNature={transaction.nature}
