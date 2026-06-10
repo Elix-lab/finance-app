@@ -58,7 +58,7 @@ const TransactionRowActions = ({ transaction }) => {
               <Spinner />
             </Button>
           ) : (
-            <Button variant='ghost' className="p-2 rounded-md">
+            <Button variant='ghost' className="p-2 rounded-md cursor-pointer">
               <BsThreeDotsVertical className="size-3.5 p-0"/>
             </Button>
           )}

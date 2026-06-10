@@ -17,7 +17,7 @@ async function UserDropDown() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button>
+        <button className="cursor-pointer">
           {session?.user ? (
             <img
               src={userImgSrc}
