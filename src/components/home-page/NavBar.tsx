@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 
 function NavBar() {
     return(
-        <header className="flex justify-between items-center py-3 px-5 bg-white">
+        <header className="flex justify-between items-center py-3 px-4 bg-white">
             {/* Logo */}
             <Link href="/">
                 <img src="/CashWell.png" alt="CashWell logo" className="w-12"/>

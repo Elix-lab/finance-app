@@ -1,6 +1,3 @@
-import { auth } from "@/lib/auth";
-import { SignOutButton } from "../auth/SignOutButton";
-import Image from "next/image";
 import UserDropDown from "../user/UserDropDown";
 import Link from "next/link";
 
