@@ -3,6 +3,7 @@ import NavBar from "@/components/home-page/NavBar";
 import Hero from "@/components/home-page/Hero";
 import Stakes from "@/components/home-page/Stakes";
 import ValueProposition from "@/components/home-page/ValueProposition";
+import TheGuide from "@/components/home-page/TheGuide";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
         <Hero />
         <Stakes/>
         <ValueProposition/>
+        <TheGuide/>
       </div>
     </div>
   );
