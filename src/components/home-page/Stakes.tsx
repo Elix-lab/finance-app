@@ -1,6 +1,6 @@
 function Stakes() {
   return (
-    <div className="flex flex-col items-center gap-5 py-8">
+    <div className="flex flex-col items-center gap-5 py-8 px-4">
       <h2 className="text-2xl/snug font-medium text-balance text-center">
         {/* Money becomes harder to manage when you don’t know where it’s going. */}
         Do you know where you money is going?

@@ -1,6 +1,6 @@
 function TheGuide() {
   return (
-    <div className="flex flex-col gap-5 py-8">
+    <div className="flex flex-col gap-5 py-8 px-4">
       <h2 className="text-2xl/snug font-medium text-balance text-center">
         We know how easy it is to fall behind on your finances.
       </h2>

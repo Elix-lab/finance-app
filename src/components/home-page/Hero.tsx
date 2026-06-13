@@ -3,7 +3,7 @@ import Link from "next/link";
 
 function Hero() {
   return (
-    <div className="flex flex-col items-center justify-center gap-5 py-8 text-center">
+    <div className="flex flex-col items-center justify-center gap-5 py-8 text-center px-4">
       <h1 className="text-4xl font-bold text-balance">
         The simplest way to track your finances
       </h1>

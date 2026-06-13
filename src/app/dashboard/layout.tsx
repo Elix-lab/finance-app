@@ -3,7 +3,7 @@ import SessionGuard from "@/components/auth/SessionGuard";
 
 const Layout = async ({ children }: { children: React.ReactNode }) => {
   return (
-    <div>
+    <div className="bg-background min-h-dvh">
       <SessionGuard>
         <Header />
         {children}
