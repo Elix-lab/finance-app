@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 
 function NavBar() {
     return(
-        <header className="flex justify-between items-center py-3 px-4 bg-white">
+        <header className="flex justify-between items-center py-3 px-4 border-b-2 border-gray-200">
             {/* Logo */}
             <Link href="/">
                 <img src="/CashWell.png" alt="CashWell logo" className="w-12"/>
@@ -11,8 +11,8 @@ function NavBar() {
             {/* Nav */}
             <nav>
                 <ul>
-                    <Button asChild>
-                        <Link href="/dashboard">Start Now</Link>
+                    <Button asChild className="bg-brand font-semibold p-4">
+                        <Link href="/dashboard">Start Tracking</Link>
                     </Button>
                 </ul>
             </nav>

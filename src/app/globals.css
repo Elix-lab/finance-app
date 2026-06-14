@@ -8,6 +8,7 @@
   /* Added variables */
   --color-income: var(--income);
   --color-expenses: var(--expenses);
+  --color-brand: var(--brand);
   --radius-card: calc(var(--radius));
   /* Default variables */
   --color-background: var(--background);
@@ -56,6 +57,7 @@
   /* Added variables */
   --income: oklch(64.562% 0.17991 148.55);
   --expenses: oklch(59.023% 0.21822 25.27);
+  --brand: oklch(75.615% 0.20099 151.552);
   /* Default variables */
   --background: oklch(97.015% 0.00011 271.152);
   --foreground: oklch(0.145 0 0);
