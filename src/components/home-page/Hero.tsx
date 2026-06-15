@@ -16,7 +16,7 @@ function Hero() {
           <Link href="/dashboard">Start Tracking</Link>
         </Button>
       </div>
-      <img src="/CashWell-screenshot.svg" alt="CashWell app screenshot" className="w-sm m-auto rounded-lg border border-green-200 shadow-md shadow-green-100 md:w-md"/>
+      <img src="/CashWell-screenshot.svg" alt="CashWell app screenshot" className="w-sm m-auto rounded-lg border border-green-200 shadow-md shadow-green-100"/>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { IoIosTrendingUp, IoIosTrendingDown } from "react-icons/io";
 import { formatCurrency } from "@/lib/currencyFormat";
@@ -9,7 +9,7 @@ type Props = {
 };
 
 const TransactionSummary = ({ nature }: Props) => {
-  const {data} = useFinanceSummaryQuery();
+  const { data } = useFinanceSummaryQuery();
   const amount = nature === "income" ? data?.income : data?.expenses;
 
   // Conditional rendering data
@@ -33,7 +33,9 @@ const TransactionSummary = ({ nature }: Props) => {
   return (
     <div className="flex items-center gap-2">
       {/* Icon */}
-      <span className={`flex justify-center items-center p-2 rounded-md ${bgClass}`}>
+      <span
+        className={`flex justify-center items-center p-2 rounded-md ${bgClass}`}
+      >
         <Icon className={`text-lg ${textClass} sm:text-xl`} />
       </span>
       <div>

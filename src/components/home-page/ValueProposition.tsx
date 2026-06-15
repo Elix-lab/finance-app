@@ -1,25 +1,74 @@
+import { IoIosTrendingUp, IoIosTrendingDown } from "react-icons/io";
+
+const summaries = ["income", "expenses"];
+// Conditional rendering data
+const config = {
+  income: {
+    label: "Total Income",
+    Icon: IoIosTrendingUp,
+    bgClass: "bg-green-100",
+    textClass: "text-income",
+    amount: 3150,
+  },
+  expenses: {
+    label: "Total Expenses",
+    Icon: IoIosTrendingDown,
+    bgClass: "bg-red-100",
+    textClass: "text-expenses",
+    amount: 40,
+  },
+};
+
 function ValueProposition() {
   return (
-    <div className="flex flex-col items-center gap-5 py-12 px-4 bg-green-50">
-      <h2 className="max-w-3xl text-2xl font-bold text-center text-balance lg:text-3xl xl:text-4xl lg:max-w-5xl">
-        Always know where you stand financially.
-      </h2>
-      <p className="text-base text-muted-foreground text-center text-balance lg:text-start lg:text-xl">Open the app and instantly understand your balance, your spending, and how much room you have to make your next financial move with confidence.</p>
-      <div className="flex items-center gap-2 bg-card border">
-            {/* Icon */}
-            <span className={`flex justify-center items-center p-2 rounded-md`}>
-              {/* <Icon className={`text-lg sm:text-xl`} /> */}
-            </span>
-            <div>
-              {/* Income/expenses label */}
-              <p className="text-xs sm:text-sm">Income</p>
-              {/* Amount */}
-              <span className={`text-base font-medium sm:text-lg`}>
-                $3000
-              </span>
-            </div>
+    <section className="bg-secondary/40">
+      <div className="py-12 px-4 flex flex-col gap-5 items-center m-auto max-w-2xl lg:max-w-4xl lg:grid lg:grid-cols-2 xl:max-w-6xl">
+        {/* Content */}
+        <div className="flex flex-col gap-5">
+          <h2 className="max-w-3xl text-2xl font-bold text-center text-balance lg:text-3xl lg:text-start xl:text-4xl lg:max-w-5xl">
+            {/* max-w-3xl text-2xl font-bold text-center text-balance lg:text-3xl xl:text-4xl lg:max-w-5xl */}
+            Always know where you stand financially.
+          </h2>
+          <p className="text-base text-muted-foreground text-center text-balance lg:text-start">
+            Open the app and instantly understand your balance, your spending,
+            and how much room you have to make your next financial move with
+            confidence.
+          </p>
+          {/* Summaries */}
+          <div className="grid grid-cols-2 gap-2 sm:gap-3">
+            {summaries.map((summary) => {
+              const { label, Icon, bgClass, textClass, amount } = config[summary];
+              return (
+                <div
+                  key={summary}
+                  className="flex items-center gap-2 p-4 bg-background border rounded-lg shadow-md border-gray-300 shadow-brand/15"
+                >
+                  <span
+                    className={`flex justify-center items-center p-2 rounded-md ${bgClass}`}
+                  >
+                    <Icon className={`text-lg ${textClass} sm:text-xl`} />
+                  </span>
+                  <div>
+                    <p className="text-xs sm:text-sm">{label}</p>
+                    <span
+                      className={`text-base font-medium ${textClass} sm:text-lg`}
+                    >
+                      ${amount}
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
           </div>
-    </div>
+        </div>
+        {/* Image */}
+        <img
+          src="/CashWell-modal.jpg"
+          alt="CashWell modal"
+          className="hidden w-md rounded-lg border shadow-md border-gray-300 shadow-brand/15 m-auto lg:inline"
+        />
+      </div>
+    </section>
   );
 }
 

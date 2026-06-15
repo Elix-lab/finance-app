@@ -33,7 +33,7 @@ const TransactionButton = ({ buttonNature }: Props) => {
       {/* Button */}
       <DialogTrigger asChild>
         <Button
-          className={`h-16 rounded-lg hover:cursor-pointer ${bgColor} sm:text-lg h-20`}
+          className={`h-14 rounded-lg hover:cursor-pointer ${bgColor} sm:text-lg sm:h-18`}
         >
           {text}
         </Button>

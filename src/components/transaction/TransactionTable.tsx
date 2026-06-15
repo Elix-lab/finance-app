@@ -38,7 +38,7 @@ const TransactionTable = () => {
   }
 
   return (
-    <div className="flex flex-col gap-1 w-full h-auto bg-card shadow-sm shadow-gray-300 rounded-card p-6">
+    <div className="flex flex-col gap-1 w-full h-auto bg-card rounded-card p-6 border border-gray-300 shadow-md shadow-gray-100">
       <span className="text-base font-medium sm:text-lg">Last transactions</span>
 
       <ul>
