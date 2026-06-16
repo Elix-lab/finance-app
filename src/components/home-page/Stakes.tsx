@@ -19,7 +19,7 @@ function Stakes() {
               key={index}
               className="flex items-center justify-center border rounded-lg p-3 lg:p-5 shadow-md border-red-300 shadow-red-100 hover:bg-red-50"
             >
-              <p className="text-sm font-medium text-center">{stake}</p>
+              <p className="text-sm font-medium text-center xl:text-base">{stake}</p>
             </li>
           ))}
         </ul>

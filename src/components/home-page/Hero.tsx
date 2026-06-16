@@ -5,11 +5,11 @@ function Hero() {
   return (
     <section className="">
       <div className="flex flex-col items-center gap-5 py-12 px-4 sm:px-8 lg:px-12 m-auto md:grid grid-cols-2 max-w-6xl">
-        <div className="flex flex-col gap-4 items-center md:items-start text-center md:text-start">
+        <div className="flex flex-col gap-5 items-center md:items-start text-center md:text-start">
           <h1 className="text-4xl font-bold sm:text-5xl lg:text-6xl xl:text-7xl">
             The simplest way to track your finances
           </h1>
-          <p className="text-base text-muted-foreground text-balance lg:text-xl">
+          <p className="text-base text-muted-foreground text-balance lg:text-2xl">
             Log income and expenses in seconds, and always know where you stand
             financially
           </p>
