@@ -3,7 +3,7 @@ import Link from "next/link";
 
 function ThePlan() {
   return (
-    <div className="flex flex-col items-center gap-5 py-8 px-4">
+    <section className="flex flex-col items-center gap-5 py-8 px-4">
       <h2 className="text-2xl/snug font-medium text-balance text-center">
         Build financial clarity step by step
       </h2>
@@ -16,7 +16,7 @@ function ThePlan() {
       <Button asChild>
         <Link href="/dashboard">Start Now</Link>
       </Button>
-    </div>
+    </section>
   );
 }
 

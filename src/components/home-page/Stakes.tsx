@@ -7,7 +7,7 @@ const stakes = [
 
 function Stakes() {
   return (
-    <div className="flex flex-col items-center gap-5 py-12 px-4">
+    <section className="flex flex-col items-center gap-5 py-12 px-4">
       <h2 className="max-w-3xl text-2xl font-bold text-center text-balance lg:text-3xl xl:text-4xl lg:max-w-5xl">
         Money becomes harder to manage when you don&apos;t know where it&apos;s going.
       </h2>
@@ -18,7 +18,7 @@ function Stakes() {
           </li>
         ))}
       </ul>
-    </div>
+    </section>
   );
 }
 
