@@ -26,7 +26,6 @@ function ValueProposition() {
         {/* Content */}
         <div className="flex flex-col gap-5">
           <h2 className="max-w-3xl text-2xl font-bold text-center text-balance lg:text-3xl lg:text-start xl:text-4xl lg:max-w-5xl">
-            {/* max-w-3xl text-2xl font-bold text-center text-balance lg:text-3xl xl:text-4xl lg:max-w-5xl */}
             Always know where you stand financially.
           </h2>
           <p className="text-base text-muted-foreground text-center text-balance lg:text-start">

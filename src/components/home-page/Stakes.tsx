@@ -13,7 +13,7 @@ function Stakes() {
       </h2>
       <ul className="flex flex-col gap-3 max-w-6xl lg:grid lg:grid-cols-2">
         {stakes.map((stake,index) => (
-          <li key={index} className="border rounded-lg font-medium text-center p-3  lg:p-5  shadow-md border-red-300 shadow-red-100 hover:bg-red-50 transform transition-all">
+          <li key={index} className="border rounded-lg font-medium text-center p-3  lg:p-5  shadow-md border-red-300 shadow-red-100 hover:bg-red-50 transition-all">
             {stake}
           </li>
         ))}
