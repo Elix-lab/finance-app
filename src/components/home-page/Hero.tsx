@@ -15,7 +15,7 @@ function Hero() {
           </p>
           <Button
             asChild
-            className="bg-brand font-semibold sm:p-4 lg:text-lg xl:font-bold lg:p-5"
+            className="bg-brand font-semibold sm:p-4 lg:text-lg xl:font-bold lg:p-5 hover:bg-brand/80"
           >
             <Link href="/dashboard">Start Tracking</Link>
           </Button>

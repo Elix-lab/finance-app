@@ -9,11 +9,11 @@ export default function Home() {
   return (
     <div>
       <NavBar />
-        <Hero />
-        <Stakes />
-        <ValueProposition />
-        <TheGuide />
-        <ThePlan />
+      <Hero />
+      <Stakes />
+      <ValueProposition />
+      <TheGuide />
+      <ThePlan />
     </div>
   );
 }
