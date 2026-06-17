@@ -25,7 +25,7 @@ function ValueProposition() {
       <div className="py-12 px-4 sm:px-8 lg:px-12 flex flex-col gap-5 items-center m-auto lg:grid lg:grid-cols-2 max-w-6xl">
         {/* Content */}
         <div className="flex flex-col items-center gap-5 lg:items-start">
-          <h2 className="text-2xl font-bold text-center text-balance md:max-w-xl lg:max-w-3xl lg:text-3xl xl:text-4xl lg:text-start">
+          <h2 className="text-2xl font-bold text-center text-balance sm:max-w-xl lg:max-w-3xl lg:text-3xl xl:text-4xl lg:text-start">
             Always know where you stand financially.
           </h2>
           <p className="text-base text-muted-foreground text-center text-balance lg:text-start">
