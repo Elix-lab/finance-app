@@ -18,7 +18,7 @@ function NavBar() {
       <div className="flex justify-between items-center py-2 px-4 max-w-6xl lg:px-12 m-auto">
         {/* Logo */}
         <Link href="/">
-          <img src="/CashWell.png" alt="CashWell logo" className="w-12" onClick={scrollToTop()}/>
+          <img src="/CashWell.png" alt="CashWell logo" className="w-12" onClick={scrollToTop}/>
         </Link>
         {/* Nav */}
         <nav>
