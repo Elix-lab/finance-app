@@ -14,7 +14,6 @@ function NavBar() {
 
   return (
     <header className="sticky top-0 border-b border-gray-200 bg-background/80 backdrop-blur-md ">
-      {/* gap-5 py-12 px-4 sm:px-8 lg:px-12 m-auto md:grid grid-cols-2 max-w-6xl */}
       <div className="flex justify-between items-center py-2 px-4 max-w-6xl lg:px-12 m-auto">
         {/* Logo */}
         <Link href="/">

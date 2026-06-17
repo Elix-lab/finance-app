@@ -4,6 +4,7 @@ import Stakes from "@/components/home-page/Stakes";
 import ValueProposition from "@/components/home-page/ValueProposition";
 import TheGuide from "@/components/home-page/TheGuide";
 import ThePlan from "@/components/home-page/ThePlan";
+import Footer from "@/components/home-page/Footer";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <ValueProposition />
       <TheGuide />
       <ThePlan />
+      <Footer/>
     </div>
   );
 }
