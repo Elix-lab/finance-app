@@ -23,7 +23,7 @@ const steps = [
 
 function ThePlan() {
   return (
-    <section id="thePlan" className="bg-brand/5">
+    <section id="thePlan" className="bg-brand/5 scroll-mt-16">
       <div className="flex flex-col items-center gap-5 m-auto py-12 px-4 sm:px-8 lg:px-12 max-w-6xl">
         <h2 className="text-2xl font-bold text-center text-balance sm:max-w-xl lg:max-w-3xl lg:text-3xl xl:text-4xl">
           Build financial clarity step by step

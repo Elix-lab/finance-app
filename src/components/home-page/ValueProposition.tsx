@@ -21,7 +21,7 @@ const config = {
 
 function ValueProposition() {
   return (
-    <section id="valueProposition" className="bg-brand/5">
+    <section id="valueProposition" className="bg-brand/5 scroll-mt-16">
       <div className="py-12 px-4 sm:px-8 lg:px-12 flex flex-col gap-5 items-center m-auto lg:grid lg:grid-cols-2 max-w-6xl">
         {/* Content */}
         <div className="flex flex-col items-center gap-5 lg:items-start">
