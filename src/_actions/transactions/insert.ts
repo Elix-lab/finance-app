@@ -23,7 +23,7 @@ export async function createTxAction(formData: FormData) {
   if (isNaN(amount)) {
     throw new Error("Invalid amount format");
   }
-  const nature = String(formData.get("nature")) ?? "";
+  const nature = formData.get("nature") as "income" | "expense";
   const title = String(formData.get("title")) ?? "";
   const category = String(formData.get("category")) ?? "";
   const date = String(formData.get("date")) ?? "";
