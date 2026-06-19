@@ -41,7 +41,6 @@ const authConfig = {
       }
     },
     async session({ session }: { session: any }) {
-      console.log("SESSION CALLBACK");
       const existingUser = await getUserByEmail(session.user.email);
       session.user.id = existingUser.id;
       return session;

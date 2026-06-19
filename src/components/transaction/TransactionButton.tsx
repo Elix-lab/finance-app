@@ -18,22 +18,24 @@ const TransactionButton = ({ buttonNature }: Props) => {
   const config = {
     income: {
       bgColor: "bg-income",
+      hoverColor: "hover:bg-income/80",
       text: "Add Income",
     },
     expense: {
       bgColor: "bg-expenses",
+      hoverColor: "hover:bg-expenses/80",
       text: "Add Expense",
     },
   };
 
-  const { bgColor, text } = config[buttonNature];
+  const { bgColor, hoverColor, text } = config[buttonNature];
 
   return (
     <Dialog>
       {/* Button */}
       <DialogTrigger asChild>
         <Button
-          className={`h-14 rounded-lg hover:cursor-pointer ${bgColor} sm:text-lg sm:h-18`}
+          className={`h-14 rounded-lg hover:cursor-pointer ${bgColor} sm:text-lg sm:h-18 ${hoverColor}`}
         >
           {text}
         </Button>
