@@ -1,6 +1,6 @@
 import { IoIosTrendingUp, IoIosTrendingDown } from "react-icons/io";
 
-const summaries = ["income", "expenses"];
+const summaries = ["income", "expenses"] as const;
 // Conditional rendering data
 const config = {
   income: {
