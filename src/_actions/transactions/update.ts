@@ -16,7 +16,7 @@ export async function updateTxAction(formData: FormData) {
   }
 
   // Creating updated transaction object
-  const userId = session.user?.id;
+  const userId = session.user!.id!;
   const id = String(formData.get("id")) ?? "";
   const title = String(formData.get("title")) ?? "";
   const category = String(formData.get("category")) ?? "";
