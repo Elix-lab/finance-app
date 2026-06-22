@@ -12,13 +12,13 @@ import { SignOutButton } from "../auth/SignOutButton";
 
 async function UserDropDown() {
   const session = await auth();
-  const userImgSrc = session?.user?.image;
+  const userImgSrc = session?.user?.image ?? "";
   const userName = session?.user?.name;
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button className="cursor-pointer">
-          {session?.user ? (
+          {session?.user?.image ? (
             <img
               src={userImgSrc}
               alt='user image'
