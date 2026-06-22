@@ -25,9 +25,20 @@ import TransactionForm from "./TransactionForm";
 import { useEditTransactionMutation } from "@/hooks/mutations/transactions/useEditTransactionMutation";
 import { useEditTxMutationState } from "@/hooks/mutation_states/transactions/useEditTxMutationState";
 
-const TransactionRowActions = ({ transaction }) => {
+type transaction = {
+  id: string;
+  userId: string;
+  nature: "income" | "expense";
+  title: string;
+  category: string;
+  amount: string;
+  date: string;
+  createdAt: string | null;
+};
+
+const TransactionRowActions = ({ transaction }: {transaction: transaction}) => {
   // States
-  const [tx, setTx] = useState(null);
+  const [tx, setTx] = useState<transaction | null>(null);
   const useDeleteTxMutation = useDeleteTransactionMutation();
   const isDeleting = useDeleteTxMutation.isPending;
   const isOptimistic = transaction.id.startsWith("optimistic-");
@@ -58,8 +69,8 @@ const TransactionRowActions = ({ transaction }) => {
               <Spinner />
             </Button>
           ) : (
-            <Button variant='ghost' className="p-2 rounded-md cursor-pointer">
-              <BsThreeDotsVertical className="size-3.5 p-0"/>
+            <Button variant="ghost" className="p-2 rounded-md cursor-pointer">
+              <BsThreeDotsVertical className="size-3.5 p-0" />
             </Button>
           )}
         </DropdownMenuTrigger>

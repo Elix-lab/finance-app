@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <body
-        className={`${poppins.className} antialiased min-h-[100dvh] bg-white`}
+        className={`${poppins.className} antialiased min-h-dvh bg-white`}
       >
         <Providers>
           {children}
