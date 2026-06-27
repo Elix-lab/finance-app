@@ -9,7 +9,7 @@ function AvailableBalance() {
     <>
       <p className="text-base font-medium sm:text-lg">Available Balance</p>
       <p className="text-2xl font-medium sm:text-3xl">
-        {formatCurrency(data?.availableBalance ?? 0)}
+        {formatCurrency(data?.availableBalance ?? '0')}
       </p>
     </>
   );

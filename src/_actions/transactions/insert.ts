@@ -18,11 +18,13 @@ export async function createTxAction(formData: FormData) {
   if (!userId) {
     throw new Error("User ID is required");
   }
-  const amountValue = formData.get("amount");
-  const amount = Number(amountValue);
-  if (isNaN(amount)) {
+  const amount = String(formData.get("amount"));
+  // Checking if amount if valid
+  const amountValue = Number(amount);
+  if (isNaN(amountValue)) {
     throw new Error("Invalid amount format");
   }
+  
   const nature = formData.get("nature") as "income" | "expense";
   const title = String(formData.get("title")) ?? "";
   const category = String(formData.get("category")) ?? "";

@@ -70,7 +70,7 @@ const TransactionTable = () => {
                 <div className="text-right">
                   {/* amount */}
                   <span className={`${amountColorClass} text-base font-medium sm:text-lg`}>
-                    {formatCurrency(Number(tx.amount))}
+                    {formatCurrency(tx.amount)}
                   </span>
                   {/* date */}
                   <p className="text-xs">

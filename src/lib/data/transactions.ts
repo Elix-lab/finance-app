@@ -11,7 +11,7 @@ export async function createTx({
     nature: "income" | "expense";
     title: string;
     category: string;
-    amount: number;
+    amount: string;
     date: string;
   };
 }) {
@@ -89,15 +89,15 @@ export async function getSumByNature(userId: string) {
   const result = await db
     .select({
       nature: transactions.nature,
-      total: sql<number>`SUM(${transactions.amount})`.mapWith(Number),
+      total: sql<number>`SUM(${transactions.amount})`.mapWith(String),
     })
     .from(transactions)
     .where(eq(transactions.userId, userId))
     .groupBy(transactions.nature);
 
   return {
-    income: result.find((r) => r.nature === "income")?.total ?? 0,
-    expenses: result.find((r) => r.nature === "expense")?.total ?? 0,
+    income: result.find((r) => r.nature === "income")?.total ?? '0',
+    expenses: result.find((r) => r.nature === "expense")?.total ?? '0',
   };
 }
 
@@ -108,21 +108,21 @@ export async function getAvailableBalance(userId: string) {
       balance: sql<number>`
       SUM(CASE WHEN ${transactions.nature} = 'income' THEN ${transactions.amount} ELSE 0 END) -
       SUM(CASE WHEN ${transactions.nature} = 'expense' THEN ${transactions.amount} ELSE 0 END)
-      `.mapWith(Number),
+      `.mapWith(String),
     })
     .from(transactions)
     .where(eq(transactions.userId, userId));
 
-  return result.balance ?? 0;
+  return result.balance ?? '0';
 }
 
 // Get Aviable Balance and Totals of income and expenses
 export async function getFinanceSummary (userId: string) {
   const [result] = await db.
   select({
-    income: sql<number>`SUM(CASE WHEN ${transactions.nature} = 'income' THEN ${transactions.amount} ELSE 0 END)`.mapWith(Number),
-    expenses: sql<number>`SUM(CASE WHEN ${transactions.nature} = 'expense' THEN ${transactions.amount} ELSE 0 END)`.mapWith(Number),
-    availableBalance: sql<number>`SUM(CASE WHEN ${transactions.nature} = 'income' THEN ${transactions.amount} ELSE -${transactions.amount} END)`.mapWith(Number)
+    income: sql<number>`SUM(CASE WHEN ${transactions.nature} = 'income' THEN ${transactions.amount} ELSE 0 END)`.mapWith(String),
+    expenses: sql<number>`SUM(CASE WHEN ${transactions.nature} = 'expense' THEN ${transactions.amount} ELSE 0 END)`.mapWith(String),
+    availableBalance: sql<number>`SUM(CASE WHEN ${transactions.nature} = 'income' THEN ${transactions.amount} ELSE -${transactions.amount} END)`.mapWith(String)
   })
   .from(transactions)
   .where(eq(transactions.userId, userId))

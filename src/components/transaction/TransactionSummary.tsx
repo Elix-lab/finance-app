@@ -43,7 +43,7 @@ const TransactionSummary = ({ nature }: Props) => {
         <p className="text-xs sm:text-sm">{label}</p>
         {/* Amount */}
         <span className={`text-base font-medium ${textClass} sm:text-lg`}>
-          {formatCurrency(amount ?? 0)}
+          {formatCurrency(amount ?? '0')}
         </span>
       </div>
     </div>
