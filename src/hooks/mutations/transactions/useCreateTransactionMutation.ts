@@ -27,8 +27,8 @@ export function useCreateTransactionMutation() {
         nature: String(payload.get("nature")),
         title: String(payload.get("title")),
         category: String(payload.get("category")),
-        amount: Number(payload.get("amount")),
-        date: new Date().toISOString(),
+        amount: String(payload.get("amount")),
+        date: String(payload.get('date'))
       };
 
       // Update cache with optimisticTx
