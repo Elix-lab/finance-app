@@ -17,7 +17,7 @@ const authConfig = {
 
   callbacks: {
     authorized: async ({ auth }: { auth: any }) => {
-      return !!auth?.user;
+      return !!auth?.user?.id;
     },
     async signIn({ user }: { user: any }) {
       try {
@@ -25,7 +25,6 @@ const authConfig = {
           return false;
         }
         const existingUser = await getUserByEmail(user.email);
-
 
         if (!existingUser) {
           await createUser({
@@ -37,13 +36,27 @@ const authConfig = {
 
         return true;
       } catch (err) {
+        console.error(`[auth][signIn] error: ${err}`)
         return false;
       }
     },
     async session({ session }: { session: any }) {
-      const existingUser = await getUserByEmail(session.user.email);
-      session.user.id = existingUser.id;
-      return session;
+      try {
+        const existingUser = await getUserByEmail(session.user.email);
+
+        if (!existingUser) {
+          console.error(
+            `[auth][session] no user found by email:${session.user.email}`,
+          );
+          return session;
+        }
+
+        session.user.id = existingUser.id;
+        return session;
+      } catch (err) {
+        console.error(`[auth][session] error ${err}`);
+        return session
+      }
     },
   },
   pages: {

@@ -4,7 +4,11 @@ import { FcGoogle } from "react-icons/fc";
 import { useFormStatus } from "react-dom";
 import { Button } from "../ui/button";
 
-function SignInContent() {
+type errorMsg = {
+  errorMessage: string | null
+}
+
+function SignInContent({ errorMessage }: errorMsg) {
   const { pending } = useFormStatus();
 
   if (pending) return <LoadingScreen />;
@@ -26,6 +30,7 @@ function SignInContent() {
         <FcGoogle className="w-4" aria-hidden />
         Continue with Google
       </Button>
+      <p className="text-red-500 text-xs">{errorMessage}</p>
     </div>
   );
 }
