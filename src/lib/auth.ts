@@ -36,27 +36,33 @@ const authConfig = {
 
         return true;
       } catch (err) {
-        console.error(`[auth][signIn] error: ${err}`)
+        console.error(`[auth][signIn] error: ${err}`);
         return false;
       }
     },
-    async session({ session }: { session: any }) {
-      try {
-        const existingUser = await getUserByEmail(session.user.email);
+    async jwt({ token, user }: { token: any; user: any }) {
+      if (user?.email) {
+        try {
+          const existingUser = await getUserByEmail(user.email);
+          if (!existingUser) {
+            console.error(
+              `[auth][JWT] no user found by the email: ${user.email}`,
+            );
+            return token;
+          }
 
-        if (!existingUser) {
-          console.error(
-            `[auth][session] no user found by email:${session.user.email}`,
-          );
-          return session;
+          token.id = existingUser.id;
+        } catch (err) {
+          console.error(`[auth][JWT] error: ${err}`);
         }
-
-        session.user.id = existingUser.id;
-        return session;
-      } catch (err) {
-        console.error(`[auth][session] error ${err}`);
-        return session
       }
+      return token;
+    },
+    async session({ session, token }: { session: any; token: any }) {
+      if (token?.id) {
+        session.user.id = token.id;
+      }
+      return session;
     },
   },
   pages: {
