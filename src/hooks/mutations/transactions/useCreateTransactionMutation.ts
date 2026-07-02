@@ -2,6 +2,7 @@
 
 import { createTxAction } from "@/_actions/transactions/insert";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import Decimal from "decimal.js";
 import { toast } from "sonner";
 
 export function useCreateTransactionMutation() {
@@ -28,27 +29,34 @@ export function useCreateTransactionMutation() {
         title: String(payload.get("title")),
         category: String(payload.get("category")),
         amount: String(payload.get("amount")),
-        date: String(payload.get('date'))
+        date: String(payload.get("date")),
       };
 
       // Update cache with optimisticTx
       // For Balance component
       queryClient.setQueryData(["finance-summary"], (old: any) => {
+        const oldExpenses = new Decimal(old.expenses);
+        const oldIncome = new Decimal(old.income);
+        const oldAvailableBalance = new Decimal(old.availableBalance);
+        const amount = new Decimal(optimisticTx.amount);
+
         const income =
           optimisticTx.nature === "income"
-            ? String(Number(old.income) + Number(optimisticTx.amount))
-            : String(Number(old.income) + 0);
+            ? oldIncome.plus(amount)
+            : oldIncome.plus(0);
         const expenses =
           optimisticTx.nature === "expense"
-            ? String(Number(old.expenses) + Number(optimisticTx.amount))
-            : String(Number(old.expenses) + 0);
-        const availableBalance = String(
-          Number(old.availableBalance) +
-          (optimisticTx.nature === "income"
-            ? Number(optimisticTx.amount)
-            : Number(-optimisticTx.amount)));
+            ? oldExpenses.plus(amount)
+            : oldExpenses.plus(0);
+        const availableBalance = oldAvailableBalance.plus(
+          optimisticTx.nature === "income" ? amount : -amount,
+        );
 
-        return { income, expenses, availableBalance };
+        return {
+          income: income.toString(),
+          expenses: expenses.toString(),
+          availableBalance: availableBalance.toString(),
+        };
       });
 
       // For TransactionTable component
