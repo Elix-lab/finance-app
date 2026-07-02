@@ -36,17 +36,17 @@ export function useCreateTransactionMutation() {
       queryClient.setQueryData(["finance-summary"], (old: any) => {
         const income =
           optimisticTx.nature === "income"
-            ? old.income + optimisticTx.amount
-            : old.income + 0;
+            ? String(Number(old.income) + Number(optimisticTx.amount))
+            : String(Number(old.income) + 0);
         const expenses =
           optimisticTx.nature === "expense"
-            ? old.expenses + optimisticTx.amount
-            : old.expenses + 0;
-        const availableBalance =
-          old.availableBalance +
+            ? String(Number(old.expenses) + Number(optimisticTx.amount))
+            : String(Number(old.expenses) + 0);
+        const availableBalance = String(
+          Number(old.availableBalance) +
           (optimisticTx.nature === "income"
-            ? optimisticTx.amount
-            : -optimisticTx.amount);
+            ? Number(optimisticTx.amount)
+            : Number(-optimisticTx.amount)));
 
         return { income, expenses, availableBalance };
       });
