@@ -20,7 +20,7 @@ const TransactionFormHeader = ({
     return (
       <DialogHeader>
         <DialogTitle>Edit {txNature} transaction</DialogTitle>
-        <DialogDescription>Change the anything about this {txNature.charAt(0).toUpperCase()+txNature.slice(1)} Transaction</DialogDescription>
+        <DialogDescription>Change anything about this {txNature.charAt(0).toUpperCase()+txNature.slice(1)} Transaction</DialogDescription>
       </DialogHeader>
     );
   }

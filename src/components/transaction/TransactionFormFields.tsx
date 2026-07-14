@@ -22,17 +22,6 @@ const TransactionFormFields = ({
   // default date for date input
   const [dateValue, setDateValue] = useState<Date | undefined>(existingTx?.date ? parseISOtoDate(existingTx?.date) : new Date(),);
 
-  // //useEffect in case existingTx exist
-  // useEffect(() => {
-  //   setId(existingTx?.id ?? "");
-  //   setTitle(existingTx?.title ?? "");
-  //   setCategory(existingTx?.category ?? "");
-  //   setAmount(existingTx?.amount ?? "");
-  //   setDateValue(
-  //     existingTx?.date ? parseISOtoDate(existingTx?.date) : new Date(),
-  //   );
-  // }, [existingTx]);
-
   return (
     // Inputs
     <div className="flex flex-col gap-4 py-4">
@@ -43,7 +32,7 @@ const TransactionFormFields = ({
           name="amount"
           type="number"
           value={amount}
-          onChange={(e) => {
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setAmount(e.target.value);
           }}
           className="w-full border px-3 py-2 rounded-lg"
@@ -59,7 +48,7 @@ const TransactionFormFields = ({
           name="title"
           type="text"
           value={title}
-          onChange={(e) => {
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setTitle(e.target.value);
           }}
           className="w-full border px-3 py-2 rounded-lg"
@@ -75,7 +64,7 @@ const TransactionFormFields = ({
           name="category"
           type="text"
           value={category}
-          onChange={(e) => {
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setCategory(e.target.value);
           }}
           className="w-full border px-3 py-2 rounded-lg"

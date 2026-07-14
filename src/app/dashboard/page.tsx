@@ -5,14 +5,6 @@ import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { getQueryClient } from "@/lib/getQueryClient";
 import Balance from "@/components/dashboard/Balance";
 
-type Transaction = {
-  id: string;
-  nature: "income" | "expense";
-  name: string;
-  category: string;
-  amount: number;
-  date: string;
-};
 
 const Page = async () => {
   const queryClient = getQueryClient();
