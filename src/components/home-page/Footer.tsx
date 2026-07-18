@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Button } from "../ui/button";
+import { Button } from "../ui/shadCn/button";
 
 function Footer() {
   const handleScroll = (id: string) => {

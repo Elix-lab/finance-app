@@ -1,6 +1,6 @@
 // The buttons work with shadCN Dialog
-import { Button } from "../ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Button } from "../ui/shadCn/button";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/shadCn/dialog";
 import { createTxAction } from "@/_actions/transactions/insert";
 import TransactionFormFields from "./TransactionFormFields";
 import TransactionFormHeader from "./TransactionFormHeader";

@@ -6,7 +6,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
+} from "../ui/shadCn/dropdown-menu";
 import { FaUser } from "react-icons/fa";
 import { SignOutButton } from "../auth/SignOutButton";
 

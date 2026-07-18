@@ -1,4 +1,4 @@
-import { Spinner } from "./ui/spinner";
+import { Spinner } from "./ui/shadCn/spinner";
 
 function LoadingScreen() {
   return (

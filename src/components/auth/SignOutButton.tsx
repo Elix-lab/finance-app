@@ -1,5 +1,5 @@
 import { signOutAction } from "@/_actions/auth/actions"
-import { Button } from "../ui/button"
+import { Button } from "../ui/shadCn/button"
 
 export function SignOutButton() {
     return (

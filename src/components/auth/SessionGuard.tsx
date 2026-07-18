@@ -3,7 +3,7 @@
 import { useSession } from "next-auth/react";
 import React from "react";
 import Link from "next/link";
-import { Button } from "../ui/button";
+import { Button } from "../ui/shadCn/button";
 import LoadingScreen from "../LoadingScreen";
 
 export default function SessionGuard({

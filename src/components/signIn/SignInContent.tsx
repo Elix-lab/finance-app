@@ -2,7 +2,7 @@
 import LoadingScreen from "../LoadingScreen";
 import { FcGoogle } from "react-icons/fc";
 import { useFormStatus } from "react-dom";
-import { Button } from "../ui/button";
+import { Button } from "../ui/shadCn/button";
 
 type errorMsg = {
   errorMessage: string | null

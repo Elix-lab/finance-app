@@ -1,4 +1,4 @@
-import { DialogHeader, DialogTitle, DialogDescription } from "../ui/dialog";
+import { DialogHeader, DialogTitle, DialogDescription } from "../ui/shadCn/dialog";
 
 const TransactionFormHeader = ({
   txNature,

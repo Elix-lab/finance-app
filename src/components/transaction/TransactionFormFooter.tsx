@@ -1,7 +1,7 @@
 "use client";
 
-import { DialogFooter, DialogClose } from "../ui/dialog";
-import { Button } from "../ui/button";
+import { DialogFooter, DialogClose } from "../ui/shadCn/dialog";
+import { Button } from "../ui/shadCn/button";
 
 const TransactionFormFooter = ({ mode }: { mode: "create" | "edit" }) => {
   return (

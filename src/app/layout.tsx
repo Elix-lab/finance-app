@@ -1,9 +1,9 @@
+import { ThemeProvider } from "@/contexts/ThemeContext";
 import { poppins } from "@/components/ui/fonts/fonts";
 import type { Metadata } from "next";
 import Providers from "./Providers";
 import { Toaster } from "sonner";
 import "./globals.css";
-
 
 export const metadata: Metadata = {
   title: "CashWell",
@@ -16,15 +16,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full">
-      <body
-        className={`${poppins.className} antialiased min-h-dvh bg-white`}
-      >
-        <Providers>
-          {children}
-          <Toaster />
-        </Providers>
-      </body>
-    </html>
+    <ThemeProvider>
+      <html lang="en" className="h-full">
+        <body className={`${poppins.className} antialiased min-h-dvh bg-white`}>
+          <Providers>
+            {children}
+            <Toaster />
+          </Providers>
+        </body>
+      </html>
+    </ThemeProvider>
   );
 }

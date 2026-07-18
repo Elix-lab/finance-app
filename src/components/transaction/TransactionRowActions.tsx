@@ -3,14 +3,14 @@
 import { MdOutlineDeleteForever, MdOutlineEdit } from "react-icons/md";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useState } from "react";
-import { Spinner } from "../ui/spinner";
+import { Spinner } from "../ui/shadCn/spinner";
 import {
   Dialog,
   DialogTrigger,
   DialogContent,
   DialogTitle,
   DialogDescription,
-} from "../ui/dialog";
+} from "../ui/shadCn/dialog";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -18,8 +18,8 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuSeparator,
-} from "../ui/dropdown-menu";
-import { Button } from "../ui/button";
+} from "../ui/shadCn/dropdown-menu";
+import { Button } from "../ui/shadCn/button";
 import { useDeleteTransactionMutation } from "@/hooks/mutations/transactions/useDeleteTransactionMutation";
 import TransactionForm from "./TransactionForm";
 import { useEditTransactionMutation } from "@/hooks/mutations/transactions/useEditTransactionMutation";
