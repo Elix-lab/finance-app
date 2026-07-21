@@ -60,8 +60,8 @@
   --brand: oklch(75.615% 0.20099 151.552);
   /* Default variables */
   --background: oklab(100% 0 -0.00011);
-  --foreground: oklab(14.479000000000001% 0 -0.00002);
-  --card: oklch(1 0 0);
+  --foreground: lab(9.78666% -6.24879 3.20627);
+  --card: lab(100% 0.01 -0.01);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
@@ -95,8 +95,8 @@
 
 .dark {
   --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
+  --foreground: lab(95.6% -3.05 2.18);
+  --card: lab(10.9212% -5.99961 1.72866);
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);

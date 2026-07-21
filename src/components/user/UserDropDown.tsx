@@ -23,7 +23,7 @@ async function UserDropDown() {
               src={userImgSrc}
               alt='user image'
               referrerPolicy="no-referrer"
-              className="w-10 rounded-full"
+              className="w-9 rounded-full"
             />
           ) : (
             <FaUser />

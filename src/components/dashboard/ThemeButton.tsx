@@ -1,6 +1,8 @@
 'use client'
 
 import { useTheme } from "@/contexts/ThemeContext";
+import { MdOutlineWbSunny } from "react-icons/md";
+import { LuMoon } from "react-icons/lu";
 
 function ThemeButton () {
     const {theme, setTheme} = useTheme()
@@ -10,7 +12,9 @@ function ThemeButton () {
     }
 
     return(
-        <button className="cursor-pointer border p-1" onClick={handleClick}>Change theme</button>
+        <button className="cursor-pointer border rounded-full w-8 h-8 flex items-center justify-center" onClick={handleClick}>{
+            theme === 'light' ? <LuMoon className=""/> : <MdOutlineWbSunny />
+        }</button>
     )
 }
 
