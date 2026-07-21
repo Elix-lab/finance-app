@@ -4,15 +4,15 @@ import AvailableBalance from "./AvailableBalance";
 // { balance, income, expenses }: Props
 const Balance = async () => {
   return (
-    <div className="flex flex-col gap-1 w-full h-auto bg-card border border-gray-300 shadow-md shadow-gray-100 rounded-card p-6">
+    <section className="flex flex-col border border-border rounded-2xl p-6 sm:p-8 bg-card gap-3 sm:gap-6">
       {/* Total Balance */}
       <AvailableBalance />
       {/* Income and Expenses Totals */}
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-col sm:grid sm:grid-cols-2 gap-1 sm:gap-4">
         <TransactionSummary nature={"income"} />
         <TransactionSummary nature={"expenses"} />
       </div>
-    </div>
+    </section>
   );
 };
 

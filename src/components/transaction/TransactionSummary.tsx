@@ -1,6 +1,7 @@
 "use client";
 
 import { IoIosTrendingUp, IoIosTrendingDown } from "react-icons/io";
+import { LuArrowUpRight, LuArrowDownRight  } from "react-icons/lu";
 import { formatCurrency } from "@/lib/currencyFormat";
 import { useFinanceSummaryQuery } from "@/hooks/queries/transactions/useFinanceSummaryQuery";
 
@@ -16,33 +17,33 @@ const TransactionSummary = ({ nature }: Props) => {
   const config = {
     income: {
       label: "Total Income",
-      Icon: IoIosTrendingUp,
-      bgClass: "bg-green-100",
-      textClass: "text-income",
+      Icon: LuArrowUpRight,
+      bgClass: "bg-accent",
+      textClass: "text-primary",
     },
     expenses: {
       label: "Total Expenses",
-      Icon: IoIosTrendingDown,
-      bgClass: "bg-red-100",
-      textClass: "text-expenses",
+      Icon: LuArrowDownRight ,
+      bgClass: "bg-destructive/10",
+      textClass: "text-destructive",
     },
   };
 
   const { label, Icon, bgClass, textClass } = config[nature];
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-3 border border-border rounded-xl bg-background p-3">
       {/* Icon */}
       <span
-        className={`flex justify-center items-center p-2 rounded-md ${bgClass}`}
+        className={`flex justify-center items-center shrink-0 rounded-lg size-10 ${bgClass}`}
       >
-        <Icon className={`text-lg ${textClass} sm:text-xl`} />
+        <Icon className={`${textClass} w-5 h-5 stroke-2`} />
       </span>
       <div>
         {/* Income/expenses label */}
-        <p className="text-xs sm:text-sm">{label}</p>
+        <p className="text-xs text-muted-foreground">{label}</p>
         {/* Amount */}
-        <span className={`text-base font-medium ${textClass} sm:text-lg`}>
+        <span className={`text-lg font-semibold ${textClass}`}>
           {formatCurrency(amount ?? '0')}
         </span>
       </div>
