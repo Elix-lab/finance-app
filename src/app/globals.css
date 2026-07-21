@@ -59,7 +59,7 @@
   --expenses: oklch(59.023% 0.21822 25.27);
   --brand: oklch(75.615% 0.20099 151.552);
   /* Default variables */
-  --background: oklab(100% 0 -0.00011);
+  --background: lab(99.31% 0.01 -0.01);
   --foreground: lab(9.78666% -6.24879 3.20627);
   --card: lab(100% 0.01 -0.01);
   --card-foreground: oklch(0.145 0 0);
@@ -94,7 +94,7 @@
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
+  --background: lab(6.36678% -4.07422 1.19132);
   --foreground: lab(95.6% -3.05 2.18);
   --card: lab(10.9212% -5.99961 1.72866);
   --card-foreground: oklch(0.985 0 0);
