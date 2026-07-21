@@ -29,7 +29,7 @@ const Page = async () => {
           {/* Balance summary component*/}
           <Balance />
           {/* Buttons to manage income and expenses */}
-          <div className="flex flex-col gap-0.5 sm:grid grid-cols-2">
+          <div className="flex flex-col gap-3 sm:gap-4 sm:grid grid-cols-2">
             <TransactionButton buttonNature="income" />
             <TransactionButton buttonNature="expense" />
           </div>

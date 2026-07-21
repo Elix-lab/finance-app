@@ -9,6 +9,7 @@
   --color-income: var(--income);
   --color-expenses: var(--expenses);
   --color-brand: var(--brand);
+  --color-edit: var(--edit);
   --radius-card: calc(var(--radius));
   /* Default variables */
   --color-background: var(--background);
@@ -58,6 +59,7 @@
   --income: oklch(64.562% 0.17991 148.55);
   --expenses: oklch(59.023% 0.21822 25.27);
   --brand: oklch(75.615% 0.20099 151.552);
+  --edit: lab(85.61% -13.09 76.34);
   /* Default variables */
   --background: lab(99.31% 0.01 -0.01);
   --foreground: lab(9.78666% -6.24879 3.20627);
@@ -66,7 +68,7 @@
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
   --primary: lab(69.8663% -56.8876 39.7744);
-  --primary-foreground: oklch(0.985 0 0);
+  --primary-foreground: lab(98.9727% -2.79456 2.16099);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: lab(96.6279% -2.36195 1.50199);
@@ -101,7 +103,7 @@
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
   --primary: lab(69.8663% -56.8876 39.7744);
-  --primary-foreground: oklch(0.205 0 0);
+  --primary-foreground: lab(3.86188% -3.71011 1.46722);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);

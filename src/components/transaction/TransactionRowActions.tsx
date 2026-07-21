@@ -61,6 +61,7 @@ const TransactionRowActions = ({ transaction }: {transaction: transaction}) => {
   };
 
   return (
+    // Dropdown (delete, edit)
     <Dialog>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -91,6 +92,7 @@ const TransactionRowActions = ({ transaction }: {transaction: transaction}) => {
         </DropdownMenuContent>
       </DropdownMenu>
 
+      {/* Edition Form */}
       {!tx ? (
         <DialogContent className="flex gap-3 items-center">
           <DialogTitle>
@@ -102,7 +104,7 @@ const TransactionRowActions = ({ transaction }: {transaction: transaction}) => {
         </DialogContent>
       ) : (
         // className="rounded-lg border border-amber-300 sm:max-w-xl"
-        <DialogContent className="rounded-lg border border-amber-300 sm:max-w-xl">
+        <DialogContent className="rounded-lg border border-edit sm:max-w-xl">
           <TransactionForm
             mutationHook={useEditTransactionMutation}
             txNature={transaction.nature}

@@ -1,11 +1,11 @@
 // The buttons work with shadCN Dialog
-import { Button } from "../ui/shadCn/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/shadCn/dialog";
-import { createTxAction } from "@/_actions/transactions/insert";
-import TransactionFormFields from "./TransactionFormFields";
-import TransactionFormHeader from "./TransactionFormHeader";
-import TransactionFormFooter from "./TransactionFormFooter";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from "@/components/ui/shadCn/dialog";
 import TransactionForm from "./TransactionForm";
+import { FaPlus, FaMinus } from "react-icons/fa6";
 import { useCreateTransactionMutation } from "@/hooks/mutations/transactions/useCreateTransactionMutation";
 import clsx from "clsx";
 
@@ -17,34 +17,45 @@ type Props = {
 const TransactionButton = ({ buttonNature }: Props) => {
   const config = {
     income: {
-      bgColor: "bg-income",
-      hoverColor: "hover:bg-income/80",
+      Icon: FaPlus,
+      bgIcon: 'bg-primary-foreground/20',
+      textColor: 'text-primary-foreground',
+      bgColor: "bg-primary",
+      hoverColor: "hover:bg-primary/90",
       text: "Add Income",
+      bgFocus: 'focus-visible:ring-primary'
     },
     expense: {
-      bgColor: "bg-expenses",
-      hoverColor: "hover:bg-expenses/80",
+      Icon: FaMinus,
+      bgIcon: 'bg-white/20',
+      textColor: 'text-white',
+      bgColor: "bg-destructive",
+      hoverColor: "hover:bg-destructive/90",
       text: "Add Expense",
+      bgFocus: 'focus-visible:ring-destructive'
     },
   };
 
-  const { bgColor, hoverColor, text } = config[buttonNature];
+  const { bgColor, hoverColor, text, Icon, textColor, bgIcon, bgFocus } = config[buttonNature];
 
   return (
     <Dialog>
       {/* Button */}
       <DialogTrigger asChild>
-        <Button
-          className={`h-14 rounded-lg hover:cursor-pointer ${bgColor} sm:text-lg sm:h-18 ${hoverColor}`}
+        <button
+          className={`flex justify-center items-center gap-2 rounded-xl text-base font-semibold p-4 ${textColor} ${bgColor} ${hoverColor} hover:cursor-pointer focus-visible:outline-none focus-visible:ring-2 ${bgFocus} ring-offset-2 focus-visible:ring-offset-background`}
         >
+          <span className={`flex justify-center items-center size-6 ${bgIcon} rounded-full`}>
+            <Icon/>
+          </span>
           {text}
-        </Button>
+        </button>
       </DialogTrigger>
       {/* Modal */}
       <DialogContent
-        className={clsx("rounded-lg border sm:max-w-xl", {
-          "border-income": buttonNature === "income",
-          "border-expenses": buttonNature === "expense",
+        className={clsx("rounded-xl border sm:max-w-xl", {
+          "border-primary": buttonNature === "income",
+          "border-destructive": buttonNature === "expense",
         })}
       >
         <TransactionForm

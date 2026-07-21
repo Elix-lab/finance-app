@@ -22,6 +22,7 @@ export default function TransactionForm({
   mode,
   transaction,
 }: FormProps) {
+  
   const { mutate } = mutationHook();
 
   function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
@@ -34,7 +35,7 @@ export default function TransactionForm({
     <form onSubmit={handleSubmit}>
       <TransactionFormHeader txNature={txNature} mode={mode} />
       <TransactionFormFields txNature={txNature} existingTx={transaction} />
-      <TransactionFormFooter mode={mode} />
+      <TransactionFormFooter txNature={txNature} mode={mode} />
     </form>
   );
 }
