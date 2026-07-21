@@ -17,13 +17,13 @@ async function UserDropDown() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className="cursor-pointer">
+        <button className="cursor-pointer w-9 ring-1 ring-border rounded-full overflow-hidden hover:ring-primary transition">
           {session?.user?.image ? (
             <img
               src={userImgSrc}
               alt='user image'
               referrerPolicy="no-referrer"
-              className="w-9 rounded-full"
+              // className="w-9 rounded-full ring-1 ring-border hover:ring-primary transition-colors"
             />
           ) : (
             <FaUser />

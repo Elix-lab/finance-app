@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Header = () => {
   return (
-    <header className="border-b bg-card">
+    <header className="border-b border-border bg-card">
       <div className="flex justify-between items-center w-full m-auto h-16 max-w-3xl px-4 sm:px-6">
         <Link href="/dashboard" className="flex items-center gap-2">
           <img src="/CashWell.png" alt="CashWell logo" className="w-8" />
