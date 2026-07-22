@@ -10,7 +10,7 @@ const Balance = async () => {
       {/* Income and Expenses Totals */}
       <div className="flex flex-col sm:grid sm:grid-cols-2 gap-1 sm:gap-4">
         <TransactionSummary nature={"income"} />
-        <TransactionSummary nature={"expenses"} />
+        <TransactionSummary nature={"expense"} />
       </div>
     </section>
   );

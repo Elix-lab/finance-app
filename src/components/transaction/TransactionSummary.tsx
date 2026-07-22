@@ -1,12 +1,12 @@
 "use client";
 
-import { IoIosTrendingUp, IoIosTrendingDown } from "react-icons/io";
 import { LuArrowUpRight, LuArrowDownRight  } from "react-icons/lu";
 import { formatCurrency } from "@/lib/currencyFormat";
 import { useFinanceSummaryQuery } from "@/hooks/queries/transactions/useFinanceSummaryQuery";
+import TxNatureIcon from "../ui/TxNatureIcon";
 
 type Props = {
-  nature: "income" | "expenses";
+  nature: "income" | "expense";
 };
 
 const TransactionSummary = ({ nature }: Props) => {
@@ -21,7 +21,7 @@ const TransactionSummary = ({ nature }: Props) => {
       bgClass: "bg-accent",
       textClass: "text-primary",
     },
-    expenses: {
+    expense: {
       label: "Total Expenses",
       Icon: LuArrowDownRight ,
       bgClass: "bg-destructive/10",
@@ -34,13 +34,10 @@ const TransactionSummary = ({ nature }: Props) => {
   return (
     <div className="flex items-center gap-3 border border-border rounded-xl bg-background p-3">
       {/* Icon */}
-      <span
-        className={`flex justify-center items-center shrink-0 rounded-lg size-10 ${bgClass}`}
-      >
-        <Icon className={`${textClass} w-5 h-5 stroke-2`} />
-      </span>
+      <TxNatureIcon txNature={nature}/>
+
       <div>
-        {/* Income/expenses label */}
+        {/* Summary label */}
         <p className="text-xs text-muted-foreground">{label}</p>
         {/* Amount */}
         <span className={`text-lg font-semibold ${textClass}`}>

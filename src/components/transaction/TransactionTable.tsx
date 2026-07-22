@@ -5,6 +5,7 @@ import TransactionRowActions from "./TransactionRowActions";
 import { formatDate, parseISOtoDate } from "@/lib/date";
 import { formatCurrency } from "@/lib/currencyFormat";
 import { useLatestTransactionQuery } from "@/hooks/queries/transactions/useLatestTransactionsQuery";
+import TxNatureIcon from "../ui/TxNatureIcon";
 
 const TransactionTable = () => {
   // Get transactions
@@ -15,20 +16,20 @@ const TransactionTable = () => {
     income: {
       Icon: IoIosTrendingUp,
       iconBgClass: "bg-green-100",
-      iconSymbolColor: "text-income",
-      amountColorClass: "text-income",
+      iconSymbolColor: "text-primary",
+      amountColorClass: "text-primary",
     },
     expense: {
       Icon: IoIosTrendingDown,
       iconBgClass: "bg-red-100",
-      iconSymbolColor: "text-expenses",
-      amountColorClass: "text-expenses",
+      iconSymbolColor: "text-destructive",
+      amountColorClass: "text-destructive",
     },
   };
 
+  // CASE: there is no transactions
   if (!transactions || transactions.length === 0) {
     return (
-      // <div className="flex flex-col gap-1 w-full h-auto bg-card shadow-md rounded-card p-6">
       <div className="flex justify-center">
         <span className="text-xs font-light text-zinc-700 sm:text-sm">
           Add a new transaction
@@ -38,52 +39,50 @@ const TransactionTable = () => {
   }
 
   return (
-    <div className="flex flex-col gap-1 w-full h-auto bg-card rounded-card p-6 border border-gray-300 shadow-md shadow-gray-100">
-      <span className="text-base font-medium sm:text-lg">Last transactions</span>
+    <section className="flex flex-col bg-card rounded-2xl p-4 sm:p-6 border border-border gap-2">
+      {/* Title */}
+      <span className="text-base font-semibold">Last transactions</span>
 
+      {/* Transaction list */}
       <ul>
         {transactions.map((tx) => {
+          // style variables
           const { Icon, iconBgClass, iconSymbolColor, amountColorClass } =
             config[tx.nature];
 
           return (
-            <li key={tx.id} className="grid grid-cols-2 border-b py-3">
-              {/* first half */}
-              <div className="flex items-center gap-2">
-                {/* icon */}
-                <span
-                  className={`flex justify-center items-center p-2 ${iconBgClass} rounded-md`}
-                >
-                  <Icon className={`text-lg ${iconSymbolColor} sm:text-xl`} />
-                </span>
+            <li key={tx.id} className="flex items-center gap-3 px-2 py-3 sm:px-3 hover:bg-muted transition rounded-xl">
+              {/* FIRST HALF */}
+              {/* icon */}
+              <TxNatureIcon txNature={tx.nature} />
+
+              {/* SECOND HALF */}
+              <div className="min-w-0 flex-1">
                 {/* title */}
-                <div className="min-w-0">
-                  <span className="text-sm font-medium truncate block sm:text-base">
-                    {tx.title}
-                  </span>
-                  {/* cathegory */}
-                  <p className="text-xs">{tx.category}</p>
-                </div>
+                <p className="truncate text-sm font-semibold">
+                  {tx.title}
+                </p>
+                {/* cathegory */}
+                <p className="text-xs inline-flex text-muted-foreground bg-muted rounded-full px-2 py-0.5">{tx.category}</p>
               </div>
-              {/* second half */}
-              <div className="flex justify-end items-center gap-2">
-                <div className="text-right">
-                  {/* amount */}
-                  <span className={`${amountColorClass} text-base font-medium sm:text-lg`}>
-                    {formatCurrency(tx.amount)}
-                  </span>
-                  {/* date */}
-                  <p className="text-xs">
-                    {formatDate(parseISOtoDate(tx.date))}
-                  </p>
-                </div>
-                <TransactionRowActions transaction={tx} />
+
+              {/* THIRD HALF */}
+              <div className="text-right">
+                {/* amount */}
+                <p
+                  className={`${amountColorClass} text-sm font-semibold`}
+                >
+                  {tx.nature === 'income' ? '+' : '-'}{formatCurrency(tx.amount)}
+                </p>
+                {/* date */}
+                <p className="text-xs text-muted-foreground">{formatDate(parseISOtoDate(tx.date))}</p>
               </div>
+              <TransactionRowActions transaction={tx} />
             </li>
           );
         })}
       </ul>
-    </div>
+    </section>
   );
 };
 

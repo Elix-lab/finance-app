@@ -42,13 +42,15 @@ const TransactionRowActions = ({ transaction }: {transaction: transaction}) => {
   const useDeleteTxMutation = useDeleteTransactionMutation();
   const isDeleting = useDeleteTxMutation.isPending;
   const isOptimistic = transaction.id.startsWith("optimistic-");
-  // Checking is there is a transaction in Pending status
+
+  // Checking if there is a transaction in Pending status
   const transactionState = useEditTxMutationState();
   const isEditing = transactionState.some(
     (t) => t.status === "pending" && t.id === transaction.id,
   );
   // Conditions to show spinner
   const showSpinner = isOptimistic || isDeleting || isEditing;
+
   //Event Handlers
   const handleDelete = () => {
     if (confirm("Are you sure you want to DELETE this transaction?")) {
@@ -66,13 +68,13 @@ const TransactionRowActions = ({ transaction }: {transaction: transaction}) => {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           {showSpinner ? (
-            <Button variant="ghost" disabled={true}>
+            <button disabled={true}>
               <Spinner />
-            </Button>
+            </button>
           ) : (
-            <Button variant="ghost" className="p-2 rounded-md cursor-pointer">
-              <BsThreeDotsVertical className="size-3.5 p-0" />
-            </Button>
+            <button className="flex items-center justify-center shrink-0 size-8 rounded-lg cursor-pointer text-muted-foreground/60 hover:text-foreground transition">
+              <BsThreeDotsVertical />
+            </button>
           )}
         </DropdownMenuTrigger>
         <DropdownMenuContent>
