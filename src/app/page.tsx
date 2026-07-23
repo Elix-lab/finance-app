@@ -1,3 +1,5 @@
+// Homepage page
+
 import NavBar from "@/components/home-page/NavBar";
 import Hero from "@/components/home-page/Hero";
 import Stakes from "@/components/home-page/Stakes";
