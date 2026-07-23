@@ -1,6 +1,7 @@
+import clsx from "clsx";
 import { LuArrowUpRight, LuArrowDownRight } from "react-icons/lu";
 
-function TxNatureIcon({ txNature }: { txNature: "income" | "expense" }) {
+function TxNatureIcon({ txNature, size }: { txNature: "income" | "expense", size?:'small' }) {
   // Conditional rendering data
   const config = {
     income: {
@@ -19,9 +20,9 @@ function TxNatureIcon({ txNature }: { txNature: "income" | "expense" }) {
 
   return (
     <span
-      className={`flex justify-center items-center shrink-0 rounded-lg size-10 ${bgClass}`}
+      className={clsx(`flex justify-center items-center shrink-0 rounded-lg ${bgClass}`, size === 'small' ? 'size-8': 'size-10')}
     >
-      <Icon className={`${textClass} w-5 h-5 stroke-2`} />
+      <Icon className={clsx(`${textClass} stroke-2`, size === 'small' ? 'w-4 h-4' : 'w-5 h-5')} />
     </span>
   );
 }
