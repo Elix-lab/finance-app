@@ -1,71 +1,59 @@
-import { IoIosTrendingUp, IoIosTrendingDown } from "react-icons/io";
+import TxNatureIcon from "../ui/TxNatureIcon";
+import TxFormMockup from "./TxFormMockup";
 
-const summaries = ["income", "expenses"] as const;
+const summaries = ["income", "expense"] as const;
 // Conditional rendering data
 const config = {
   income: {
     label: "Total Income",
-    Icon: IoIosTrendingUp,
-    bgClass: "bg-green-100",
-    textClass: "text-income",
+    textClass: "text-primary",
     amount: 3150,
   },
-  expenses: {
+  expense: {
     label: "Total Expenses",
-    Icon: IoIosTrendingDown,
-    bgClass: "bg-red-100",
-    textClass: "text-expenses",
+    textClass: "text-destructive",
     amount: 40,
   },
 };
 
 function ValueProposition() {
   return (
-    <section id="valueProposition" className="bg-brand/5 scroll-mt-16">
-      <div className="py-12 px-4 sm:px-8 lg:px-12 flex flex-col gap-5 items-center m-auto lg:grid lg:grid-cols-2 max-w-6xl">
+    <section id="valueProposition" className="bg-secondary/40 scroll-mt-16">
+      <div className="grid justify-center items-center gap-3 lg:justify-start lg:grid-cols-2 max-w-6xl mx-auto px-6 py-20 lg:py-28">
+        {/* FIRST HALF */}
         {/* Content */}
-        <div className="flex flex-col items-center gap-5 lg:items-start">
-          <h2 className="text-2xl font-bold text-center text-balance sm:max-w-xl lg:max-w-3xl lg:text-3xl xl:text-4xl lg:text-start">
+        <div className="flex flex-col items-center lg:items-start">
+          <h2 className="text-3xl font-bold text-balance tracking-tight sm:text-4xl text-center lg:text-left max-w-4xl">
             Always know where you stand financially.
           </h2>
-          <p className="text-base text-muted-foreground text-center text-balance lg:text-start">
+          <p className="mt-5 text-lg text-muted-foreground leading-relaxed text-pretty text-center lg:text-left max-w-xl">
             Open the app and instantly understand your balance, your spending,
             and how much room you have to make your next financial move with
             confidence.
           </p>
           {/* Summaries */}
-          <div className="grid grid-cols-2 gap-2 sm:gap-3">
+          <div className="mt-8 grid grid-cols-2 gap-4 w-full max-w-md">
             {summaries.map((summary) => {
-              const { label, Icon, bgClass, textClass, amount } = config[summary];
+              const { label, textClass, amount } = config[summary];
               return (
                 <div
                   key={summary}
-                  className="flex items-center gap-2 p-4 bg-background border rounded-lg shadow-md border-gray-300 shadow-brand/15"
+                  className="flex flex-col gap-3 p-5 bg-card border border-border rounded-2xl"
                 >
-                  <span
-                    className={`flex justify-center items-center p-2 rounded-md ${bgClass}`}
-                  >
-                    <Icon className={`text-lg ${textClass} sm:text-xl`} />
-                  </span>
+                  <TxNatureIcon txNature={summary} />
                   <div>
-                    <p className="text-xs sm:text-sm">{label}</p>
-                    <span
-                      className={`text-base font-medium ${textClass} sm:text-lg`}
-                    >
+                    <span className={`text-2xl font-bold ${textClass}`}>
                       ${amount}
                     </span>
+                    <p className="text-xs sm:text-sm text-muted-foreground">{label}</p>
                   </div>
                 </div>
               );
             })}
           </div>
         </div>
-        {/* Image */}
-        <img
-          src="/CashWell-modal.jpg"
-          alt="CashWell modal"
-          className="hidden w-md rounded-lg border shadow-md border-gray-300 shadow-brand/15 m-auto lg:inline"
-        />
+        {/* SECOND HALF */}
+        <TxFormMockup />
       </div>
     </section>
   );

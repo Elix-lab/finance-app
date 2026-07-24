@@ -14,7 +14,7 @@ function NavBar() {
   };
 
   return (
-    <header className="sticky top-0 border-b border-border bg-background/80 backdrop-blur-md">
+    <header className="z-50 sticky top-0 border-b border-border bg-background/80 backdrop-blur-md">
       <div className="flex justify-between items-center h-16 px-6 max-w-6xl mx-auto">
         {/* Logo */}
         <Link href="/" onClick={scrollToTop}>
