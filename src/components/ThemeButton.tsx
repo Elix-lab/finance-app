@@ -12,7 +12,7 @@ function ThemeButton () {
     }
 
     return(
-        <button className="cursor-pointer border border-border rounded-full w-8 h-8 flex items-center justify-center hover:bg-muted dark:bg-input/30 dark:hover:bg-input/50 transition-all" onClick={handleClick}>{
+        <button className="cursor-pointer border border-border rounded-full w-8 h-8 flex items-center justify-center hover:bg-muted dark:bg-input/30 dark:hover:bg-input/50 transition-all active:translate-y-0.5 " onClick={handleClick}>{
             theme === 'light' ? <LuMoon /> : <MdOutlineWbSunny />
         }</button>
     )

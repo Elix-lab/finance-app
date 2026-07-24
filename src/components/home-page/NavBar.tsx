@@ -22,7 +22,7 @@ function NavBar() {
         </Link>
         {/* Nav */}
         <nav>
-          <ul className="hidden items-center gap-8 text-sm text-muted-foreground font-medium *:hover:text-foreground md:flex">
+          <ul className="hidden items-center gap-8 text-sm text-muted-foreground font-medium *:hover:text-foreground md:flex *:transition">
             <li>
               <button
                 className="cursor-pointer"
@@ -47,7 +47,7 @@ function NavBar() {
           </div>
           <Link
             href="/dashboard"
-            className="text-xs font-medium bg-primary text-primary-foreground rounded-full px-2.5 py-1.5"
+            className="text-xs font-medium bg-primary text-primary-foreground rounded-full px-2.5 py-1.5 hover:bg-primary/90 transition-colors"
           >
             Start Tracking
           </Link>

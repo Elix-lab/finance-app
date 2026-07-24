@@ -1,6 +1,7 @@
 import Link from "next/link";
 import DashboardMockup from "./DashboardMockup";
 
+
 function Hero() {
   return (
     <section>
@@ -16,7 +17,7 @@ function Hero() {
           </p>
           <Link
             href="/dashboard"
-            className="inline-flex items-center justify-center w-full max-w-xl lg:w-fit text-sm font-medium bg-primary text-primary-foreground rounded-full px-2.5 h-9 py-1.5"
+            className="flex items-center justify-center w-full max-w-xl lg:w-fit text-sm font-medium bg-primary text-primary-foreground rounded-full px-2.5 h-9 py-1.5 hover:translate-y-0.5 hover:bg-primary/90 transition"
           >
             Start Tracking
           </Link>

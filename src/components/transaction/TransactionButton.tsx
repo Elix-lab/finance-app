@@ -43,7 +43,7 @@ const TransactionButton = ({ buttonNature }: Props) => {
       {/* Button */}
       <DialogTrigger asChild>
         <button
-          className={`flex justify-center items-center gap-2 rounded-xl text-base font-semibold p-4 ${textColor} ${bgColor} ${hoverColor} hover:cursor-pointer focus-visible:outline-none focus-visible:ring-2 ${bgFocus} ring-offset-2 focus-visible:ring-offset-background`}
+          className={`flex justify-center items-center gap-2 rounded-xl text-base font-semibold p-4 ${textColor} ${bgColor} ${hoverColor} hover:cursor-pointer focus-visible:outline-none focus-visible:ring-2 ${bgFocus} ring-offset-2 focus-visible:ring-offset-background transition-colors`}
         >
           <span className={`flex justify-center items-center size-6 ${bgIcon} rounded-full`}>
             <Icon/>
