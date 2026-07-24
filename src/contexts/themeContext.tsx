@@ -20,12 +20,17 @@ const ThemeContext = createContext<ThemeContext | null>(null);
 
 // Provider
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState(() => {
-    if(typeof window === 'undefined') return 'light'
+  const [theme, setTheme] = useState('light')
 
-    return localStorage.getItem('theme') ?? 'light'
-  });
+  // Initial render theme adaptation
+  // Using useEffect to avoid Hydration prblems due to possible conflict between the server and the client
+  useEffect(() => {
+    let stored = typeof window === 'undefined' ? 'light' : localStorage.getItem('theme')
+    if(stored) setTheme(stored) 
+  }, [])
 
+  // Change theme
+  // This doesn't trigger a re-render, it makes the browser recalculate the CSS
   useEffect(() => {
     document.documentElement.classList.remove("light", "dark");
     document.documentElement.classList.add(theme)
