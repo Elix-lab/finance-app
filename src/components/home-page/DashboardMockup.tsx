@@ -1,28 +1,22 @@
 import TxNatureIcon from "../ui/TxNatureIcon";
-import clsx from "clsx";
+import TxsTableMockup from "./TxsTableMokup";
+import { Transaction } from "@/types/transaction";
 
 // Types
-type summaries = {
+type Summaries = {
   nature: "income" | "expense";
   label: string;
   amount: string;
   textColor: string;
 }[];
-type buttons = {
+type Buttons = {
   label: string;
   textColor: string;
   bgColor: string;
 }[];
-type transactions = {
-  nature: "income" | "expense";
-  title: string;
-  category: string;
-  amount: string;
-  date: string;
-}[];
 
 // .map data
-const summaries: summaries = [
+const summaries: Summaries = [
   {
     nature: "income",
     label: "Total Income",
@@ -36,7 +30,7 @@ const summaries: summaries = [
     textColor: "text-destructive",
   },
 ];
-const buttons: buttons = [
+const buttons: Buttons = [
   {
     label: "Add Income",
     textColor: "text-primary-foreground",
@@ -48,7 +42,7 @@ const buttons: buttons = [
     bgColor: "bg-destructive",
   },
 ];
-const transactions: transactions = [
+const transactions: Transaction[] = [
   {
     nature: "income",
     title: "Commissions",
@@ -124,7 +118,7 @@ function DashboardMockup() {
         ))}
       </div>
       {/* Transactions */}
-      <div className="rounded-3xl border border-border bg-card p-5 shadow-2xl shadow-primary/10 sm:p-6">
+      {/* <div className="rounded-3xl border border-border bg-card p-5 shadow-2xl shadow-primary/10 sm:p-6">
         <p className="text-sm font-semibold">Last Transactions</p>
         <ul className="mt-3 divide-y divide-border">
         {transactions.map(t => (
@@ -141,7 +135,8 @@ function DashboardMockup() {
             </li>
         ))}
         </ul>
-      </div>
+      </div> */}
+      <TxsTableMockup transactions={transactions}/>
     </div>
   );
 }

@@ -1,22 +1,24 @@
+import TxsAndSummaries from "./TxsAndSummaries";
+
 function TheGuide() {
   return (
-    <section className="">
-      <div className="py-12 px-4 sm:px-8 lg:px-12 flex flex-col gap-5 items-center m-auto lg:grid lg:grid-cols-2 max-w-6xl">
-        <div className="flex flex-col items-center gap-5 col-start-2">
-          <h2 className="text-2xl font-bold text-center text-balance sm:max-w-xl lg:max-w-3xl lg:text-3xl xl:text-4xl lg:text-start">
+    <section className="max-w-6xl mx-auto px-6 py-20 lg:py-28">
+      <div className="grid gap-12 items-center lg:grid-cols-2">
+        
+        <div className="space-y-5 lg:col-start-2 flex flex-col items-center lg:items-start">
+          <h2 className="text-3xl font-bold text-balance tracking-tight sm:text-4xl text-center lg:text-left max-w-4xl">
             We know how easy it is to fall behind on your finances.
           </h2>
-          <p className="text-base text-muted-foreground text-center text-balance lg:text-start">
+          <p className="text-lg text-muted-foreground leading-relaxed text-pretty text-center lg:text-left max-w-xl">
             Life gets busy. Expenses add up. And before you notice, money
             becomes another source of stress. This app was built to help staying
             on top of your finances feel simpler and less overwhelming.
           </p>
         </div>
-        <img
-          src="/CashWell-table.png"
-          alt="CashWell last transactions table"
-          className="w-md rounded-lg border shadow-md border-gray-300 shadow-brand/15 m-auto col-start-1 row-start-1"
-        />
+        
+        <div className="lg:col-start-1 lg:row-start-1">
+          <TxsAndSummaries />
+        </div>
       </div>
     </section>
   );
