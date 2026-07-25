@@ -1,20 +1,23 @@
-import { Button } from "../ui/shadCn/button";
 import Link from "next/link";
+import { LuCirclePlus, LuEye, LuRocket } from "react-icons/lu";
 
 const steps = [
   {
-    stepNum: 1,
+    num: "01",
+    Icon: LuCirclePlus,
     title: "Add your income and expenses",
     description: "Quickly log the money coming in and going out.",
   },
   {
-    stepNum: 2,
+    num: "02",
+    Icon: LuEye,
     title: "See where you stand",
     description:
       "Understand your balance, spending, and financial situation at a glance.",
   },
   {
-    stepNum: 3,
+    num: "03",
+    Icon: LuRocket,
     title: "Move forward with confidence",
     description:
       "Make everyday financial decisions with more clarity and less stress.",
@@ -23,29 +26,40 @@ const steps = [
 
 function ThePlan() {
   return (
-    <section id="thePlan" className="bg-brand/5 scroll-mt-16">
-      <div className="flex flex-col items-center gap-5 m-auto py-12 px-4 sm:px-8 lg:px-12 max-w-6xl">
-        <h2 className="text-2xl font-bold text-center text-balance sm:max-w-xl lg:max-w-3xl lg:text-3xl xl:text-4xl">
+    <section id="thePlan" className="bg-secondary/40 scroll-mt-16">
+      <div className="flex flex-col items-center gap-14 max-w-6xl mx-auto px-6 py-20 lg:py-28">
+        <h2 className="text-3xl font-bold tracking-tight text-balance sm:text-4xl">
           Build financial clarity step by step
         </h2>
-        <ul className="flex flex-col gap-3 max-w-6xl lg:grid lg:grid-cols-3">
-          {steps.map((step) => (
+
+        <ul className="grid gap-6 md:grid-cols-3">
+          {steps.map(({ num, Icon, title, description }) => (
             <li
-              key={step.stepNum}
-              className="border rounded-lg p-3 lg:p-5 shadow-md border-brand shadow-brand/15 bg-background"
+              key={num}
+              className="group bg-card border border-border p-7 rounded-2xl hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/5 transition duration-300"
             >
-              <h3 className="font-medium">
-                {step.stepNum}. {step.title}
-              </h3>
-              <p className="text-base text-muted-foreground text-balance lg:text-start">
-                {step.description}
+              {/* Icon and number */}
+              <div className="flex items-center justify-between">
+                <span className="flex items-center justify-center size-11 bg-primary text-primary-foreground rounded-xl">
+                  <Icon className="w-5 h-5" />
+                </span>
+                <span className="text-2xl font-bold text-border group-hover:text-primary/30 transition">
+                  {num}
+                </span>
+              </div>
+              <h3 className="mt-6 font-medium">{title}</h3>
+              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+                {description}
               </p>
             </li>
           ))}
         </ul>
-        <Button asChild className="bg-brand font-semibold p-4 hover:bg-brand/80">
-          <Link href="/dashboard">Start Tracking</Link>
-        </Button>
+        <Link
+          href="/signIn"
+          className="text-xs font-medium bg-primary text-primary-foreground rounded-full px-2.5 py-1.5 hover:translate-y-0.5 hover:bg-primary/90 transition-colors"
+        >
+          Start Tracking Today!
+        </Link>
       </div>
     </section>
   );
