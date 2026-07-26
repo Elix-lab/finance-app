@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Button } from "../ui/shadCn/button";
+import Logo from "../ui/Logo";
 
 function Footer() {
   const handleScroll = (id: string) => {
@@ -13,20 +13,15 @@ function Footer() {
   };
 
   return (
-    <footer className="sticky top-0 border-t border-gray-200">
-      <div className="flex flex-col gap-3 md:grid grid-cols-3 md:items-center py-2 px-4 max-w-6xl lg:px-12 m-auto min-h-30">
+    <footer className="border-t border-border">
+      <div className="grid md:grid-cols-3 items-center gap-6 py-12 px-6 max-w-6xl mx-auto">
         {/* Logo */}
-        <Link href="/" className="col-start-1">
-          <img
-            src="/CashWell.png"
-            alt="CashWell logo"
-            className="w-12"
-            onClick={scrollToTop}
-          />
+        <Link href="/" onClick={scrollToTop}>
+          <Logo />
         </Link>
         {/* Nav */}
-        <nav className="col-start-2">
-          <ul className="flex flex-col gap-1 md:flex-row md:gap-5 text-sm text-muted-foreground font-medium justify-center">
+        <nav>
+          <ul className="flex flex-col gap-1 md:flex-row md:gap-5 text-sm text-muted-foreground font-medium justify-center *:hover:text-foreground *:transition">
             <li>
               <button
                 className="cursor-pointer"
@@ -46,8 +41,10 @@ function Footer() {
           </ul>
         </nav>
       </div>
-      <div className="border-t border-gray-100">
-        <p className="py-5 text-center text-sm text-muted-foreground">2026 CashWell. All rights reserved.</p>
+
+      {/* Company rights */}
+      <div className="border-t border-border/60 py-6">
+        <p className="text-center text-sm text-muted-foreground">© 2026 CashWell. All rights reserved.</p>
       </div>
     </footer>
   );

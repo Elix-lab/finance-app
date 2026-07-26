@@ -56,7 +56,7 @@ function ThePlan() {
         </ul>
         <Link
           href="/signIn"
-          className="text-xs font-medium bg-primary text-primary-foreground rounded-full px-2.5 py-1.5 hover:translate-y-0.5 hover:bg-primary/90 transition-colors"
+          className="text-xs font-medium bg-primary text-primary-foreground rounded-full px-2.5 py-1.5 hover:translate-y-0.5 hover:bg-primary/90 transition"
         >
           Start Tracking Today!
         </Link>
