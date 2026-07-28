@@ -4,11 +4,11 @@ import { FcGoogle } from "react-icons/fc";
 import { useFormStatus } from "react-dom";
 import { Button } from "../ui/shadCn/button";
 
-type errorMsg = {
+type ErrorMsg = {
   errorMessage: string | null
 }
 
-function SignInContent({ errorMessage }: errorMsg) {
+function SignInContent({ errorMessage }: ErrorMsg) {
   const { pending } = useFormStatus();
 
   if (pending) return <LoadingScreen />;

@@ -25,7 +25,7 @@ import TransactionForm from "./TransactionForm";
 import { useEditTransactionMutation } from "@/hooks/mutations/transactions/useEditTransactionMutation";
 import { useEditTxMutationState } from "@/hooks/mutation_states/transactions/useEditTxMutationState";
 
-type transaction = {
+type Transaction = {
   id: string;
   userId: string;
   nature: "income" | "expense";
@@ -36,7 +36,7 @@ type transaction = {
   createdAt: string | null;
 };
 
-const TransactionRowActions = ({ transaction }: {transaction: transaction}) => {
+const TransactionRowActions = ({ transaction }: {transaction: Transaction}) => {
   // States
   const [tx, setTx] = useState<transaction | null>(null);
   const useDeleteTxMutation = useDeleteTransactionMutation();
