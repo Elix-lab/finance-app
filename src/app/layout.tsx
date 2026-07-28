@@ -1,4 +1,4 @@
-import { ThemeProvider } from "@/contexts/ThemeContext";
+import { ThemeProvider } from "@/context/ThemeContext";
 import { poppins } from "@/components/ui/fonts/fonts";
 import type { Metadata } from "next";
 import Providers from "./Providers";

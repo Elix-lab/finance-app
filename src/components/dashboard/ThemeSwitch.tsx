@@ -1,5 +1,5 @@
 import { Switch } from "../ui/switch";
-import { useTheme } from "@/contexts/ThemeContext";
+import { useTheme } from "@/context/ThemeContext";
 
 function ThemeSwitch() {
   const { theme, setTheme } = useTheme();
