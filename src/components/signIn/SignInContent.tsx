@@ -3,35 +3,59 @@ import LoadingScreen from "../LoadingScreen";
 import { FcGoogle } from "react-icons/fc";
 import { useFormStatus } from "react-dom";
 import { Button } from "../ui/shadCn/button";
+import Link from "next/link";
+import Logo from "../ui/Logo";
+import { signInAction } from "@/_actions/auth/actions";
 
 type ErrorMsg = {
-  errorMessage: string | null
-}
+  errorMessage: string | null;
+};
 
 function SignInContent({ errorMessage }: ErrorMsg) {
   const { pending } = useFormStatus();
 
+  // If the form is loading then show the Loading Screen
   if (pending) return <LoadingScreen />;
 
+  // Predeterminated view
   return (
-    <div className="flex flex-col items-center justify-center gap-4 rounded-lg bg-card p-8 shadow-sm shadow-gray-300 w-sm sm:w-lg max-w-lg h-96 max-h-96">
-      <img src="/CashWell.png" alt="CashWell logo" className="w-30 sm:w-40" />
-      <div className="text-center">
-        <h2 className="font-medium text-lg sm:text-xl">Welcome</h2>
-        <p className="text-xs sm:text-sm">Sign In with your Google account.</p>
-      </div>
+    <main className="min-h-dvh flex flex-col items-center justify-center px-6 py-12">
+      {/* Logo */}
+      <Link href="/" className="mb-5">
+        <Logo />
+      </Link>
 
-      <Button
-        type="submit"
-        variant="default"
-        size="lg"
-        className="cursor-pointer"
-      >
-        <FcGoogle className="w-4" aria-hidden />
-        Continue with Google
-      </Button>
-      <p className="text-red-500 text-xs">{errorMessage}</p>
-    </div>
+      {/* SignIn card */}
+      <div className="bg-card border border-border max-w-md rounded-2xl w-full overflow-hidden">
+        {/* Top green line */}
+        <div className="h-1.5 bg-primary w-full"></div>
+        {/* Content */}
+        <div className="p-8 sm:p-10">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold tracking-tight">Welcome</h1>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Sign in to start tracking!
+            </p>
+          </div>
+
+          {/* Form */}
+          <form action={signInAction} className="mt-8">
+            <>
+              <Button
+                type="submit"
+                variant="outline"
+                size="lg"
+                className="cursor-pointer w-full rounded-xl border border-border h-10 sm:gap-3 "
+              >
+                <FcGoogle className="w-4" aria-hidden />
+                Continue with Google
+              </Button>
+              <p className="text-red-500 text-xs">{errorMessage}</p>
+            </>
+          </form>
+        </div>
+      </div>
+    </main>
   );
 }
 

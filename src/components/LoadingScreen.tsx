@@ -1,13 +1,12 @@
 import { Spinner } from "./ui/shadCn/spinner";
+import Logo from "./ui/Logo";
+import { ImSpinner8 } from "react-icons/im";
 
 function LoadingScreen() {
   return (
-    <div className="flex flex-col items-center justify-center gap-4 rounded-lg bg-card p-8 shadow-sm shadow-gray-300 w-sm sm:w-lg max-w-lg h-96 max-h-96">
-      <img src="/CashWell.png" alt="CashWell logo" className="w-30 sm:w-40" />
-      <div className="flex items-center gap-2">
-        <p className="text-base">Loading</p>
-        <Spinner />
-      </div>
+    <div className="min-h-dvh w-full flex flex-col items-center justify-center px-6 py-12 bg-radial from-card to-accent dark:from-accent dark:to-background animate-pulse">
+        <img src="Logo.svg" className="size-20" />
+        <p className="text-base">Loading...</p>
     </div>
   );
 }
