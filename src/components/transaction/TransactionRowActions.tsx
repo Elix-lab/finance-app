@@ -38,7 +38,7 @@ type Transaction = {
 
 const TransactionRowActions = ({ transaction }: {transaction: Transaction}) => {
   // States
-  const [tx, setTx] = useState<transaction | null>(null);
+  const [tx, setTx] = useState<Transaction | null>(null);
   const useDeleteTxMutation = useDeleteTransactionMutation();
   const isDeleting = useDeleteTxMutation.isPending;
   const isOptimistic = transaction.id.startsWith("optimistic-");
