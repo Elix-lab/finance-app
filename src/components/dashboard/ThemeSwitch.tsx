@@ -1,8 +1,8 @@
 import { Switch } from "../ui/switch";
 import { useTheme } from "@/context/ThemeContext";
 
-function ThemeSwitch() {
-  const { theme, setTheme } = useTheme();
+const ThemeSwitch = () => {
+  const { theme } = useTheme();
 
   return (
     <>

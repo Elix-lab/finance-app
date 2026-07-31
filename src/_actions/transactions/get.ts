@@ -1,17 +1,20 @@
-/** GET seerver actions */
+/** GET server actions */
 
-'use server'
+"use server";
 
 import { auth } from "@/lib/auth";
 import { eq } from "drizzle-orm";
 import { transactions } from "@/db/schema";
-import { getLatestTxs, getAvailableBalance, getSumByNature, getFinanceSummary } from "@/lib/data/transactions";
+import {
+  getLatestTxs,
+  getAvailableBalance,
+  getSumByNature,
+  getFinanceSummary,
+} from "@/lib/data/transactions";
 
 // Get MULTIPLE transactions.
 // It has more steps than needed because of thinking about using this query in the transactions page; where the user can see the hisrotic of transactions
-export async function getLatestTxAction(
-  transactionsLimit: number = 5,
-) {
+export const getLatestTxAction = async (transactionsLimit: number = 5) => {
   //Check session
   const session = await auth();
   if (!session) throw new Error("Unauthorized");
@@ -21,36 +24,36 @@ export async function getLatestTxAction(
 
   //Getting transactions
   return await getLatestTxs(filters, transactionsLimit);
-}
+};
 
 // Get Aviable Balance
-export async function getAvailableBalanceAction() {
+export const getAvailableBalanceAction = async () => {
   // Check user session
   const session = await auth();
   if (!session) throw new Error("Unauthorized");
 
   // Getting Aviable Balance
   return await getAvailableBalance(session!.user!.id!);
-}
+};
 
 // Get sum of Transactions by nature
-export async function getSumByNatureAction() {
+export const getSumByNatureAction = async () => {
   // Check user session
-  const session = await auth()
-  if (!session) throw new Error('Unauthorized')
-  
+  const session = await auth();
+  if (!session) throw new Error("Unauthorized");
+
   // Getting sum by nature
-  return getSumByNature(session.user?.id!)
-}
+  return getSumByNature(session.user?.id!);
+};
 
 // Get Aviable Balance and Totals of income and expenses
-export async function getFinanceSummaryAction() {
+export const getFinanceSummaryAction = async () => {
   // Check session
   const session = await auth();
-  if(!session) {
-    throw new Error('Unauthorized')
+  if (!session) {
+    throw new Error("Unauthorized");
   }
 
-  const data = await getFinanceSummary(session.user?.id!)
+  const data = await getFinanceSummary(session.user?.id!);
   return data;
-}
+};

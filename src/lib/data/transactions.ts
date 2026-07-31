@@ -3,7 +3,7 @@ import { transactions } from "@/db/schema";
 import { sql, eq, desc, and } from "drizzle-orm";
 
 // Insert a new Transaction
-export async function createTx({
+export const createTx = async ({
   data,
 }: {
   data: {
@@ -14,7 +14,7 @@ export async function createTx({
     amount: string;
     date: string;
   };
-}) {
+}) => {
   return await db.insert(transactions).values({
     userId: data.userId,
     nature: data.nature,
@@ -23,10 +23,13 @@ export async function createTx({
     amount: data.amount.toString(),
     date: data.date,
   });
-}
+};
 
 // Get MULTIPLE transactions
-export async function getLatestTxs(filters: any[], transactionsLimit: number) {
+export const getLatestTxs = async (
+  filters: any[],
+  transactionsLimit: number,
+) => {
   const LatestTxs = await db
     .select()
     .from(transactions)
@@ -35,10 +38,10 @@ export async function getLatestTxs(filters: any[], transactionsLimit: number) {
     .limit(transactionsLimit);
 
   return LatestTxs;
-}
+};
 
 // Get a SINGLE transaction
-export async function getSingleTx(userId: string, transactionId: string) {
+export const getSingleTx = async (userId: string, transactionId: string) => {
   const SingleTx = await db
     .select()
     .from(transactions)
@@ -47,19 +50,19 @@ export async function getSingleTx(userId: string, transactionId: string) {
     );
 
   return SingleTx;
-}
+};
 
 // Delete transaction
-export async function deleteTx(userId: string, transactionId: string) {
+export const deleteTx = async (userId: string, transactionId: string) => {
   return await db
     .delete(transactions)
     .where(
       and(eq(transactions.id, transactionId), eq(transactions.userId, userId)),
     );
-}
+};
 
 // Update transaction
-export async function updateTx({
+export const updateTx = async ({
   data,
 }: {
   data: {
@@ -70,7 +73,7 @@ export async function updateTx({
     amount: string;
     date: string;
   };
-}) {
+}) => {
   return await db
     .update(transactions)
     .set({
@@ -82,10 +85,10 @@ export async function updateTx({
     .where(
       and(eq(transactions.userId, data.userId), eq(transactions.id, data.id)),
     );
-}
+};
 
 // Get Sum of transactions by nature
-export async function getSumByNature(userId: string) {
+export const getSumByNature = async (userId: string) => {
   const result = await db
     .select({
       nature: transactions.nature,
@@ -96,13 +99,13 @@ export async function getSumByNature(userId: string) {
     .groupBy(transactions.nature);
 
   return {
-    income: result.find((r) => r.nature === "income")?.total ?? '0',
-    expenses: result.find((r) => r.nature === "expense")?.total ?? '0',
+    income: result.find((r) => r.nature === "income")?.total ?? "0",
+    expenses: result.find((r) => r.nature === "expense")?.total ?? "0",
   };
-}
+};
 
 // Get Aviable Balance (income - expenses)
-export async function getAvailableBalance(userId: string) {
+export const getAvailableBalance = async (userId: string) => {
   const [result] = await db
     .select({
       balance: sql<number>`
@@ -113,23 +116,32 @@ export async function getAvailableBalance(userId: string) {
     .from(transactions)
     .where(eq(transactions.userId, userId));
 
-  return result.balance ?? '0';
-}
+  return result.balance ?? "0";
+};
 
 // Get Aviable Balance and Totals of income and expenses
-export async function getFinanceSummary (userId: string) {
-  const [result] = await db.
-  select({
-    income: sql<number>`SUM(CASE WHEN ${transactions.nature} = 'income' THEN ${transactions.amount} ELSE 0 END)`.mapWith(String),
-    expenses: sql<number>`SUM(CASE WHEN ${transactions.nature} = 'expense' THEN ${transactions.amount} ELSE 0 END)`.mapWith(String),
-    availableBalance: sql<number>`SUM(CASE WHEN ${transactions.nature} = 'income' THEN ${transactions.amount} ELSE -${transactions.amount} END)`.mapWith(String)
-  })
-  .from(transactions)
-  .where(eq(transactions.userId, userId))
+export const getFinanceSummary = async (userId: string) => {
+  const [result] = await db
+    .select({
+      income:
+        sql<number>`SUM(CASE WHEN ${transactions.nature} = 'income' THEN ${transactions.amount} ELSE 0 END)`.mapWith(
+          String,
+        ),
+      expenses:
+        sql<number>`SUM(CASE WHEN ${transactions.nature} = 'expense' THEN ${transactions.amount} ELSE 0 END)`.mapWith(
+          String,
+        ),
+      availableBalance:
+        sql<number>`SUM(CASE WHEN ${transactions.nature} = 'income' THEN ${transactions.amount} ELSE -${transactions.amount} END)`.mapWith(
+          String,
+        ),
+    })
+    .from(transactions)
+    .where(eq(transactions.userId, userId));
 
   return {
     income: result.income ?? 0,
     expenses: result.expenses ?? 0,
     availableBalance: result.availableBalance ?? 0,
-  }
+  };
 }

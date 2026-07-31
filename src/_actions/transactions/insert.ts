@@ -1,4 +1,4 @@
-/** INSERT seerver actions */
+/** INSERT server actions */
 
 "use server";
 
@@ -6,7 +6,7 @@ import { auth } from "@/lib/auth";
 import { createTx } from "@/lib/data/transactions";
 
 // Create/insert a new Transaction
-export async function createTxAction(formData: FormData) {
+export const createTxAction = async (formData: FormData) => {
   // Check session
   const session = await auth();
   if (!session) {

@@ -16,12 +16,12 @@ type FormProps = {
   transaction?: any;
 };
 
-export default function TransactionForm({
+const TransactionForm = ({
   mutationHook,
   txNature,
   mode,
   transaction,
-}: FormProps) {
+}: FormProps) => {
   
   const { mutate } = mutationHook();
 
@@ -39,3 +39,5 @@ export default function TransactionForm({
     </form>
   );
 }
+
+export default TransactionForm;

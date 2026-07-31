@@ -4,7 +4,7 @@ import Link from "next/link";
 import ThemeButton from "../ThemeButton";
 import Logo from "../ui/Logo";
 
-function NavBar() {
+const NavBar = () => {
   const handleScroll = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };

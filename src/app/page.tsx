@@ -8,7 +8,7 @@ import TheGuide from "@/components/home-page/TheGuide";
 import ThePlan from "@/components/home-page/ThePlan";
 import Footer from "@/components/home-page/Footer";
 
-export default function Home() {
+const Home = () => {
   return (
     <div>
       <NavBar />
@@ -21,3 +21,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Home;

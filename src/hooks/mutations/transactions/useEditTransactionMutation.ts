@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateTxAction } from "@/_actions/transactions/update";
 import { toast } from "sonner";
 
-export function useEditTransactionMutation() {
+export const useEditTransactionMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationKey: ['edit-transaction'],

@@ -4,7 +4,7 @@ import { LuWallet } from "react-icons/lu";
 import { formatCurrency } from "@/lib/currencyFormat";
 import { useFinanceSummaryQuery } from "@/hooks/queries/transactions/useFinanceSummaryQuery";
 
-function AvailableBalance() {
+const AvailableBalance = () => {
   const { data } = useFinanceSummaryQuery();
   return (
     <div className="flex flex-col gap-2">

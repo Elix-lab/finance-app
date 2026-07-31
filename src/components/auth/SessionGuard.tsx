@@ -6,11 +6,11 @@ import Link from "next/link";
 import { Button } from "../ui/shadCn/button";
 import LoadingScreen from "../LoadingScreen";
 
-export default function SessionGuard({
+const SessionGuard = ({
   children,
 }: {
   children: React.ReactNode;
-}) {
+}) => {
   const { data: session, status } = useSession();
 
   if (status === "loading") {
@@ -44,3 +44,5 @@ export default function SessionGuard({
 
   return <>{children}</>;
 }
+
+export default SessionGuard;

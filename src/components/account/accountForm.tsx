@@ -1,4 +1,4 @@
-function AccountForm() {
+const AccountForm = () => {
   return (
     <form className="w-full h-auto bg-card border border-gray-300 shadow-md shadow-gray-100 rounded-card p-6">
       <label htmlFor="name">Name:</label>

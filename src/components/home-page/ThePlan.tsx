@@ -24,7 +24,7 @@ const steps = [
   },
 ];
 
-function ThePlan() {
+const ThePlan = () => {
   return (
     <section id="thePlan" className="bg-secondary/40 scroll-mt-16">
       <div className="flex flex-col items-center gap-14 max-w-6xl mx-auto px-6 py-20 lg:py-28">

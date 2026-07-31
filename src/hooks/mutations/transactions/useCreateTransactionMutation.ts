@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Decimal from "decimal.js";
 import { toast } from "sonner";
 
-export function useCreateTransactionMutation() {
+export const useCreateTransactionMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (payload: FormData) => await createTxAction(payload),

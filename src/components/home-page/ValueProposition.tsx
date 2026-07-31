@@ -16,7 +16,7 @@ const config = {
   },
 };
 
-function ValueProposition() {
+const ValueProposition = () => {
   return (
     <section id="valueProposition" className="bg-secondary/40 scroll-mt-16">
       <div className="grid justify-center items-center gap-3 lg:justify-start lg:grid-cols-2 max-w-6xl mx-auto px-6 py-20 lg:py-28">

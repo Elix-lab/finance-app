@@ -19,23 +19,24 @@ interface ThemeContext {
 const ThemeContext = createContext<ThemeContext | null>(null);
 
 // Provider
-export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState('light')
+export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
+  const [theme, setTheme] = useState("light");
 
   // Initial render theme adaptation
   // Using useEffect to avoid Hydration prblems due to possible conflict between the server and the client
   useEffect(() => {
-    let stored = typeof window === 'undefined' ? 'light' : localStorage.getItem('theme')
-    if(stored) setTheme(stored) 
-  }, [])
+    let stored =
+      typeof window === "undefined" ? "light" : localStorage.getItem("theme");
+    if (stored) setTheme(stored);
+  }, []);
 
   // Change theme
   // This doesn't trigger a re-render, it makes the browser recalculate the CSS
   useEffect(() => {
     document.documentElement.classList.remove("light", "dark");
-    document.documentElement.classList.add(theme)
+    document.documentElement.classList.add(theme);
 
-    localStorage.setItem('theme', theme)
+    localStorage.setItem("theme", theme);
   }, [theme]);
 
   const value = { theme, setTheme };
@@ -43,10 +44,10 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   return (
     <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
   );
-}
+};
 
 // Custom context hook
-export function useTheme() {
+export const useTheme = () => {
   const context = useContext(ThemeContext);
 
   if (!context)

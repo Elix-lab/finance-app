@@ -3,7 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getFinanceSummaryAction } from "@/_actions/transactions/get";
 
-export function useFinanceSummaryQuery() {
+export const useFinanceSummaryQuery = () => {
   return useQuery({
     queryKey: ["finance-summary"],
     queryFn: async () => {

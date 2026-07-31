@@ -1,6 +1,6 @@
 import TxNatureIcon from "../ui/TxNatureIcon";
 
-function TxFormMockup() {
+const TxFormMockup = () => {
   return (
     <div className="rounded-3xl bg-card border border-border p-6 shadow-xl shadow-primary/5 max-w-md mx-auto w-full">
       {/* title */}

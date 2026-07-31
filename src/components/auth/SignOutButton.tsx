@@ -1,7 +1,6 @@
 import { signOutAction } from "@/_actions/auth/actions"
-import { Button } from "../ui/shadCn/button"
 
-export function SignOutButton() {
+export const SignOutButton = () => {
     return (
         <form action={signOutAction}>
             <button type="submit">

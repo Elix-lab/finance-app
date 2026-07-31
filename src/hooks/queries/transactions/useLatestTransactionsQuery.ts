@@ -3,7 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getLatestTxAction } from "@/_actions/transactions/get";
 
-export function useLatestTransactionQuery({limit = 5}:{limit?: number} = {}) {
+export const useLatestTransactionQuery=({limit = 5}:{limit?: number} = {}) => {
   return useQuery({
     queryKey: ["transactions", 'latest'],
     queryFn: async () => {

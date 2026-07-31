@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteTxAction } from "@/_actions/transactions/delete";
 import { toast } from "sonner";
 
-export function useDeleteTransactionMutation() {
+export const useDeleteTransactionMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (transactionId: string) => {

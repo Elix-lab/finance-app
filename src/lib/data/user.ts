@@ -3,7 +3,7 @@ import { eq } from "drizzle-orm";
 import { users } from "@/db/schema";
 
 // Get user by email
-export async function getUserByEmail(email: string) {
+export const getUserByEmail = async (email: string) => {
   const user = await db
     .select()
     .from(users)
@@ -13,11 +13,11 @@ export async function getUserByEmail(email: string) {
 }
 
 // Create user
-export async function createUser(newUser: {
+export const createUser = async (newUser: {
   name?: string;
   email: string;
   image?: string;
-}) {
+}) => {
   const user = await db
     .insert(users)
     .values({

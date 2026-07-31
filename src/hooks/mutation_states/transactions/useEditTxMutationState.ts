@@ -1,6 +1,6 @@
 import { Mutation, useMutationState } from "@tanstack/react-query";
 
-export function useEditTxMutationState () {
+export const useEditTxMutationState = () => {
     return useMutationState({
         filters: {mutationKey: ['edit-transaction']},
         select: (mutation: Mutation) => ({

@@ -2,7 +2,7 @@ import Link from "next/link";
 import DashboardMockup from "./DashboardMockup";
 
 
-function Hero() {
+const Hero = () => {
   return (
     <section>
       <div className="grid lg:grid-cols-2 items-center px-6 py-16 max-w-6xl mx-auto gap-12 lg:py-24">

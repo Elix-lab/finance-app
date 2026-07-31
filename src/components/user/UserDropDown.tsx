@@ -10,7 +10,7 @@ import {
 import { FaUser } from "react-icons/fa";
 import { SignOutButton } from "../auth/SignOutButton";
 
-async function UserDropDown() {
+const UserDropDown = async () => {
   const session = await auth();
   const userImgSrc = session?.user?.image ?? "";
   const userName = session?.user?.name;

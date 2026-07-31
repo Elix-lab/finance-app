@@ -8,7 +8,6 @@ import {
   pgEnum,
 } from "drizzle-orm/pg-core";
 import { users } from "../schema";
-import { sql } from "drizzle-orm";
 
 const txNatureEnum = pgEnum('transaction_nature', ['income', 'expense'])
 

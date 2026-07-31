@@ -1,4 +1,4 @@
-export function formatCurrency(amount: string) {
+export const formatCurrency = (amount: string) => {
     return(
         Number(amount).toLocaleString('en-US',{
             style:'currency',

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Logo from "../ui/Logo";
 
-function Footer() {
+const Footer = () => {
   const handleScroll = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };

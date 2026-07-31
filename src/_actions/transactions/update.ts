@@ -1,4 +1,4 @@
-/** UPDATE seerver actions */
+/** UPDATE server actions */
 
 "use server";
 

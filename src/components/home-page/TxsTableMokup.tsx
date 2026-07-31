@@ -6,7 +6,7 @@ type TxsTableMockupProps = {
   transactions: Transaction[];
 };
 
-function TxsTableMockup({ transactions }: TxsTableMockupProps) {
+const TxsTableMockup = ({ transactions }: TxsTableMockupProps) => {
   return (
     <div className="rounded-3xl border border-border bg-card p-5 shadow-2xl shadow-primary/10 sm:p-6">
       <p className="text-sm font-semibold">Last Transactions</p>

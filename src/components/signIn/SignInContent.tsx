@@ -11,7 +11,7 @@ type ErrorMsg = {
   errorMessage: string | null;
 };
 
-function SignInContent({ errorMessage }: ErrorMsg) {
+const SignInContent = ({ errorMessage }: ErrorMsg) => {
   const { pending } = useFormStatus();
 
   // If the form is loading then show the Loading Screen

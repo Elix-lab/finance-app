@@ -36,7 +36,7 @@ const stakes = [
   },
 ];
 
-function Stakes() {
+const Stakes = () => {
   return (
     <section className="max-w-6xl mx-auto px-6 py-20 lg:py-28">
       <h2 className="text-balance text-3xl font-bold tracking-tight sm:text-4xl max-w-2xl mx-auto text-center">

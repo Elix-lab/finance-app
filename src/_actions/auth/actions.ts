@@ -2,10 +2,11 @@
 
 import { signIn, signOut } from "../../lib/auth";
 
-export async function signInAction() {
+
+export const signInAction = async () => {
   await signIn("google", { redirectTo: "/dashboard" });
 }
 
-export async function signOutAction() {
+export const signOutAction = async () => {
   await signOut({ redirectTo: "/" });
 }

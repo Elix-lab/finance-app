@@ -4,7 +4,7 @@ import { useTheme } from "@/context/ThemeContext";
 import { MdOutlineWbSunny } from "react-icons/md";
 import { LuMoon } from "react-icons/lu";
 
-function ThemeButton () {
+const ThemeButton = () => {
     const {theme, setTheme} = useTheme()
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {

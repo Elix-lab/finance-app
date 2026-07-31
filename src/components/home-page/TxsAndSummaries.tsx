@@ -26,7 +26,7 @@ const transactions: Transaction[] = [
   },
 ]
 
-function TxsAndSummaries () {
+const TxsAndSummaries = () => {
     return(
         <div className="relative max-w-sm mx-auto w-full">
             <TxsTableMockup transactions={transactions}/>

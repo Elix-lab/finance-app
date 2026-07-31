@@ -1,10 +1,12 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "SignIn",
+  title: "Sign In",
   description: "Sign in to CashWell",
 };
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   return <>{children}</>;
 }
+
+export default Layout;
