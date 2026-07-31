@@ -25,15 +25,15 @@ export const createTx = async ({
   });
 };
 
-// Get MULTIPLE transactions
+// Get last transactions
 export const getLatestTxs = async (
-  filters: any[],
+  userId: string,
   transactionsLimit: number,
 ) => {
   const LatestTxs = await db
     .select()
     .from(transactions)
-    .where(and(...filters))
+    .where(eq(transactions.userId, userId))
     .orderBy(desc(transactions.date), desc(transactions.createdAt))
     .limit(transactionsLimit);
 
@@ -144,4 +144,17 @@ export const getFinanceSummary = async (userId: string) => {
     expenses: result.expenses ?? 0,
     availableBalance: result.availableBalance ?? 0,
   };
+}
+
+
+export const getTxs = async (userId:string ,rowNum:number = 20, offsetNum:number = 0) => {
+  const txs = await db
+  .select()
+  .from(transactions)
+  .where(eq(transactions.userId, userId))
+  .orderBy(desc(transactions.date), desc(transactions.createdAt))
+  .limit(rowNum)
+  .offset(offsetNum)
+
+  return txs;
 }

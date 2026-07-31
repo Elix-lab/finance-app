@@ -30,11 +30,11 @@ const TransactionTable = () => {
   // CASE: there is no transactions
   if (!transactions || transactions.length === 0) {
     return (
-      <div className="flex justify-center">
+      <section className="flex justify-center">
         <span className="text-xs font-light text-zinc-700 sm:text-sm">
           Add a new transaction
         </span>
-      </div>
+      </section>
     );
   }
 

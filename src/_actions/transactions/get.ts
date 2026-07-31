@@ -10,20 +10,18 @@ import {
   getAvailableBalance,
   getSumByNature,
   getFinanceSummary,
+  getTxs,
 } from "@/lib/data/transactions";
 
 // Get MULTIPLE transactions.
-// It has more steps than needed because of thinking about using this query in the transactions page; where the user can see the hisrotic of transactions
 export const getLatestTxAction = async (transactionsLimit: number = 5) => {
   //Check session
   const session = await auth();
   if (!session) throw new Error("Unauthorized");
-
-  //Managing filters for selecting the data
-  const filters = [eq(transactions.userId, session.user?.id!)];
+  const userId = session.user?.id! 
 
   //Getting transactions
-  return await getLatestTxs(filters, transactionsLimit);
+  return await getLatestTxs(userId, transactionsLimit);
 };
 
 // Get Aviable Balance
@@ -57,3 +55,14 @@ export const getFinanceSummaryAction = async () => {
   const data = await getFinanceSummary(session.user?.id!);
   return data;
 };
+
+export const getTxsAction = async (rowNum?:number, offsetNum?:number) => {
+  // Session
+  const session = await auth()
+  if(!session) throw new Error('Unauthorized')
+  const userId = session.user?.id!
+
+  // Validating parameters
+
+  return getTxs(userId, rowNum, offsetNum)
+}
