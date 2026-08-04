@@ -1,10 +1,21 @@
+"use client";
+
 import TransactionRowActions from "./TransactionRowActions";
 import { formatDate, parseISOtoDate } from "@/lib/date";
 import { formatCurrency } from "@/lib/currencyFormat";
-import TxNatureIcon from "../ui/TxNatureIcon";
 import { Transactions } from "@/types/transaction";
+import TxNatureIcon from "../ui/TxNatureIcon";
+import TransactionTableHeader from "./TransactionTableHeader";
 
-const TransactionTable = ({ transactions, title }: { transactions: Transactions, title?: string }) => {
+type TableProps = {
+  transactions: Transactions;
+  title: string;
+  currentPage: number;
+  hasNextPage: boolean;
+};
+
+const TransactionTable = ({ transactions, title, currentPage, hasNextPage }: TableProps) => {
+  // Styles config
   const config = {
     income: {
       amountColorClass: "text-primary",
@@ -13,12 +24,9 @@ const TransactionTable = ({ transactions, title }: { transactions: Transactions,
       amountColorClass: "text-destructive",
     },
   };
-
   return (
     <section className="flex flex-col bg-card rounded-2xl p-4 sm:p-6 border border-border gap-2">
-      {/* Title */}
-      {title ? <span className="text-base font-semibold">{title}</span> : null}
-
+      <TransactionTableHeader title={title} currentPage={currentPage} hasNextPage={hasNextPage} />
       {/* Transaction list */}
       <ul>
         {transactions
@@ -33,7 +41,7 @@ const TransactionTable = ({ transactions, title }: { transactions: Transactions,
                 >
                   {/* FIRST HALF */}
                   {/* icon */}
-                  <TxNatureIcon txNature={tx.nature}/>
+                  <TxNatureIcon txNature={tx.nature} />
 
                   {/* SECOND HALF */}
                   <div className="min-w-0 flex-1">

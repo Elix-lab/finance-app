@@ -13,12 +13,12 @@ import {
   getTxs,
 } from "@/lib/data/transactions";
 
-// Get MULTIPLE transactions.
+// Get last transactions.
 export const getLatestTxAction = async (transactionsLimit: number = 5) => {
   //Check session
   const session = await auth();
   if (!session) throw new Error("Unauthorized");
-  const userId = session.user?.id! 
+  const userId = session.user?.id!;
 
   //Getting transactions
   return await getLatestTxs(userId, transactionsLimit);
@@ -56,13 +56,19 @@ export const getFinanceSummaryAction = async () => {
   return data;
 };
 
-export const getTxsAction = async (rowNum?:number, offsetNum?:number) => {
+// Get Transactions
+export const getTxsAction = async (page: number = 1, rowNum: number = 20) => {
   // Session
-  const session = await auth()
-  if(!session) throw new Error('Unauthorized')
-  const userId = session.user?.id!
+  const session = await auth();
+  if (!session) throw new Error("Unauthorized");
+  const userId = session.user?.id!;
 
-  // Validating parameters
+  const offsetNum = (page - 1) * rowNum 
 
-  return getTxs(userId, rowNum, offsetNum)
-}
+  const txs = await getTxs(userId, rowNum + 1, offsetNum)
+
+  const hasNextPage = txs.length > rowNum
+  const transactions = hasNextPage ? txs.slice(0, rowNum) : txs
+
+  return {transactions, hasNextPage}
+};
