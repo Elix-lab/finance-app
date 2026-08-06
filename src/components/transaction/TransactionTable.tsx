@@ -18,7 +18,7 @@ const TransactionTable = ({ transactions, title, currentPage, hasNextPage }: Tab
   // Styles config
   const config = {
     income: {
-      amountColorClass: "text-primary",
+      amountColorClass: "text-blue-600",
     },
     expense: {
       amountColorClass: "text-destructive",
