@@ -10,8 +10,8 @@ import TransactionTableHeader from "./TransactionTableHeader";
 type TableProps = {
   transactions: Transactions;
   title: string;
-  currentPage: number;
-  hasNextPage: boolean;
+  currentPage?: number;
+  hasNextPage?: boolean;
 };
 
 const TransactionTable = ({ transactions, title, currentPage, hasNextPage }: TableProps) => {

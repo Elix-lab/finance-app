@@ -10,7 +10,7 @@ const Page = async ({searchParams}: {searchParams: Promise<{page?: string}>}) =>
   return (
     <main className="flex justify-center">
       <div className="flex flex-col gap-5 w-full max-w-3xl px-4 sm:px-6 py-6 sm:py-10">
-        <SearchBar />
+        {/* <SearchBar /> */}
         <TransactionTable transactions={transactions} title="Transactions" currentPage={currentPage} hasNextPage={hasNextPage}/>
       </div>
     </main>
