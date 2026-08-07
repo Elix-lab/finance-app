@@ -4,7 +4,7 @@ import { Popover, PopoverTrigger, PopoverContent } from "../ui/shadCn/popover";
 import { CalendarIcon } from "lucide-react";
 import { Calendar } from "../ui/shadCn/calendar";
 import { Button } from "../ui/shadCn/button";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { parseISOtoDate } from "@/lib/date";
 
 const TransactionFormFields = ({
