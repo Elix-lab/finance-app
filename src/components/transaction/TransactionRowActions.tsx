@@ -68,7 +68,7 @@ const TransactionRowActions = ({ transaction }: {transaction: Transaction}) => {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           {showSpinner ? (
-            <button disabled={true}>
+            <button disabled={true} className="flex items-center justify-center shrink-0 size-8 rounded-lg transition">
               <Spinner />
             </button>
           ) : (
