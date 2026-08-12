@@ -12,7 +12,7 @@ const SessionGuard = ({ children }: { children: React.ReactNode }) => {
 
   if (status === "loading") {
     return (
-      <main className="flex items-center justify-center p-4 min-h-screen">
+      <main className="flex items-center justify-center min-h-screen">
         <LoadingScreen />
       </main>
     );
