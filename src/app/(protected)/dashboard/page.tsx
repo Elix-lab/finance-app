@@ -24,7 +24,7 @@ const Page = async () => {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <div className="flex justify-center">
+      <main className="flex justify-center">
         <div className="flex flex-col gap-5 w-full max-w-3xl px-4 sm:px-6 py-6 sm:py-10">
           {/* Balance summary component*/}
           <Balance />
@@ -35,7 +35,7 @@ const Page = async () => {
           </div>
           <LatestTransactions />
         </div>
-      </div>
+      </main>
     </HydrationBoundary>
   );
 };

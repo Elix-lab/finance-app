@@ -43,7 +43,7 @@ const DateFilter = () => {
     <div>
       <Popover>
         <PopoverTrigger asChild>
-          <Button className="flex gap-1 border-border" variant="outline">
+          <Button className="flex gap-1 border-border bg-card" variant="outline">
             <span className="text-sm">Date</span>
             <FaCaretDown className="ml-auto" />
           </Button>
