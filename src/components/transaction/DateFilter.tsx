@@ -30,7 +30,7 @@ const DateFilter = () => {
       params.set("from", from);
     }
 
-    if (!to) {
+    if (!to || to === from) {
         params.delete("to");
     } else {
       params.set("to", to);

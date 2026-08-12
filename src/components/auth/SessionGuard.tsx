@@ -54,7 +54,6 @@ const SessionGuard = ({ children }: { children: React.ReactNode }) => {
                   Go to Sign In Page
                 </Link>
               </Button>
-              {/* <p className="text-red-500 text-xs">{errorMessage}</p> */}
             </>
           </form>
         </div>
