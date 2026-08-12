@@ -2,11 +2,17 @@ import TransactionFilters from "@/components/transaction/TransactionFilters";
 import TransactionTable from "@/components/transaction/TransactionTable";
 import { getTxsAction } from "@/_actions/transactions/get";
 import SearchBar from "@/components/transaction/SearchBar";
+import { GetTxsParams } from "@/types/transaction";
 
-const Page = async ({searchParams}: {searchParams: Promise<{page?: string}>}) => {
+const Page = async ({searchParams}: {searchParams: Promise<GetTxsParams>}) => {
   const params = await searchParams
   const currentPage = Math.max(1, Number(params.page) || 1)
-  const {transactions, hasNextPage} = await getTxsAction(currentPage);
+  const txsParams = {
+    page: currentPage,
+    from: params.from,
+    to: params.to
+  }
+  const {transactions, hasNextPage} = await getTxsAction(txsParams);
 
   return (
     <main className="flex justify-center">

@@ -1,5 +1,7 @@
+"use client";
 import { FaPlus, FaMinus } from "react-icons/fa6";
-import Link from "next/link";
+import { useSearchParams, useRouter } from "next/navigation";
+import clsx from "clsx";
 
 const TransactionTableHeader = ({
   title,
@@ -10,31 +12,53 @@ const TransactionTableHeader = ({
   currentPage?: number;
   hasNextPage?: boolean;
 }) => {
+  const searchParams = useSearchParams();
+  const params = new URLSearchParams(searchParams);
+  const router = useRouter();
+
+  const handleClick = (pageChange: "prev" | "next") => {
+    if (!currentPage) return;
+    const newPage = pageChange === "next" ? currentPage + 1 : currentPage - 1;
+    params.set("page", String(newPage));
+    router.push(`?${params.toString()}`);
+  };
+
   return (
     <div className="flex justify-between border-b border-border pb-4">
       {/* Title */}
       <span className="text-base font-semibold">{title}</span>
-
       {currentPage ? (
         // Pagination
         <div className="flex items-center">
-          <Link
-            href={currentPage > 1 ? `?page=${currentPage - 1}` : "#"}
-            aria-disabled={currentPage <= 1}
-            className="border border-border flex items-center justify-center rounded-sm text-xs p-1 cursor-pointer"
+          <button
+            onClick={() => handleClick("prev")}
+            className={clsx(
+              "border border-border flex items-center justify-center rounded-sm text-xs p-1 ",
+              currentPage <= 1
+                ? "cursor-default text-muted-foreground"
+                : "cursor-pointer",
+            )}
+            disabled={currentPage <= 1}
           >
             <FaMinus />
-          </Link>
+          </button>
+          {/* </Link> */}
           <p className="min-w-7 text-center text-sm text-muted-foreground px-1">
             {currentPage}
           </p>
-          <Link
-            href={hasNextPage ? `?page=${currentPage + 1}` : "#"}
-            aria-disabled={!hasNextPage}
-            className="border border-border flex items-center justify-center rounded-sm text-xs p-1 cursor-pointer"
+          <button
+            onClick={() => handleClick("next")}
+            className={clsx(
+              "border border-border flex items-center justify-center rounded-sm text-xs p-1",
+              !hasNextPage
+                ? "cursor-default text-muted-foreground"
+                : "cursor-pointer",
+            )}
+            disabled={!hasNextPage}
           >
             <FaPlus />
-          </Link>
+          </button>
+          {/* </Link> */}
         </div>
       ) : null}
     </div>

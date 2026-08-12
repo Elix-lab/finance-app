@@ -1,4 +1,4 @@
-"use client";
+
 
 import TransactionRowActions from "./TransactionRowActions";
 import { formatDate, parseISOtoDate } from "@/lib/date";
@@ -14,7 +14,7 @@ type TableProps = {
   hasNextPage?: boolean;
 };
 
-const TransactionTable = ({ transactions, title, currentPage, hasNextPage }: TableProps) => {
+const TransactionTable = ({ transactions, title, currentPage, hasNextPage}: TableProps) => {
   // Styles config
   const config = {
     income: {
@@ -26,7 +26,7 @@ const TransactionTable = ({ transactions, title, currentPage, hasNextPage }: Tab
   };
   return (
     <section className="flex flex-col bg-card rounded-2xl p-4 sm:p-6 border border-border gap-2">
-      <TransactionTableHeader title={title} currentPage={currentPage} hasNextPage={hasNextPage} />
+      <TransactionTableHeader title={title} currentPage={currentPage} hasNextPage={hasNextPage}/>
       {/* Transaction list */}
       <ul>
         {transactions

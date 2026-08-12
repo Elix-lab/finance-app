@@ -147,11 +147,11 @@ export const getFinanceSummary = async (userId: string) => {
 }
 
 
-export const getTxs = async (userId:string ,rowNum:number = 20, offsetNum:number = 0) => {
+export const getTxs = async (userId:string ,rowNum:number = 20, offsetNum:number = 0, filters) => {
   const txs = await db
   .select()
   .from(transactions)
-  .where(eq(transactions.userId, userId))
+  .where(and(eq(transactions.userId, userId),...filters))
   .orderBy(desc(transactions.date), desc(transactions.createdAt))
   .limit(rowNum)
   .offset(offsetNum)

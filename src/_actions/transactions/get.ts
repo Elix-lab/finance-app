@@ -3,8 +3,7 @@
 "use server";
 
 import { auth } from "@/lib/auth";
-import { eq } from "drizzle-orm";
-import { transactions } from "@/db/schema";
+import { type SQL, between, eq } from "drizzle-orm";
 import {
   getLatestTxs,
   getAvailableBalance,
@@ -12,6 +11,8 @@ import {
   getFinanceSummary,
   getTxs,
 } from "@/lib/data/transactions";
+import { GetTxsParams } from "@/types/transaction";
+import { transactions } from "@/db/schema";
 
 // Get last transactions.
 export const getLatestTxAction = async (transactionsLimit: number = 5) => {
@@ -56,19 +57,33 @@ export const getFinanceSummaryAction = async () => {
   return data;
 };
 
+
 // Get Transactions
-export const getTxsAction = async (page: number = 1, rowNum: number = 20) => {
+export const getTxsAction = async ({page = 1, rowNum = 20, from, to}: GetTxsParams) => {
+  const filters: SQL[] = []
   // Session
   const session = await auth();
   if (!session) throw new Error("Unauthorized");
+  // UserID
   const userId = session.user?.id!;
-
+  // Rows offset
   const offsetNum = (page - 1) * rowNum 
 
-  const txs = await getTxs(userId, rowNum + 1, offsetNum)
+  // DATE
+  if(from) {
+    if (!to){ 
+      filters.push(eq(transactions.date, from))
+    } else {
+      filters.push(between(transactions.date, from, to))
+    }
+  }
 
+  // Query -> rowNum+1 to see if there is any other transaction to show
+  const txs = await getTxs(userId, rowNum + 1, offsetNum, filters)
+  // Is there a new page? true | false
   const hasNextPage = txs.length > rowNum
-  const transactions = hasNextPage ? txs.slice(0, rowNum) : txs
+  // Returning the right amount of transactions
+  const transactionsResult = hasNextPage ? txs.slice(0, rowNum) : txs
 
-  return {transactions, hasNextPage}
+  return {transactions: transactionsResult, hasNextPage}
 };
