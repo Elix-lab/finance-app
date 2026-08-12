@@ -1,6 +1,6 @@
 import { db } from "@/db";
 import { transactions } from "@/db/schema";
-import { sql, eq, desc, and } from "drizzle-orm";
+import { sql, eq, desc, and, type SQL } from "drizzle-orm";
 
 // Insert a new Transaction
 export const createTx = async ({
@@ -147,7 +147,7 @@ export const getFinanceSummary = async (userId: string) => {
 }
 
 
-export const getTxs = async (userId:string ,rowNum:number = 20, offsetNum:number = 0, filters) => {
+export const getTxs = async (userId:string ,rowNum:number = 20, offsetNum:number = 0, filters: Array<SQL>) => {
   const txs = await db
   .select()
   .from(transactions)
