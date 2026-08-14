@@ -1,3 +1,8 @@
+/* 
+Filters transactions based on Date o Range of Dates selected 
+Uses Popover & Calendar ShadCN components
+*/
+
 "use client";
 
 import { Popover, PopoverTrigger, PopoverContent } from "../ui/shadCn/popover";
@@ -11,18 +16,24 @@ import { type DateRange } from "react-day-picker";
 import { format } from "date-fns";
 
 const DateFilter = () => {
+  // Getting URL params
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
   const router = useRouter();
 
+  // Initial dates selected in the Calendar
   const [dateRange, setDateRange] = useState<DateRange | undefined>({
     from: new Date(),
     to: addDays(new Date(), 10),
   });
 
+  // Manage selected date
   const handleClick = () => {
+    // Formatting date
     const from = dateRange?.from ? format(dateRange?.from, "yyyy-MM-dd") : "";
     const to = dateRange?.to ? format(dateRange?.to, "yyyy-MM-dd") : "";
+
+    // Changing URL settings
     if (!from) {
         params.delete("from");
         params.delete("to");
@@ -36,11 +47,12 @@ const DateFilter = () => {
       params.set("to", to);
     }
 
+    // Pushing new URL
     router.push(`?${params.toString()}`);
   };
 
   return (
-    <div>
+    <article>
       <Popover>
         <PopoverTrigger asChild>
           <Button className="flex gap-1 border-border bg-card" variant="outline">
@@ -53,7 +65,7 @@ const DateFilter = () => {
           <button onClick={handleClick} className="w-fit mx-auto px-5 py-1 rounded-lg bg-primary text-primary-foreground font-medium cursor-pointer hover:bg-primary/90 transition-colors">Save</button>
         </PopoverContent>
       </Popover>
-    </div>
+    </article>
   );
 };
 

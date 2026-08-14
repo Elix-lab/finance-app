@@ -1,5 +1,6 @@
+/* Filters for the Transacion page */
+
 import DateFilter from "./DateFilter";
-import { getTxsAction } from "@/_actions/transactions/get";
 
 const TransactionFilters = async () => {
     return <DateFilter />;

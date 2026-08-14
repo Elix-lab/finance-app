@@ -1,3 +1,7 @@
+/* 
+Conditionaly rendes a messagge or the Latest Transactions depending on the existence of transactions
+*/
+
 "use client";
 
 import TransactionTable from "./TransactionTable";
@@ -19,7 +23,7 @@ const LatestTransactions = () => {
   }
 
   return (
-    // TransactionTable
+    // CASE: there are existing transactions
     <TransactionTable transactions={transactions} title="Latest Transactions"/>
 
   );

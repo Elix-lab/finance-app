@@ -1,4 +1,4 @@
-/* Main Dashboard page */
+/* Main Dashboard page - authenticated view */
 
 import {
   getFinanceSummaryAction,

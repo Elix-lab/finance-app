@@ -1,4 +1,6 @@
-
+/* 
+Show a table with user's transactions
+*/
 
 import TransactionRowActions from "./TransactionRowActions";
 import { formatDate, parseISOtoDate } from "@/lib/date";
@@ -7,6 +9,7 @@ import { Transactions } from "@/types/transaction";
 import TxNatureIcon from "../ui/TxNatureIcon";
 import TransactionTableHeader from "./TransactionTableHeader";
 
+// Props type
 type TableProps = {
   transactions: Transactions;
   title: string;
@@ -15,7 +18,7 @@ type TableProps = {
 };
 
 const TransactionTable = ({ transactions, title, currentPage, hasNextPage}: TableProps) => {
-  // Styles config
+  // Styles configuration
   const config = {
     income: {
       amountColorClass: "text-primary",
