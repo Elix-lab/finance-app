@@ -1,8 +1,13 @@
+/* 
+Icon that changes based on the txNature prop
+You can also make it smaller via the 'size' prop
+ */
+
 import clsx from "clsx";
 import { LuArrowUpRight, LuArrowDownRight } from "react-icons/lu";
 
 function TxNatureIcon({ txNature, size }: { txNature: "income" | "expense", size?:'small' }) {
-  // Conditional rendering data
+  // Conditional rendering of Styles
   const config = {
     income: {
       Icon: LuArrowUpRight,

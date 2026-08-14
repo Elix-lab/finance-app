@@ -1,3 +1,5 @@
+/* Function to format amounts to display in view */
+
 export const formatCurrency = (amount: string) => {
     return(
         Number(amount).toLocaleString('en-US',{

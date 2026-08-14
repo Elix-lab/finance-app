@@ -1,3 +1,5 @@
+/* Main Dashboard page */
+
 import {
   getFinanceSummaryAction,
   getLatestTxAction,
@@ -9,8 +11,10 @@ import { getQueryClient } from "@/lib/getQueryClient";
 import Balance from "@/components/dashboard/Balance";
 
 const Page = async () => {
+  // queyClient passed to HydrationBoundary
   const queryClient = getQueryClient();
 
+  // Prefetching Dashboard components' data to have everything when it first renders
   await Promise.all([
     queryClient.prefetchQuery({
       queryKey: ["finance-summary"],
@@ -23,16 +27,18 @@ const Page = async () => {
   ]);
 
   return (
+    // HydrationBoundary allow us to work with the Server Cached data
     <HydrationBoundary state={dehydrate(queryClient)}>
       <main className="flex justify-center">
         <div className="flex flex-col gap-5 w-full max-w-3xl px-4 sm:px-6 py-6 sm:py-10">
-          {/* Balance summary component*/}
+          {/* Balance component*/}
           <Balance />
-          {/* Buttons to manage income and expenses */}
+          {/* Add Income & Add Expenses buttons */}
           <div className="flex flex-col gap-3 sm:gap-4 sm:grid grid-cols-2">
             <TransactionButton buttonNature="income" />
             <TransactionButton buttonNature="expense" />
           </div>
+          {/* Last transactions */}
           <LatestTransactions />
         </div>
       </main>
