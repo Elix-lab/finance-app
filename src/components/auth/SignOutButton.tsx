@@ -1,3 +1,5 @@
+/* Button for Signing Out */
+
 import { signOutAction } from "@/_actions/auth/actions"
 
 export const SignOutButton = () => {

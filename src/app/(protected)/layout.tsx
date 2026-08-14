@@ -1,3 +1,7 @@
+/* 
+  Layout - authenticated view
+*/
+
 import Header from "@/components/dashboard/Header";
 import SessionGuard from "@/components/auth/SessionGuard";
 

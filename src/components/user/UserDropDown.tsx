@@ -1,3 +1,8 @@
+/* 
+Dropdown button to manage user's session
+Uses DropdownMenu from ShadCn
+*/
+
 import { auth } from "@/lib/auth";
 import {
   DropdownMenu,
@@ -18,7 +23,7 @@ const UserDropDown = async () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        {/* <button className="cursor-pointer w-9 ring-1 ring-border rounded-full overflow-hidden hover:ring-primary focus-visible:outline-primary transition"> */}
+        {/* Button shows user's image or generic icon */}
         <Button className="overflow-hidden rounded-full p-0 size-10">
           {session?.user?.image ? (
             <img
@@ -30,11 +35,12 @@ const UserDropDown = async () => {
             <FaUser />
           )}
         </Button>
-        {/* </button> */}
       </DropdownMenuTrigger>
       <DropdownMenuContent>
+        {/* User name */}
         <DropdownMenuLabel>{userName}</DropdownMenuLabel>
         <DropdownMenuSeparator />
+        {/* SignOut button */}
         <DropdownMenuItem>
           <SignOutButton />
         </DropdownMenuItem>

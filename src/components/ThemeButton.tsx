@@ -1,3 +1,8 @@
+/* 
+Button for changing the theme 
+Displays different icon based on current theme
+*/
+
 'use client'
 
 import { useTheme } from "@/context/ThemeContext";
@@ -5,6 +10,7 @@ import { MdOutlineWbSunny } from "react-icons/md";
 import { LuMoon } from "react-icons/lu";
 
 const ThemeButton = () => {
+    // theme: current theme, setTheme: changes theme
     const {theme, setTheme} = useTheme()
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {

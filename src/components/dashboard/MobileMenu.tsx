@@ -1,3 +1,9 @@
+/* 
+Menu for small devices(e.g.: Mobile) 
+Displays a 'hamburguer' collapsible menu
+Uses ShadCN sheet
+*/
+
 import Link from "next/link";
 import { IoIosMenu } from "react-icons/io";
 import {
