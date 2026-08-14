@@ -48,7 +48,7 @@ const SessionGuard = ({ children }: { children: React.ReactNode }) => {
                 type="submit"
                 variant="outline"
                 size="lg"
-                className="cursor-pointer w-full rounded-xl border border-border h-10 sm:gap-3 "
+                className="w-full rounded-xl border border-border h-10 sm:gap-3 "
               >
                 <Link href="/signIn">
                   Go to Sign In Page

@@ -45,7 +45,7 @@ const SignInContent = ({ errorMessage }: ErrorMsg) => {
                 type="submit"
                 variant="outline"
                 size="lg"
-                className="cursor-pointer w-full rounded-xl border border-border h-10 sm:gap-3 "
+                className="w-full rounded-xl border border-border h-10 sm:gap-3 "
               >
                 <FcGoogle className="w-4" aria-hidden />
                 Continue with Google
