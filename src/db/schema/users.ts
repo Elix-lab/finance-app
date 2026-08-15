@@ -1,3 +1,5 @@
+/* Database Schema for the Users Table */
+
 import { pgTable, text, timestamp, unique, uuid } from "drizzle-orm/pg-core";
 
 export const users = pgTable(

@@ -1,3 +1,8 @@
+/* 
+Tanstack Query
+Keeps track of the mutations state with the mutation key = 'edit-transaction'
+*/
+
 import { Mutation, useMutationState } from "@tanstack/react-query";
 
 export const useEditTxMutationState = () => {

@@ -1,3 +1,5 @@
+/* Database Schema for the Transactions Table */
+
 import {
   pgTable,
   uuid,

@@ -1,3 +1,9 @@
+/* 
+Tanstack Query
+Mutation for creating a transaction.
+Manage optimistic rendering of the mutation during the process
+*/
+
 "use client";
 
 import { createTxAction } from "@/_actions/transactions/insert";

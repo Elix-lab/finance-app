@@ -1,3 +1,8 @@
+/* 
+Tanstack Query
+Query to get the Latest Transactions
+*/
+
 "use client";
 
 import { useQuery } from "@tanstack/react-query";

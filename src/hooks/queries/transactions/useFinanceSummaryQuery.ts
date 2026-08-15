@@ -1,3 +1,8 @@
+/* 
+Tanstack Query
+Query to get the Aviable Balance, Total Income & Total Expenses
+*/
+
 "use client";
 
 import { useQuery } from "@tanstack/react-query";

@@ -1,3 +1,8 @@
+/* 
+Tanstack Query
+Mutation for deleting a transaction.
+*/
+
 "use client";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
