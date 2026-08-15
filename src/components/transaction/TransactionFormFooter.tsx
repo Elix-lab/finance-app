@@ -1,3 +1,7 @@
+/* 
+Footer used inside TransactionForm.tsx
+*/
+
 "use client";
 
 import { DialogFooter, DialogClose } from "../ui/shadCn/dialog";
@@ -13,17 +17,20 @@ const TransactionFormFooter = ({
 }) => {
   return (
     <DialogFooter>
+      {/* Cancel button */}
       <DialogClose asChild>
         <Button variant="outline">Cancel</Button>
       </DialogClose>
-
+      {/* Save button */}
       <DialogClose asChild>
         <Button
           type="submit"
           className={clsx({
-            "bg-primary hover:bg-primary/90": txNature === "income" && mode ==='create',
-            "bg-destructive hover:bg-destructive/90": txNature === "expense" && mode ==='create',
-            'bg-edit hover:bg-edit/90': mode === 'edit'
+            "bg-primary hover:bg-primary/90":
+              txNature === "income" && mode === "create",
+            "bg-destructive hover:bg-destructive/90":
+              txNature === "expense" && mode === "create",
+            "bg-edit hover:bg-edit/90": mode === "edit",
           })}
         >
           Save

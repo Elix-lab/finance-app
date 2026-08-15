@@ -1,3 +1,9 @@
+/* 
+Three dots menu used in every transaction line inside the TransactionTable.tsx
+It allows the user to edit or delete the transaction
+Edit: displays a form with the transactions info. If ther is no info, displays a spinner
+*/
+
 "use client";
 
 import { MdOutlineDeleteForever, MdOutlineEdit } from "react-icons/md";
@@ -19,7 +25,6 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
 } from "../ui/shadCn/dropdown-menu";
-import { Button } from "../ui/shadCn/button";
 import { useDeleteTransactionMutation } from "@/hooks/mutations/transactions/useDeleteTransactionMutation";
 import TransactionForm from "./TransactionForm";
 import { useEditTransactionMutation } from "@/hooks/mutations/transactions/useEditTransactionMutation";
@@ -57,7 +62,6 @@ const TransactionRowActions = ({ transaction }: {transaction: Transaction}) => {
       useDeleteTxMutation.mutate(transaction.id);
     }
   };
-
   const handleEdit = () => {
     setTx(transaction);
   };
@@ -67,6 +71,7 @@ const TransactionRowActions = ({ transaction }: {transaction: Transaction}) => {
     <Dialog>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
+          {/* Conditional rendering: spinner | three dots */}
           {showSpinner ? (
             <button disabled={true} className="flex items-center justify-center shrink-0 size-8 rounded-lg transition">
               <Spinner />
@@ -79,6 +84,7 @@ const TransactionRowActions = ({ transaction }: {transaction: Transaction}) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuGroup>
+            {/* Edit button - displays the form to edit the transaction */}
             <DialogTrigger className="w-full" onClick={handleEdit}>
               <DropdownMenuItem>
                 <MdOutlineEdit />
@@ -86,6 +92,7 @@ const TransactionRowActions = ({ transaction }: {transaction: Transaction}) => {
               </DropdownMenuItem>
             </DialogTrigger>
             <DropdownMenuSeparator />
+            {/* Delete */}
             <DropdownMenuItem onClick={handleDelete}>
               <MdOutlineDeleteForever />
               Delete
@@ -94,7 +101,7 @@ const TransactionRowActions = ({ transaction }: {transaction: Transaction}) => {
         </DropdownMenuContent>
       </DropdownMenu>
 
-      {/* Edition Form */}
+      {/* Edition Form - Case => no transaction info:displays spinner, else: show form with transaction info*/}
       {!tx ? (
         <DialogContent className="flex gap-3 items-center">
           <DialogTitle>
@@ -105,7 +112,6 @@ const TransactionRowActions = ({ transaction }: {transaction: Transaction}) => {
           <DialogDescription>Preparing for edition</DialogDescription>
         </DialogContent>
       ) : (
-        // className="rounded-lg border border-amber-300 sm:max-w-xl"
         <DialogContent className="rounded-lg border border-edit sm:max-w-xl">
           <TransactionForm
             mutationHook={useEditTransactionMutation}

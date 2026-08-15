@@ -1,3 +1,5 @@
+/* Search bar for searching transactions */
+
 const SearchBar = () => {
     return(
         <>

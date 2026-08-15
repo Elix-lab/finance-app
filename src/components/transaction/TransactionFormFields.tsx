@@ -1,3 +1,7 @@
+/* 
+Inputs used inside TransactionForm.tsx
+*/
+
 "use client";
 
 import { Popover, PopoverTrigger, PopoverContent } from "../ui/shadCn/popover";
@@ -103,7 +107,9 @@ const TransactionFormFields = ({
           }
         />
 
+        {/* Transaction nature input - hidden */}
         <input type="hidden" name="nature" value={txNature} />
+        {/* Transaction id input - hidden */}
         <input type="hidden" name="id" value={id} />
       </div>
     </div>

@@ -1,3 +1,7 @@
+/* 
+Form used to manage the creation or edition of transactions
+*/
+
 "use client";
 
 import TransactionFormHeader from "./TransactionFormHeader";
