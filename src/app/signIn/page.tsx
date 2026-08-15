@@ -1,3 +1,5 @@
+/* Main SignIn page */
+
 import SignInContent from "@/components/signIn/SignInContent";
 
 const Page = async ({
@@ -5,6 +7,7 @@ const Page = async ({
 }: {
   searchParams: Promise<{ error?: string }>;
 }) => {
+  // Capturing possible error
   const { error } = await searchParams;
   const errorMessage = error
     ? "SignIn error, please try again in a few minutes"

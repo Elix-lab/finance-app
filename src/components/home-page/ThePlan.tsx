@@ -1,6 +1,11 @@
+/* 
+Plan section - Home page
+*/
+
 import Link from "next/link";
 import { LuCirclePlus, LuEye, LuRocket } from "react-icons/lu";
 
+// Steps data
 const steps = [
   {
     num: "01",
@@ -31,7 +36,7 @@ const ThePlan = () => {
         <h2 className="text-3xl font-bold tracking-tight text-balance sm:text-4xl">
           Build financial clarity step by step
         </h2>
-
+        {/* Display of the Steps */}
         <ul className="grid gap-6 md:grid-cols-3">
           {steps.map(({ num, Icon, title, description }) => (
             <li
@@ -54,6 +59,7 @@ const ThePlan = () => {
             </li>
           ))}
         </ul>
+        {/* CTA button */}
         <Link
           href="/signIn"
           className="text-xs font-medium bg-primary text-primary-foreground rounded-full px-2.5 py-1.5 hover:translate-y-0.5 hover:bg-primary/90 transition"

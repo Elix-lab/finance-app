@@ -1,3 +1,8 @@
+/* 
+Content to show in SignIn page
+In case the signIn is processing it renders a loading screen
+*/
+
 "use client";
 import LoadingScreen from "../LoadingScreen";
 import { FcGoogle } from "react-icons/fc";
@@ -7,6 +12,7 @@ import Link from "next/link";
 import Logo from "../ui/Logo";
 import { signInAction } from "@/_actions/auth/actions";
 
+// Prop´s type
 type ErrorMsg = {
   errorMessage: string | null;
 };
@@ -14,10 +20,10 @@ type ErrorMsg = {
 const SignInContent = ({ errorMessage }: ErrorMsg) => {
   const { pending } = useFormStatus();
 
-  // If the form is loading then show the Loading Screen
+  // CASE: form is pending, show Loading Screen
   if (pending) return <LoadingScreen />;
 
-  // Predeterminated view
+  // CASE: default
   return (
     <main className="min-h-dvh flex flex-col items-center justify-center px-6 py-12">
       {/* Logo */}

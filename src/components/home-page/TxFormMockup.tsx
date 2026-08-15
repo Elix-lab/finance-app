@@ -1,8 +1,10 @@
+/* Iconography of the transactions form - Home page  */
+
 import TxNatureIcon from "../ui/TxNatureIcon";
 
 const TxFormMockup = () => {
   return (
-    <div className="rounded-3xl bg-card border border-border p-6 shadow-xl shadow-primary/5 max-w-md mx-auto w-full">
+    <article className="rounded-3xl bg-card border border-border p-6 shadow-xl shadow-primary/5 max-w-md mx-auto w-full">
       {/* title */}
       <div className="flex items-center gap-2.5">
         <TxNatureIcon txNature="expense" size="small" />
@@ -30,7 +32,7 @@ const TxFormMockup = () => {
         </div>
       </div>
         <div className="mt-8 rounded-4xl bg-destructive px-4 py-3 text-sm text-center font-semibold text-white">Save Expense</div>
-    </div>
+    </article>
   );
 }
 

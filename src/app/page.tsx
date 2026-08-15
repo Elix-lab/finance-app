@@ -1,4 +1,7 @@
-// Homepage page
+/* 
+Main Home page - landing page 
+Structure of the page based on the book: Marketing Made Simple
+*/
 
 import NavBar from "@/components/home-page/NavBar";
 import Hero from "@/components/home-page/Hero";

@@ -1,3 +1,7 @@
+/* 
+Iconography of transactions - Home page 
+*/
+
 import clsx from "clsx";
 import TxNatureIcon from "../ui/TxNatureIcon";
 import { Transaction } from "@/types/transaction";
@@ -8,8 +12,10 @@ type TxsTableMockupProps = {
 
 const TxsTableMockup = ({ transactions }: TxsTableMockupProps) => {
   return (
-    <div className="rounded-3xl border border-border bg-card p-5 shadow-2xl shadow-primary/10 sm:p-6">
+    <article className="rounded-3xl border border-border bg-card p-5 shadow-2xl shadow-primary/10 sm:p-6">
+      {/* Title */}
       <p className="text-sm font-semibold">Last Transactions</p>
+      {/* View of transactions */}
       <ul className="mt-3 divide-y divide-border">
         {transactions.map((t) => (
           <li key={t.title} className="flex items-center gap-3 py-3">
@@ -32,7 +38,7 @@ const TxsTableMockup = ({ transactions }: TxsTableMockupProps) => {
           </li>
         ))}
       </ul>
-    </div>
+    </article>
   );
 }
 

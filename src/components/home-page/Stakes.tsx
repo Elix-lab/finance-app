@@ -1,3 +1,7 @@
+/* 
+Stakes section - Home page
+*/
+
 import {
   LuReceipt,
   LuClipboardList,
@@ -5,6 +9,7 @@ import {
   LuBrain,
 } from "react-icons/lu";
 
+// Stakes data
 const stakes = [
   {
     id: 1,
@@ -39,10 +44,12 @@ const stakes = [
 const Stakes = () => {
   return (
     <section className="max-w-6xl mx-auto px-6 py-20 lg:py-28">
+      {/* Title */}
       <h2 className="text-balance text-3xl font-bold tracking-tight sm:text-4xl max-w-2xl mx-auto text-center">
         Money becomes harder to manage when you don&apos;t know where it&apos;s
         going.
       </h2>
+      {/* Stakes display */}
       <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {stakes.map(({ id, Icon, title, description }) => (
           <li

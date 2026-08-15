@@ -1,8 +1,12 @@
+/*
+Value Proposition section - Home page
+*/
+
 import TxNatureIcon from "../ui/TxNatureIcon";
 import TxFormMockup from "./TxFormMockup";
 
 const summaries = ["income", "expense"] as const;
-// Conditional rendering data
+// Amount summaries data
 const config = {
   income: {
     label: "Total Income",
@@ -21,7 +25,6 @@ const ValueProposition = () => {
     <section id="valueProposition" className="bg-secondary/40 scroll-mt-16">
       <div className="grid justify-center items-center gap-3 lg:justify-start lg:grid-cols-2 max-w-6xl mx-auto px-6 py-20 lg:py-28">
         {/* FIRST HALF */}
-        {/* Content */}
         <div className="flex flex-col items-center lg:items-start">
           <h2 className="text-3xl font-bold text-balance tracking-tight sm:text-4xl text-center lg:text-left max-w-4xl">
             Always know where you stand financially.
@@ -31,12 +34,12 @@ const ValueProposition = () => {
             and how much room you have to make your next financial move with
             confidence.
           </p>
-          {/* Summaries */}
+          {/* View of the Summaries */}
           <div className="mt-8 grid grid-cols-2 gap-4 w-full max-w-md">
             {summaries.map((summary) => {
               const { label, textClass, amount } = config[summary];
               return (
-                <div
+                <article
                   key={summary}
                   className="flex flex-col gap-3 p-5 bg-card border border-border rounded-2xl"
                 >
@@ -45,9 +48,11 @@ const ValueProposition = () => {
                     <span className={`text-2xl font-bold ${textClass}`}>
                       ${amount}
                     </span>
-                    <p className="text-xs sm:text-sm text-muted-foreground">{label}</p>
+                    <p className="text-xs sm:text-sm text-muted-foreground">
+                      {label}
+                    </p>
                   </div>
-                </div>
+                </article>
               );
             })}
           </div>
@@ -57,6 +62,6 @@ const ValueProposition = () => {
       </div>
     </section>
   );
-}
+};
 
 export default ValueProposition;

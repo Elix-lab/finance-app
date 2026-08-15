@@ -1,3 +1,7 @@
+/*  
+Component to ilustrate the app's Dashboard within home-page/Hero
+*/
+
 import TxNatureIcon from "../ui/TxNatureIcon";
 import TxsTableMockup from "./TxsTableMokup";
 import { Transaction } from "@/types/transaction";

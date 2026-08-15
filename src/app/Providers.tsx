@@ -1,3 +1,5 @@
+/* Providers for using in the Main Layout */
+
 "use client";
 
 import { SessionProvider } from "next-auth/react";

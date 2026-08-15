@@ -1,14 +1,15 @@
-"use client";
+/* NavBar for the Home page */
 
+"use client";
 import Link from "next/link";
 import ThemeButton from "../ThemeButton";
 import Logo from "../ui/Logo";
 
 const NavBar = () => {
+  // Scroll handlers
   const handleScroll = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
-
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -41,6 +42,7 @@ const NavBar = () => {
             </li>
           </ul>
         </nav>
+        {/* Theme & CTA buttons */}
         <div className="flex items-center gap-2">
           <div className="hidden sm:inline">
           <ThemeButton />

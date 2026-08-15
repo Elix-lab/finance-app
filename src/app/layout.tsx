@@ -1,3 +1,5 @@
+/* Main Layout */
+
 import { ThemeProvider } from "@/context/ThemeContext";
 import { poppins } from "@/components/ui/fonts/fonts";
 import type { Metadata } from "next";

@@ -1,6 +1,7 @@
+/* Hero section for the Home page */
+
 import Link from "next/link";
 import DashboardMockup from "./DashboardMockup";
-
 
 const Hero = () => {
   return (
