@@ -9,20 +9,18 @@ import { createTx } from "@/lib/data/transactions";
 export const createTxAction = async (formData: FormData) => {
   // Check session
   const session = await auth();
-  if (!session) {
-    throw new Error("You must be logged in to perform this action");
+  if (!session?.user?.id) {
+    throw new Error("[_actions/transactions/insert][createTxAction] Unauthorized");
   }
 
   // Creating new transaction object
-  const userId = session.user?.id;
-  if (!userId) {
-    throw new Error("User ID is required");
-  }
+  const userId = session.user.id;
+  
   const amount = String(formData.get("amount"));
   // Checking if amount if valid
   const amountValue = Number(amount);
   if (isNaN(amountValue)) {
-    throw new Error("Invalid amount format");
+    throw new Error("[_actions/transactions/insert][createTxAction] Invalid amount format");
   }
   
   const nature = formData.get("nature") as "income" | "expense";

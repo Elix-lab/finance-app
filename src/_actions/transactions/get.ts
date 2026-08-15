@@ -18,8 +18,8 @@ import { transactions } from "@/db/schema";
 export const getLatestTxAction = async (transactionsLimit: number = 5) => {
   //Check session
   const session = await auth();
-  if (!session) throw new Error("Unauthorized");
-  const userId = session.user?.id!;
+  if (!session?.user?.id) throw new Error("[_actions/transactions/get][getLatestTxAction] Unauthorized");
+  const userId = session.user.id;
 
   //Getting transactions
   return await getLatestTxs(userId, transactionsLimit);
@@ -29,31 +29,35 @@ export const getLatestTxAction = async (transactionsLimit: number = 5) => {
 export const getAvailableBalanceAction = async () => {
   // Check user session
   const session = await auth();
-  if (!session) throw new Error("Unauthorized");
+  if (!session?.user?.id) throw new Error("[_actions/transactions/get][getAvailableBalanceAction] Unauthorized");
+  const userId = session.user.id;
 
   // Getting Aviable Balance
-  return await getAvailableBalance(session!.user!.id!);
+  return await getAvailableBalance(userId);
 };
 
 // Get sum of Transactions by nature
 export const getSumByNatureAction = async () => {
   // Check user session
   const session = await auth();
-  if (!session) throw new Error("Unauthorized");
+  if (!session?.user?.id) throw new Error("[_actions/transactions/get][getSumByNatureAction] Unauthorized");
+  const userId = session.user.id;
 
   // Getting sum by nature
-  return getSumByNature(session.user?.id!);
+  return getSumByNature(userId);
 };
 
 // Get Aviable Balance and Totals of income and expenses
 export const getFinanceSummaryAction = async () => {
   // Check session
   const session = await auth();
-  if (!session) {
-    throw new Error("Unauthorized");
+  if (!session?.user?.id) {
+    throw new Error("[_actions/transactions/get][getFinanceSummaryAction] Unauthorized");
   }
+  const userId = session.user.id;
 
-  const data = await getFinanceSummary(session.user?.id!);
+
+  const data = await getFinanceSummary(userId);
   return data;
 };
 
@@ -63,9 +67,9 @@ export const getTxsAction = async ({page = 1, rowNum = 20, from, to}: GetTxsPara
   const filters: SQL[] = []
   // Session
   const session = await auth();
-  if (!session) throw new Error("Unauthorized");
+  if (!session?.user?.id) throw new Error("[_actions/transactions/get][getTxsAction] Unauthorized");
   // UserID
-  const userId = session.user?.id!;
+  const userId = session.user.id;
   // Rows offset
   const offsetNum = (page - 1) * rowNum 
 

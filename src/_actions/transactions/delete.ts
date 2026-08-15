@@ -10,9 +10,10 @@ import { revalidatePath } from "next/cache";
 export const deleteTxAction = async (transactionId: string) => {
   //Check session
   const session = await auth();
-  if (!session) throw new Error("You must be logged in to perform this action");
+  if (!session?.user?.id) throw new Error('[_actions/transactions/delete][deleteTxAction] Unauthorized');
+  const userId = session.user.id
 
-  await deleteTx(session!.user!.id!, transactionId);
+  await deleteTx(userId, transactionId);
 
   revalidatePath('/dashboard')
 }

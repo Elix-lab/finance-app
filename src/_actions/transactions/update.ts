@@ -11,24 +11,24 @@ import { revalidatePath } from "next/cache";
 export async function updateTxAction(formData: FormData) {
   // Check session
   const session = await auth();
-  if (!session) {
-    throw new Error("You must be logged in to perform this action");
+  if (!session?.user?.id) {
+    throw new Error("[_actions/transactions/update][updateTxAction] Unauthorized");
   }
 
   // Creating updated transaction object
-  const userId = session.user!.id!;
+  const userId = session.user.id;
   const id = String(formData.get("id")) ?? "";
   const title = String(formData.get("title")) ?? "";
   const category = String(formData.get("category")) ?? "";
   const date = String(formData.get("date")) ?? "";
   const amount = String(formData.get("amount"));
   if (!amount || amount.trim() === "") {
-    throw new Error("Amount required");
+    throw new Error("[_actions/transactions/update][updateTxAction] Nonexistent amount");
   }
   try {
     new Decimal(amount);
   } catch {
-    throw new Error("Invalid amount");
+    throw new Error("[_actions/transactions/update][updateTxAction] Invalid amount format");
   }
   const updatedTransaction = { id, userId, title, category, date, amount };
 
