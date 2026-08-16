@@ -1,8 +1,14 @@
+/* 
+Database operations for managing Transactions Table
+Organized under the acronym CRUD
+*/
+
 import { db } from "@/db";
 import { transactions } from "@/db/schema";
 import { sql, eq, desc, and, type SQL } from "drizzle-orm";
 
-// Insert a new Transaction
+// CREATE
+// Create Transaction
 export const createTx = async ({
   data,
 }: {
@@ -25,7 +31,8 @@ export const createTx = async ({
   });
 };
 
-// Get last transactions
+// READ
+// Get latest transactions
 export const getLatestTxs = async (
   userId: string,
   transactionsLimit: number,
@@ -40,7 +47,7 @@ export const getLatestTxs = async (
   return LatestTxs;
 };
 
-// Get a SINGLE transaction
+// Get transaction
 export const getSingleTx = async (userId: string, transactionId: string) => {
   const SingleTx = await db
     .select()
@@ -52,42 +59,7 @@ export const getSingleTx = async (userId: string, transactionId: string) => {
   return SingleTx;
 };
 
-// Delete transaction
-export const deleteTx = async (userId: string, transactionId: string) => {
-  return await db
-    .delete(transactions)
-    .where(
-      and(eq(transactions.id, transactionId), eq(transactions.userId, userId)),
-    );
-};
-
-// Update transaction
-export const updateTx = async ({
-  data,
-}: {
-  data: {
-    id: string;
-    userId: string;
-    title: string;
-    category: string;
-    amount: string;
-    date: string;
-  };
-}) => {
-  return await db
-    .update(transactions)
-    .set({
-      amount: data.amount,
-      title: data.title,
-      category: data.category,
-      date: data.date,
-    })
-    .where(
-      and(eq(transactions.userId, data.userId), eq(transactions.id, data.id)),
-    );
-};
-
-// Get Sum of transactions by nature
+// Get total amount by nature
 export const getSumByNature = async (userId: string) => {
   const result = await db
     .select({
@@ -119,7 +91,7 @@ export const getAvailableBalance = async (userId: string) => {
   return result.balance ?? "0";
 };
 
-// Get Aviable Balance and Totals of income and expenses
+// Get Aviable Balance, Total Income & Total Expenses
 export const getFinanceSummary = async (userId: string) => {
   const [result] = await db
     .select({
@@ -146,7 +118,7 @@ export const getFinanceSummary = async (userId: string) => {
   };
 }
 
-
+// Get transactions
 export const getTxs = async (userId:string ,rowNum:number = 20, offsetNum:number = 0, filters: Array<SQL>) => {
   const txs = await db
   .select()
@@ -158,3 +130,40 @@ export const getTxs = async (userId:string ,rowNum:number = 20, offsetNum:number
 
   return txs;
 }
+
+// UPDATE
+// Update transaction
+export const updateTx = async ({
+  data,
+}: {
+  data: {
+    id: string;
+    userId: string;
+    title: string;
+    category: string;
+    amount: string;
+    date: string;
+  };
+}) => {
+  return await db
+    .update(transactions)
+    .set({
+      amount: data.amount,
+      title: data.title,
+      category: data.category,
+      date: data.date,
+    })
+    .where(
+      and(eq(transactions.userId, data.userId), eq(transactions.id, data.id)),
+    );
+};
+
+// DELETE
+// Delete transaction
+export const deleteTx = async (userId: string, transactionId: string) => {
+  return await db
+    .delete(transactions)
+    .where(
+      and(eq(transactions.id, transactionId), eq(transactions.userId, userId)),
+    );
+};

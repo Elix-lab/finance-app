@@ -1,17 +1,13 @@
+/* 
+Database operations for managing Users Table
+Organized under the acronym CRUD
+*/
+
 import { db } from "@/db";
 import { eq } from "drizzle-orm";
 import { users } from "@/db/schema";
 
-// Get user by email
-export const getUserByEmail = async (email: string) => {
-  const user = await db
-    .select()
-    .from(users)
-    .where(eq(users.email, email))
-    .limit(1);
-  return user[0] ?? null;
-}
-
+// CREATE
 // Create user
 export const createUser = async (newUser: {
   name?: string;
@@ -29,3 +25,17 @@ export const createUser = async (newUser: {
     .returning();
   return user[0] ?? null;
 }
+
+// READ
+// Get user by email
+export const getUserByEmail = async (email: string) => {
+  const user = await db
+    .select()
+    .from(users)
+    .where(eq(users.email, email))
+    .limit(1);
+  return user[0] ?? null;
+}
+
+// UPDATE
+// DELETE
