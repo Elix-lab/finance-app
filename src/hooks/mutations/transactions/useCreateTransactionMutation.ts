@@ -70,7 +70,7 @@ export const useCreateTransactionMutation = () => {
         if (!old) {
           return [optimisticTx];
         }
-        return [optimisticTx, ...old];
+        return [optimisticTx, ...old].slice(0,5);
       });
       // Returning previous data to use in onError in case a revert is needed
       return { previousData };
