@@ -1,4 +1,4 @@
-/* Function to format amounts to display in view */
+/* Function to format amounts to display in the view */
 
 export const formatCurrency = (amount: string) => {
     return(

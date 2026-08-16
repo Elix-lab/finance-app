@@ -1,3 +1,5 @@
+/* Auth configuration */
+
 import NextAuth from "next-auth";
 import { User } from "next-auth";
 import Google from "next-auth/providers/google";

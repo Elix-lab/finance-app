@@ -1,4 +1,4 @@
-//  Transaction type
+//  Transaction Types
 
 // Singular
 export type Transaction = {
@@ -20,10 +20,6 @@ export type Transactions = {
   date: string;
   createdAt: string | null;
 }[];
-
-export type TransactionFilters = {
-  // transaction filters
-}
 
 export type GetTxsParams = {
   page?: number;

@@ -1,3 +1,9 @@
+/* 
+Function to keep track of the widnow width.
+It returns a boolean that depends on the prarameter received;
+if the width matches the parameter's condition then it returns true
+*/
+
 "use client";
 
 import { useEffect, useState } from "react";
