@@ -24,7 +24,7 @@ export const useCreateTransactionMutation = () => {
       ]);
 
       // Get the current data
-      const previousData = await queryClient.getQueryData([
+      const previousData = queryClient.getQueryData([
         "transactions",
         "latest",
       ]);
