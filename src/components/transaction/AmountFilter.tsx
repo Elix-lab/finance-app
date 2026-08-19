@@ -1,4 +1,10 @@
+/* 
+Filter transactions based on min & max Amount
+Uses Popover from ShadCN
+*/
+
 "use client";
+
 import { Popover, PopoverTrigger, PopoverContent } from "../ui/shadCn/popover";
 import { Button } from "../ui/shadCn/button";
 import { FaCaretDown } from "react-icons/fa";
@@ -6,9 +12,9 @@ import { useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 
 const AmountFilter = () => {
+  // Getting params
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
-  console.log(params);
   const router = useRouter();
 
   // Inputs State
@@ -23,14 +29,14 @@ const AmountFilter = () => {
   const handleMaxAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMaxAmount(e.target.value);
   };
-
+  // Handle Submit
   const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (minAmount && maxAmount && minAmount > maxAmount) {
       setInvalidRange(true);
       return;
     } else {
-      setInvalidRange(false)
+      setInvalidRange(false);
       minAmount
         ? params.set("minAmount", minAmount)
         : params.delete("minAmount");
@@ -56,8 +62,9 @@ const AmountFilter = () => {
         <PopoverContent>
           <form
             onSubmit={handleSubmit}
-            className="flex flex-col gap-3 text-sm font-medium p-5"
+            className="flex flex-col gap-3 text-sm font-medium px-3 py-3"
           >
+            {/* Inputs */}
             <div className="flex gap-1.5">
               {/* Min Amount */}
               <div className="flex flex-col">
@@ -84,10 +91,13 @@ const AmountFilter = () => {
                 />
               </div>
             </div>
+            {/* Button & Error message */}
             <div className="text-center">
+              {/* Button */}
               <button className="w-fit mx-auto px-5 py-1 rounded-lg bg-primary text-primary-foreground font-medium cursor-pointer hover:bg-primary/90 transition-colors">
                 Apply
               </button>
+              {/* Error message */}
               {invalidRange ? (
                 <p className="text-xs font-light text-destructive mt-1.5">
                   Invalid amount range

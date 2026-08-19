@@ -105,7 +105,9 @@ export const getTxsAction = async ({
     if (minAmount <= maxAmount) {
       filters.push(between(transactions.amount, minAmount, maxAmount));
     } else {
-      throw new Error("[_actions/transactions/get][getTxsAction] maxAmount can't be lower than minAmount")
+      throw new Error(
+        "[_actions/transactions/get][getTxsAction] maxAmount can't be lower than minAmount",
+      );
     }
   } else {
     if (minAmount) {

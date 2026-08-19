@@ -1,5 +1,5 @@
 /* 
-Filters transactions based on Date o Range of Dates selected 
+Filter transactions based on Date or Range of Dates selected 
 Uses Popover & Calendar ShadCN components
 */
 
