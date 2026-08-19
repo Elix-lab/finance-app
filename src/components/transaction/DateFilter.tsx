@@ -55,12 +55,12 @@ const DateFilter = () => {
     <article>
       <Popover>
         <PopoverTrigger asChild>
-          <Button className="flex gap-1 border-border bg-card" variant="outline">
+          <Button className="flex border-border bg-card" variant="outline">
             <span className="text-sm">Date</span>
-            <FaCaretDown className="ml-auto" />
+            <FaCaretDown />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-auto p-5">
+        <PopoverContent className="w-auto p-5 gap-2">
           <Calendar mode="range" selected={dateRange} onSelect={setDateRange} />
           <button onClick={handleClick} className="w-fit mx-auto px-5 py-1 rounded-lg bg-primary text-primary-foreground font-medium cursor-pointer hover:bg-primary/90 transition-colors">Apply</button>
         </PopoverContent>

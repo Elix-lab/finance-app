@@ -25,12 +25,13 @@ const AmountFilter = () => {
     setMaxAmount(e.target.value);
   };
 
-  const handleClick = () => {
-    if (minAmount && maxAmount && !isValidRange){
-      return
+  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (minAmount && maxAmount && !isValidRange) {
+      return;
     }
-    minAmount ? params.set('minAmount', minAmount) : params.delete('minAmount')
-    maxAmount ? params.set('maxAmount', maxAmount) : params.delete('maxAmount')
+    minAmount ? params.set("minAmount", minAmount) : params.delete("minAmount");
+    maxAmount ? params.set("maxAmount", maxAmount) : params.delete("maxAmount");
 
     router.push(`?${params.toString()}`);
   };
@@ -48,38 +49,39 @@ const AmountFilter = () => {
           </Button>
         </PopoverTrigger>
         <PopoverContent>
-          <div className="flex gap-2 text-sm font-medium">
-            {/* Min Amount */}
-            <div className="flex flex-col">
-              <label htmlFor="from">Min</label>
-              <input
-                type="number"
-                id="minAmount"
-                step={0.01}
-                className="w-full border px-2 py-1 rounded-lg"
-                value={minAmount}
-                onChange={handleMinAmount}
-              />
+          <form onSubmit={handleSubmit} className="flex flex-col gap-2 text-sm font-medium">
+            <div className="flex gap-1.5">
+              {/* Min Amount */}
+              <div className="flex flex-col">
+                <label htmlFor="from">Min</label>
+                <input
+                  type="number"
+                  id="minAmount"
+                  step={0.01}
+                  className="w-full border px-2 py-1 rounded-lg"
+                  value={minAmount}
+                  onChange={handleMinAmount}
+                />
+              </div>
+              {/* Max Amount */}
+              <div className="flex flex-col">
+                <label htmlFor="to">Max</label>
+                <input
+                  type="number"
+                  id="maxAmount"
+                  step={0.01}
+                  className="w-full border px-2 py-1 rounded-lg"
+                  value={maxAmount}
+                  onChange={handleMaxAmount}
+                />
+              </div>
             </div>
-            {/* Max Amount */}
-            <div className="flex flex-col">
-              <label htmlFor="to">Max</label>
-              <input
-                type="number"
-                id="maxAmount"
-                step={0.01}
-                className="w-full border px-2 py-1 rounded-lg"
-                value={maxAmount}
-                onChange={handleMaxAmount}
-              />
-            </div>
-          </div>
-          <button
-            className="w-fit mx-auto px-5 py-1 rounded-lg bg-primary text-primary-foreground font-medium cursor-pointer hover:bg-primary/90 transition-colors"
-            onClick={handleClick}
-          >
-            Apply
-          </button>
+            <button
+              className="w-fit mx-auto px-5 py-1 rounded-lg bg-primary text-primary-foreground font-medium cursor-pointer hover:bg-primary/90 transition-colors"
+            >
+              Apply
+            </button>
+          </form>
         </PopoverContent>
       </Popover>
     </article>
