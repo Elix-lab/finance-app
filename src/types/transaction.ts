@@ -26,4 +26,6 @@ export type GetTxsParams = {
   rowNum?: number;
   from?: string;
   to?:string;
+  minAmount?: string;
+  maxAmount?: string;
 };
