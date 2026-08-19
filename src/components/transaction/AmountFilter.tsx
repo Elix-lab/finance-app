@@ -4,7 +4,6 @@ import { Button } from "../ui/shadCn/button";
 import { FaCaretDown } from "react-icons/fa";
 import { useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { max } from "drizzle-orm";
 
 const AmountFilter = () => {
   const searchParams = useSearchParams();
@@ -15,7 +14,7 @@ const AmountFilter = () => {
   // Inputs State
   const [minAmount, setMinAmount] = useState("");
   const [maxAmount, setMaxAmount] = useState("");
-  const isValidRange = Number(minAmount) <= Number(maxAmount);
+  const [invalidRange, setInvalidRange] = useState(false);
 
   // Handle Input Changes
   const handleMinAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,13 +25,19 @@ const AmountFilter = () => {
   };
 
   const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    if (minAmount && maxAmount && !isValidRange) {
+    e.preventDefault();
+    if (minAmount && maxAmount && minAmount > maxAmount) {
+      setInvalidRange(true);
       return;
+    } else {
+      setInvalidRange(false)
+      minAmount
+        ? params.set("minAmount", minAmount)
+        : params.delete("minAmount");
+      maxAmount
+        ? params.set("maxAmount", maxAmount)
+        : params.delete("maxAmount");
     }
-    minAmount ? params.set("minAmount", minAmount) : params.delete("minAmount");
-    maxAmount ? params.set("maxAmount", maxAmount) : params.delete("maxAmount");
-
     router.push(`?${params.toString()}`);
   };
 
@@ -49,7 +54,10 @@ const AmountFilter = () => {
           </Button>
         </PopoverTrigger>
         <PopoverContent>
-          <form onSubmit={handleSubmit} className="flex flex-col gap-2 text-sm font-medium">
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-3 text-sm font-medium p-5"
+          >
             <div className="flex gap-1.5">
               {/* Min Amount */}
               <div className="flex flex-col">
@@ -76,11 +84,16 @@ const AmountFilter = () => {
                 />
               </div>
             </div>
-            <button
-              className="w-fit mx-auto px-5 py-1 rounded-lg bg-primary text-primary-foreground font-medium cursor-pointer hover:bg-primary/90 transition-colors"
-            >
-              Apply
-            </button>
+            <div className="text-center">
+              <button className="w-fit mx-auto px-5 py-1 rounded-lg bg-primary text-primary-foreground font-medium cursor-pointer hover:bg-primary/90 transition-colors">
+                Apply
+              </button>
+              {invalidRange ? (
+                <p className="text-xs font-light text-destructive mt-1.5">
+                  Invalid amount range
+                </p>
+              ) : null}
+            </div>
           </form>
         </PopoverContent>
       </Popover>
