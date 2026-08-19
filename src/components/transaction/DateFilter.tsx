@@ -62,7 +62,7 @@ const DateFilter = () => {
         </PopoverTrigger>
         <PopoverContent className="w-auto p-5">
           <Calendar mode="range" selected={dateRange} onSelect={setDateRange} />
-          <button onClick={handleClick} className="w-fit mx-auto px-5 py-1 rounded-lg bg-primary text-primary-foreground font-medium cursor-pointer hover:bg-primary/90 transition-colors">Save</button>
+          <button onClick={handleClick} className="w-fit mx-auto px-5 py-1 rounded-lg bg-primary text-primary-foreground font-medium cursor-pointer hover:bg-primary/90 transition-colors">Apply</button>
         </PopoverContent>
       </Popover>
     </article>
