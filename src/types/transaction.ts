@@ -28,4 +28,5 @@ export type GetTxsParams = {
   to?:string;
   minAmount?: string;
   maxAmount?: string;
+  nature?: Array<'income' | 'expense'>;
 };

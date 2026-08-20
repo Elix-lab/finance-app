@@ -9,7 +9,7 @@ const TransactionFilters = async () => {
     <section className="flex gap-x-2">
       <DateFilter/>
       <AmountFilter/>
-      {/* <NatureFilter/> */}
+      <NatureFilter/>
     </section>
   );
 };

@@ -56,7 +56,7 @@ const DateFilter = () => {
       <Popover>
         <PopoverTrigger asChild>
           <Button className="flex border-border bg-card" variant="outline">
-            <span className="text-sm">Date</span>
+            <span className="text-sm font-light">Date</span>
             <FaCaretDown />
           </Button>
         </PopoverTrigger>

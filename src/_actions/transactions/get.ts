@@ -3,7 +3,7 @@
 "use server";
 
 import { auth } from "@/lib/auth";
-import { type SQL, between, eq, gte, lte } from "drizzle-orm";
+import { type SQL, between, eq, gte, inArray, lte } from "drizzle-orm";
 import {
   getLatestTxs,
   getAvailableBalance,
@@ -79,6 +79,7 @@ export const getTxsAction = async ({
   to,
   minAmount,
   maxAmount,
+  nature,
 }: GetTxsParams) => {
   const filters: SQL[] = [];
   // Session
@@ -116,6 +117,17 @@ export const getTxsAction = async ({
     if (maxAmount) {
       filters.push(lte(transactions.amount, maxAmount));
     }
+  }
+
+  // Nature
+  // When a URLparameter(key) has more than one value, it brings the information as an Array. Otherwise the value type is a string
+  // Case: nature is an Array
+  if (Array.isArray(nature)) {
+    filters.push(inArray(transactions.nature, nature));
+  }
+  // Case: nature is a single string
+  else if (typeof nature === "string") {
+    filters.push(eq(transactions.nature, nature));
   }
 
   // Query -> rowNum+1 to see if there is any other transaction to show
