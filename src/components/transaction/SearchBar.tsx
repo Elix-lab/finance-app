@@ -52,14 +52,14 @@ const SearchBar = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex">
+    <form onSubmit={handleSubmit} className="flex items-center h-12 px-4 border border-border rounded-xl font-light bg-card focus-within:border-primary">
       {/* Search bar */}
       <input
         ref={inputRef}
         onChange={handleChange}
         name="search"
         type="text"
-        className="border border-border bg-card rounded-l-lg mx-auto w-full px-6 py-3 font-light"
+        className="min-w-0 flex-1 bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
         placeholder="Search by title..."
       />
       {hasContent ? (
@@ -67,17 +67,17 @@ const SearchBar = () => {
         <button
           type="reset"
           onClick={handleReset}
-          className="bg-muted w-15 border border-border cursor-pointer hover:bg-border"
+          className="rounded-full p-1 text-xs text-muted-foreground cursor-pointer mr-1 hover:bg-muted"
         >
-          <RxCross2 size={20} className="mx-auto" />
+          <RxCross2 size={16} className="mx-auto" />
         </button>
       ) : null}
       {/* Search button */}
       <button
         type="submit"
-        className="bg-muted min-w-20 border border-border rounded-r-lg cursor-pointer hover:bg-border transition-colors"
+        className="rounded-lg bg-muted px-2 py-1 text-xs text-muted-foreground cursor-pointer hover:bg-border"
       >
-        <IoIosSearch size={25} className="mx-auto" />
+        <IoIosSearch size={20} className="mx-auto" />
       </button>
     </form>
   );

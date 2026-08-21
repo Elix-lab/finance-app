@@ -42,10 +42,10 @@ const TransactionTableHeader = ({
           <button
             onClick={() => handleClick("prev")}
             className={clsx(
-              "border border-border flex items-center justify-center rounded-sm text-xs p-1 ",
+              "border border-border flex items-center justify-center rounded-full text-xs p-1",
               currentPage <= 1
-                ? "cursor-default text-muted-foreground"
-                : "cursor-pointer",
+                ? "cursor-default text-muted"
+                : "cursor-pointer hover:bg-border",
             )}
             disabled={currentPage <= 1}
           >
@@ -59,10 +59,10 @@ const TransactionTableHeader = ({
           <button
             onClick={() => handleClick("next")}
             className={clsx(
-              "border border-border flex items-center justify-center rounded-sm text-xs p-1",
+              "border border-border flex items-center justify-center rounded-full text-xs p-1",
               !hasNextPage
-                ? "cursor-default text-muted-foreground"
-                : "cursor-pointer",
+                ? "cursor-default text-muted"
+                : "cursor-pointer hover:bg-border",
             )}
             disabled={!hasNextPage}
           >

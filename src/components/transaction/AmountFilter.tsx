@@ -55,7 +55,7 @@ const AmountFilter = () => {
             className="flex gap-1 border-border bg-card"
             variant="outline"
           >
-            <span className="text-sm font-light">Amount</span>
+            <span className="text-xs font-light">Amount</span>
             <FaCaretDown className="ml-auto" />
           </Button>
         </PopoverTrigger>

@@ -7,7 +7,7 @@ import ClearFilters from "./ClearFilters";
 
 const TransactionFilters = async () => {
   return (
-    <section className="flex gap-x-2 text-sm font-light">
+    <section className="flex gap-x-2 text-sm font-light flex-wrap">
       <DateFilter/>
       <AmountFilter/>
       <NatureFilter/>

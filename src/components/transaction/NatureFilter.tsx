@@ -40,7 +40,7 @@ const NatureFilter = () => {
       <Popover>
         <PopoverTrigger asChild>
           <Button className="flex border-border bg-card" variant="outline">
-            <span className="text-sm font-light">Nature</span>
+            <span className="text-xs font-light">Nature</span>
             <FaCaretDown />
           </Button>
         </PopoverTrigger>

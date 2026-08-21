@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
+import { Button } from "../ui/shadCn/button";
 
 const ClearFilters = () => {
   const searchParams = useSearchParams();
@@ -15,7 +16,7 @@ const ClearFilters = () => {
     })
     router.push(`?${params.toString()}`)
 };
-  return <button onClick={handleClick}>Clear filters</button>;
+  return <Button onClick={handleClick} className="text-xs font-light cursor-pointer" variant={"ghost"}>Clear filters</Button>;
 };
 
 export default ClearFilters;
