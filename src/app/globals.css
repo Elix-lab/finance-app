@@ -137,7 +137,6 @@
     @apply bg-background text-foreground;
   }
   html {
-    overflow-y: scroll;
     @apply font-sans;
   }
 }

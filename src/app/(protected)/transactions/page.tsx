@@ -25,7 +25,7 @@ const Page = async ({searchParams}: {searchParams: Promise<GetTxsParams>}) => {
 
   return (
     <main className="flex justify-center">
-      <div className="flex flex-col gap-2 w-full max-w-3xl px-4 sm:px-6 py-6 sm:py-10">
+      <div className="flex flex-col gap-2 w-full max-w-3xl px-4  py-6">
         <SearchBar />
         {/* Filters */}
         <TransactionFilters />

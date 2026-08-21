@@ -12,9 +12,11 @@ import {
   SheetTrigger,
   SheetTitle,
   SheetHeader,
+  SheetDescription,
 } from "../ui/shadCn/sheet";
+import clsx from "clsx";
 
-const MobileMenu = () => {
+const MobileMenu = ({path}: {path: string}) => {
   return (
     <>
       <Sheet>
@@ -23,14 +25,15 @@ const MobileMenu = () => {
         </SheetTrigger>
         <SheetContent side="left" className="bg-card">
           <SheetHeader>
-            <SheetTitle className="border-b border-boder pb-4">Menu</SheetTitle>
+            <SheetTitle>Menu</SheetTitle>
+            <SheetDescription className="border-b border-boder pb-4"></SheetDescription>
           </SheetHeader>
-          <ul className="flex flex-col gap-y-1 px-4 text-xl *:focus-within:outline-none *:focus-within:text-primary *:hover:text-primary *:transition *:w-fit [&>li>a]:focus-within:outline-none">
+          <ul className="flex flex-col gap-y-1 px-4 text-xl *:focus-within:outline-none *:w-fit [&>li>a]:focus-within:outline-none">
             <li>
-              <Link href="/dashboard">Dashboard</Link>
+              <Link href="/dashboard" className={clsx('focus-within:text-primary hover:text-primary transition-colors',path === '/dashboard' ? 'text-foreground':'text-muted-foreground')}>Dashboard</Link>
             </li>
             <li>
-              <Link href="/transactions">Transactions</Link>
+              <Link href="/transactions" className={clsx('focus-within:text-primary hover:text-primary transition-colors',path === '/transactions' ? 'text-foreground':'text-muted-foreground')}>Transactions</Link>
             </li>
           </ul>
         </SheetContent>

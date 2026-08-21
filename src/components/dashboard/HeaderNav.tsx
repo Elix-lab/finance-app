@@ -9,15 +9,18 @@ import Logo from "../ui/Logo";
 import Link from "next/link";
 import { useMediaQuery } from "@/lib/mediaQuery";
 import MobileMenu from "./MobileMenu";
+import { usePathname } from "next/navigation";
+import clsx from "clsx";
 
 const HeaderNav = () => {
+  const path = usePathname()
   // Boolean based on window width
   const notDesktop = useMediaQuery("(max-width: 640px)");
   return (
     <>
       {notDesktop ? (
         // Mobile view
-        <MobileMenu />
+        <MobileMenu path={path}/>
       ) : (
         // Desktop view
         <>
@@ -25,9 +28,9 @@ const HeaderNav = () => {
             <Logo />
           </Link>
           <nav>
-            <ul className="hidden items-center gap-8 text-sm text-muted-foreground font-medium *:hover:text-foreground sm:flex *:transition">
+            <ul className="hidden items-center gap-8 text-sm font-light *:hover:text-foreground sm:flex *:transition">
               <li>
-                <Link href="/transactions">Transactions</Link>
+                <Link href="/transactions" className={clsx(path === '/transactions' ? 'text-foreground':'text-muted-foreground')}>Transactions</Link>
               </li>
             </ul>
           </nav>
