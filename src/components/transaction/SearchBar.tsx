@@ -29,8 +29,9 @@ const SearchBar = () => {
   // Resets the input to default
   const handleReset = (e: React.MouseEvent<HTMLButtonElement>) => {
     const params = new URLSearchParams(searchParams);
-    if (inputRef.current) {
-      inputRef.current.value = "";
+    if (!inputRef.current) return
+    if (inputRef.current.value) {
+      inputRef.current.value = '';
     }
     setHasContent(false);
     if (!params.has("search")) {
@@ -44,7 +45,7 @@ const SearchBar = () => {
   const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     const params = new URLSearchParams(searchParams);
-    if (!inputRef.current) return;
+    if(!inputRef.current || !inputRef.current.value) return
     const searchInput = inputRef.current.value;
     params.set("search", searchInput);
     params.set("page", "1");
