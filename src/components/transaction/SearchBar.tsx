@@ -1,4 +1,7 @@
-/* Search bar for searching transactions */
+/* 
+Search bar for searching transactions 
+It searches for each teram introduce 
+*/
 
 "use client";
 
@@ -14,6 +17,7 @@ const SearchBar = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [hasContent, setHasContent] = useState(false);
 
+  // Handle changes when input has content
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.value) {
       setHasContent(false);
@@ -22,6 +26,7 @@ const SearchBar = () => {
     }
   };
 
+  // Resets the input to default
   const handleReset = (e: React.MouseEvent<HTMLButtonElement>) => {
     const params = new URLSearchParams(searchParams);
     if (inputRef.current) {
@@ -35,17 +40,20 @@ const SearchBar = () => {
     router.push(`?${params.toString()}`);
   };
 
-    const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      const params = new URLSearchParams(searchParams);
-      if (!inputRef.current) return;
-      const searchInput = inputRef.current.value;
-      params.set("search", searchInput);
-      router.push(`?${params.toString()}`);
-    };
+  // Handles the form submit
+  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const params = new URLSearchParams(searchParams);
+    if (!inputRef.current) return;
+    const searchInput = inputRef.current.value;
+    params.set("search", searchInput);
+    params.set("page", "1");
+    router.push(`?${params.toString()}`);
+  };
 
   return (
     <form onSubmit={handleSubmit} className="flex">
+      {/* Search bar */}
       <input
         ref={inputRef}
         onChange={handleChange}
@@ -55,13 +63,16 @@ const SearchBar = () => {
         placeholder="Search by title..."
       />
       {hasContent ? (
+        // Reset button
         <button
+          type="reset"
           onClick={handleReset}
           className="bg-muted w-15 border border-border cursor-pointer hover:bg-border"
         >
           <RxCross2 size={20} className="mx-auto" />
         </button>
       ) : null}
+      {/* Search button */}
       <button
         type="submit"
         className="bg-muted min-w-20 border border-border rounded-r-lg cursor-pointer hover:bg-border transition-colors"

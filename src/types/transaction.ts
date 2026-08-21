@@ -28,5 +28,6 @@ export type GetTxsParams = {
   to?:string;
   minAmount?: string;
   maxAmount?: string;
-  nature?: Array<'income' | 'expense'>;
+  nature?: 'income' | 'expense' | Array<'income' | 'expense'>;
+  search?: string;
 };

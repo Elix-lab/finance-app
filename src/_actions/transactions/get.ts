@@ -3,7 +3,7 @@
 "use server";
 
 import { auth } from "@/lib/auth";
-import { type SQL, between, eq, gte, inArray, lte } from "drizzle-orm";
+import { type SQL, between, eq, gte, ilike, inArray, lte } from "drizzle-orm";
 import {
   getLatestTxs,
   getAvailableBalance,
@@ -80,6 +80,7 @@ export const getTxsAction = async ({
   minAmount,
   maxAmount,
   nature,
+  search
 }: GetTxsParams) => {
   const filters: SQL[] = [];
   // Session
@@ -91,7 +92,7 @@ export const getTxsAction = async ({
   // Rows offset
   const offsetNum = (page - 1) * rowNum;
 
-  // FILTERS MANAGEMENT
+  // - FILTERS MANAGEMENT -
   // Date
   if (from) {
     if (!to) {
@@ -128,6 +129,15 @@ export const getTxsAction = async ({
   // Case: nature is a single string
   else if (typeof nature === "string") {
     filters.push(eq(transactions.nature, nature));
+  }
+
+  // Search
+  if(search) {
+    // Separating each term to search with each of them separately
+    const searchTerms = search.trim().split(/\s+/)
+    searchTerms.forEach(term => {
+      filters.push(ilike(transactions.title, `%${term}%`))
+    })
   }
 
   // Query -> rowNum+1 to see if there is any other transaction to show

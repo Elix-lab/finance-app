@@ -17,7 +17,8 @@ const Page = async ({searchParams}: {searchParams: Promise<GetTxsParams>}) => {
     to: params.to,
     minAmount: params.minAmount,
     maxAmount: params.maxAmount,
-    nature: params.nature
+    nature: params.nature,
+    search: params.search
   }
   // Getting the transactions and a boolean in case there are no more pages
   const {transactions, hasNextPage} = await getTxsAction(txsParams);
